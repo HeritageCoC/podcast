@@ -204,24 +204,28 @@ jobs:
             return rss;
         }
 
-        try {
-            console.log('📡 Getting episode data...');
-            const vimeoData = await fetchVimeoData();
-            
-            console.log('📝 Generating RSS...');
-            const rss = generateRSS(vimeoData);
-            
-            console.log('💾 Writing RSS to feed.xml...');
-            fs.writeFileSync('feed.xml', rss);
-            
-            console.log('✅ RSS feed generated successfully!');
-            console.log('📄 File size: ' + fs.statSync('feed.xml').size + ' bytes');
-            console.log('🕐 Generated at: ' + new Date().toISOString());
-            
-        } catch (error) {
-            console.error('❌ Error generating RSS:', error);
-            process.exit(1);
+        async function main() {
+            try {
+                console.log('📡 Getting episode data...');
+                const vimeoData = await fetchVimeoData();
+                
+                console.log('📝 Generating RSS...');
+                const rss = generateRSS(vimeoData);
+                
+                console.log('💾 Writing RSS to feed.xml...');
+                fs.writeFileSync('feed.xml', rss);
+                
+                console.log('✅ RSS feed generated successfully!');
+                console.log('📄 File size: ' + fs.statSync('feed.xml').size + ' bytes');
+                console.log('🕐 Generated at: ' + new Date().toISOString());
+                
+            } catch (error) {
+                console.error('❌ Error generating RSS:', error);
+                process.exit(1);
+            }
         }
+        
+        main();
         EOF
         
         echo "📝 Running RSS generation script..."
