@@ -200,7 +200,6 @@ jobs:
 
         try {
             console.log('📡 Getting episode data...');
-            # const vimeoData = getSampleData();
             const vimeoData = await fetchVimeoData();
             
             console.log('📝 Generating RSS...');
