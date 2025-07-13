@@ -2,16 +2,15 @@ name: Update Podcast Feed
 
 on:
   schedule:
-    # Run every 6 hours to check for new sermons
     - cron: '0 */6 * * *'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
   push:
     branches: [ main ]
     paths:
       - 'config.json'
 
 permissions:
-  contents: write  # Allow the workflow to write to the repository
+  contents: write
 
 jobs:
   update-feed:
@@ -32,7 +31,6 @@ jobs:
       run: |
         echo "Starting RSS generation..."
         
-        # Read the config file to make sure it exists
         if [ ! -f "config.json" ]; then
           echo "❌ config.json not found!"
           exit 1
@@ -41,13 +39,11 @@ jobs:
         echo "✅ config.json found"
         cat config.json
         
-        # Create Node.js script to generate RSS
         cat > generate-rss.js << 'EOF'
         const fs = require('fs');
         
         console.log('🚀 Starting RSS generation script...');
         
-        // Read config
         let config;
         try {
           config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
@@ -64,7 +60,7 @@ jobs:
                     case '<': return '&lt;';
                     case '>': return '&gt;';
                     case '&': return '&amp;';
-                    case '\'': return '&apos;';
+                    case "'": return '&apos;';
                     case '"': return '&quot;';
                 }
             });
@@ -76,13 +72,12 @@ jobs:
             const secs = seconds % 60;
             
             if (hours > 0) {
-                return `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                return hours + ':' + minutes.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
             } else {
-                return `${minutes}:${secs.toString().padStart(2, '0')}`;
+                return minutes + ':' + secs.toString().padStart(2, '0');
             }
         }
 
-        // For now, use sample data (later we'll add Vimeo API integration)
         function getSampleData() {
             return {
                 "providerName": config.podcastAuthor,
@@ -99,78 +94,80 @@ jobs:
         }
 
         function generateRSS(vimeoData) {
-            console.log('📝 Generating RSS with', vimeoData.movies.length, 'episodes');
+            console.log('📝 Generating RSS with ' + vimeoData.movies.length + ' episodes');
             
             const baseUrl = 'https://heritagecoc.github.io/podcast';
             const artworkUrl = config.podcastArtwork.startsWith('http') ? 
-                config.podcastArtwork : `${baseUrl}/${config.podcastArtwork.replace('./', '')}`;
+                config.podcastArtwork : baseUrl + '/' + config.podcastArtwork.replace('./', '');
             
             const now = new Date().toUTCString();
             const buildDate = new Date(vimeoData.lastUpdated).toUTCString();
             
-            let rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-<channel>
-    <title>${escapeXML(config.podcastTitle)}</title>
-    <link>${config.churchWebsite}</link>
-    <description>${escapeXML(config.podcastDescription)}</description>
-    <language>${config.podcastLanguage}</language>
-    <copyright>© ${new Date().getFullYear()} ${escapeXML(config.podcastAuthor)}</copyright>
-    <managingEditor>${config.podcastEmail} (${escapeXML(config.podcastAuthor)})</managingEditor>
-    <webMaster>${config.podcastEmail} (${escapeXML(config.podcastAuthor)})</webMaster>
-    <pubDate>${now}</pubDate>
-    <lastBuildDate>${buildDate}</lastBuildDate>
-    <generator>GitHub Actions Podcast RSS Generator v2.0</generator>
-    
-    <!-- iTunes Podcast Tags -->
-    <itunes:author>${escapeXML(config.podcastAuthor)}</itunes:author>
-    <itunes:summary>${escapeXML(config.podcastDescription)}</itunes:summary>
-    <itunes:owner>
-        <itunes:name>${escapeXML(config.podcastAuthor)}</itunes:name>
-        <itunes:email>${config.podcastEmail}</itunes:email>
-    </itunes:owner>
-    <itunes:explicit>false</itunes:explicit>
-    <itunes:category text="${config.podcastCategory}"${config.podcastSubcategory ? '>\n        <itunes:category text="' + config.podcastSubcategory + '" />\n    </itunes:category' : ' /'}">
-    <itunes:image href="${artworkUrl}" />
-    <itunes:type>episodic</itunes:type>
-`;
+            let rss = '<?xml version="1.0" encoding="UTF-8"?>\n';
+            rss += '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">\n';
+            rss += '<channel>\n';
+            rss += '    <title>' + escapeXML(config.podcastTitle) + '</title>\n';
+            rss += '    <link>' + config.churchWebsite + '</link>\n';
+            rss += '    <description>' + escapeXML(config.podcastDescription) + '</description>\n';
+            rss += '    <language>' + config.podcastLanguage + '</language>\n';
+            rss += '    <copyright>© ' + new Date().getFullYear() + ' ' + escapeXML(config.podcastAuthor) + '</copyright>\n';
+            rss += '    <managingEditor>' + config.podcastEmail + ' (' + escapeXML(config.podcastAuthor) + ')</managingEditor>\n';
+            rss += '    <webMaster>' + config.podcastEmail + ' (' + escapeXML(config.podcastAuthor) + ')</webMaster>\n';
+            rss += '    <pubDate>' + now + '</pubDate>\n';
+            rss += '    <lastBuildDate>' + buildDate + '</lastBuildDate>\n';
+            rss += '    <generator>GitHub Actions Podcast RSS Generator v2.0</generator>\n';
+            rss += '    \n';
+            rss += '    <!-- iTunes Podcast Tags -->\n';
+            rss += '    <itunes:author>' + escapeXML(config.podcastAuthor) + '</itunes:author>\n';
+            rss += '    <itunes:summary>' + escapeXML(config.podcastDescription) + '</itunes:summary>\n';
+            rss += '    <itunes:owner>\n';
+            rss += '        <itunes:name>' + escapeXML(config.podcastAuthor) + '</itunes:name>\n';
+            rss += '        <itunes:email>' + config.podcastEmail + '</itunes:email>\n';
+            rss += '    </itunes:owner>\n';
+            rss += '    <itunes:explicit>false</itunes:explicit>\n';
+            
+            if (config.podcastSubcategory) {
+                rss += '    <itunes:category text="' + config.podcastCategory + '">\n';
+                rss += '        <itunes:category text="' + config.podcastSubcategory + '" />\n';
+                rss += '    </itunes:category>\n';
+            } else {
+                rss += '    <itunes:category text="' + config.podcastCategory + '" />\n';
+            }
+            
+            rss += '    <itunes:image href="' + artworkUrl + '" />\n';
+            rss += '    <itunes:type>episodic</itunes:type>\n';
 
-            // Add episodes
-            vimeoData.movies.forEach((movie, index) => {
+            vimeoData.movies.forEach(function(movie, index) {
                 const episodeNumber = vimeoData.movies.length - index;
                 const pubDate = new Date(movie.releaseDate).toUTCString();
                 const duration = formatDuration(movie.content.duration);
                 
-                rss += `
-    <item>
-        <title>${escapeXML(movie.title)}</title>
-        <description>${escapeXML(movie.shortDescription || movie.title)}</description>
-        <link>https://vimeo.com/${movie.id}</link>
-        <guid isPermaLink="false">vimeo-${movie.id}</guid>
-        <pubDate>${pubDate}</pubDate>
-        <enclosure url="${movie.content.videos[0].url}" type="application/x-mpegURL" length="0" />
-        
-        <!-- iTunes Episode Tags -->
-        <itunes:title>${escapeXML(movie.title)}</itunes:title>
-        <itunes:summary>${escapeXML(movie.shortDescription || movie.title)}</itunes:summary>
-        <itunes:duration>${duration}</itunes:duration>
-        <itunes:episode>${episodeNumber}</itunes:episode>
-        <itunes:episodeType>full</itunes:episodeType>
-        <itunes:explicit>false</itunes:explicit>
-        <itunes:image href="${movie.thumbnail}" />
-    </item>`;
+                rss += '\n    <item>\n';
+                rss += '        <title>' + escapeXML(movie.title) + '</title>\n';
+                rss += '        <description>' + escapeXML(movie.shortDescription || movie.title) + '</description>\n';
+                rss += '        <link>https://vimeo.com/' + movie.id + '</link>\n';
+                rss += '        <guid isPermaLink="false">vimeo-' + movie.id + '</guid>\n';
+                rss += '        <pubDate>' + pubDate + '</pubDate>\n';
+                rss += '        <enclosure url="' + movie.content.videos[0].url + '" type="application/x-mpegURL" length="0" />\n';
+                rss += '        \n';
+                rss += '        <!-- iTunes Episode Tags -->\n';
+                rss += '        <itunes:title>' + escapeXML(movie.title) + '</itunes:title>\n';
+                rss += '        <itunes:summary>' + escapeXML(movie.shortDescription || movie.title) + '</itunes:summary>\n';
+                rss += '        <itunes:duration>' + duration + '</itunes:duration>\n';
+                rss += '        <itunes:episode>' + episodeNumber + '</itunes:episode>\n';
+                rss += '        <itunes:episodeType>full</itunes:episodeType>\n';
+                rss += '        <itunes:explicit>false</itunes:explicit>\n';
+                rss += '        <itunes:image href="' + movie.thumbnail + '" />\n';
+                rss += '    </item>';
             });
 
-            rss += `
-</channel>
-</rss>`;
-
+            rss += '\n\n</channel>\n</rss>';
             return rss;
         }
 
         try {
             console.log('📡 Getting episode data...');
-            const vimeoData = getSampleData(); // Using sample data for now
+            const vimeoData = getSampleData();
             
             console.log('📝 Generating RSS...');
             const rss = generateRSS(vimeoData);
@@ -179,8 +176,8 @@ jobs:
             fs.writeFileSync('feed.xml', rss);
             
             console.log('✅ RSS feed generated successfully!');
-            console.log('📄 File size:', fs.statSync('feed.xml').size, 'bytes');
-            console.log('🕐 Generated at:', new Date().toISOString());
+            console.log('📄 File size: ' + fs.statSync('feed.xml').size + ' bytes');
+            console.log('🕐 Generated at: ' + new Date().toISOString());
             
         } catch (error) {
             console.error('❌ Error generating RSS:', error);
@@ -191,7 +188,6 @@ jobs:
         echo "📝 Running RSS generation script..."
         node generate-rss.js
         
-        # Verify the file was created
         if [ -f "feed.xml" ]; then
           echo "✅ feed.xml created successfully!"
           echo "📄 File size: $(wc -c < feed.xml) bytes"
@@ -206,11 +202,9 @@ jobs:
       run: |
         echo "🔍 Checking for changes to feed.xml..."
         
-        # Configure git
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action RSS Bot"
         
-        # Check if feed.xml has changed
         if git diff --quiet feed.xml; then
           echo "ℹ️ No changes to feed.xml - skipping commit"
         else
