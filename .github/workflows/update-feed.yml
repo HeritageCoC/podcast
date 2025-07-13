@@ -1,0 +1,56 @@
+name: Update Podcast Feed
+
+on:
+  schedule:
+    # Run every 6 hours to check for new sermons
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Allow manual trigger
+  push:
+    branches: [ main ]
+    paths:
+      - 'config.json'
+      - 'index.html'
+
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Generate RSS Feed
+      run: |
+        # Create a simple Node.js script to fetch Vimeo data and generate RSS
+        cat > generate-rss.js << 'EOF'
+        const fs = require('fs');
+        const https = require('https');
+        
+        // Read config
+        const config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        
+        // For now, we'll just touch the feed file to trigger GitHub Pages rebuild
+        // In a future version, we could add actual Vimeo API integration here
+        const timestamp = new Date().toISOString();
+        console.log(`Feed update triggered at ${timestamp}`);
+        
+        // Create a simple status file
+        fs.writeFileSync('.feed-update', timestamp);
+        EOF
+        
+        node generate-rss.js
+        
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        if [ -f .feed-update ]; then
+          git add .feed-update
+          git commit -m "Auto-update feed check $(date)" || exit 0
+          git push
+        fi
