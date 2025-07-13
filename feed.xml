@@ -3,24 +3,24 @@
 <channel>
     <title>Heritage Church of Christ</title>
     <link>https://heritagecoc.org</link>
-    <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together.</description>
+    <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&#39;s Word together.</description>
     <language>en</language>
     <copyright>© 2025 Heritage Church of Christ</copyright>
     <managingEditor>office@heritagecoc.org (Heritage Church of Christ)</managingEditor>
     <webMaster>office@heritagecoc.org (Heritage Church of Christ)</webMaster>
-    <pubDate>Sun, 13 Jul 2025 22:28:21 GMT</pubDate>
+    <pubDate>Sun, 13 Jul 2025 22:34:39 GMT</pubDate>
     <lastBuildDate>Sun, 13 Jul 2025 19:56:09 GMT</lastBuildDate>
     <generator>GitHub Actions Podcast RSS Generator v2.0</generator>
     
     <!-- iTunes Podcast Tags -->
     <itunes:author>Heritage Church of Christ</itunes:author>
-    <itunes:summary>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together.</itunes:summary>
+    <itunes:summary>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&#39;s Word together.</itunes:summary>
     <itunes:owner>
         <itunes:name>Heritage Church of Christ</itunes:name>
         <itunes:email>office@heritagecoc.org</itunes:email>
     </itunes:owner>
     <itunes:explicit>false</itunes:explicit>
-    <itunes:category text="Religion & Spirituality">
+    <itunes:category text="Religion &amp; Spirituality">
         <itunes:category text="Christianity" />
     </itunes:category>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
@@ -299,16 +299,16 @@
         <itunes:image href="https://i.vimeocdn.com/video/1996739442-4f6e4968e0a8d5129c3d5d48cfb8934ed314897d7d1616fd8779278e0a91c73c-d_800x450?region=us" />
     </item>
     <item>
-        <title>&quot;The Holy Spirit&apos;s Groanings&quot; 3-23-2025</title>
-        <description>&quot;The Holy Spirit&apos;s Groanings&quot; 3-23-2025</description>
+        <title>&quot;The Holy Spirit&#39;s Groanings&quot; 3-23-2025</title>
+        <description>&quot;The Holy Spirit&#39;s Groanings&quot; 3-23-2025</description>
         <link>https://vimeo.com/1066325577</link>
         <guid isPermaLink="false">vimeo-1066325577</guid>
         <pubDate>Sun, 16 Mar 2025 15:02:42 GMT</pubDate>
         <enclosure url="https://player.vimeo.com/external/1066325577.m3u8?s=2916a1cb2e109941a7c3fc47c485dc2fefc4c378" type="application/x-mpegURL" length="0" />
         
         <!-- iTunes Episode Tags -->
-        <itunes:title>&quot;The Holy Spirit&apos;s Groanings&quot; 3-23-2025</itunes:title>
-        <itunes:summary>&quot;The Holy Spirit&apos;s Groanings&quot; 3-23-2025</itunes:summary>
+        <itunes:title>&quot;The Holy Spirit&#39;s Groanings&quot; 3-23-2025</itunes:title>
+        <itunes:summary>&quot;The Holy Spirit&#39;s Groanings&quot; 3-23-2025</itunes:summary>
         <itunes:duration>1:00:40</itunes:duration>
         <itunes:episode>65</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
@@ -571,16 +571,16 @@
         <itunes:image href="https://i.vimeocdn.com/video/1959126547-a7c4aaa3aed8b630ff528677a9c6504cf45f71013d6d7a4c28ade20e356e2d6a-d_800x450?region=us" />
     </item>
     <item>
-        <title>&quot;I&apos;m King of the World!&quot; - December 8, 2024</title>
-        <description>&quot;I&apos;m King of the World!&quot; - December 8, 2024</description>
+        <title>&quot;I&#39;m King of the World!&quot; - December 8, 2024</title>
+        <description>&quot;I&#39;m King of the World!&quot; - December 8, 2024</description>
         <link>https://vimeo.com/1034957925</link>
         <guid isPermaLink="false">vimeo-1034957925</guid>
         <pubDate>Sun, 01 Dec 2024 15:59:22 GMT</pubDate>
         <enclosure url="https://player.vimeo.com/external/1034957925.m3u8?s=6ed83ce5fa74c5dcd2d11b2423fa9b49808a28a6" type="application/x-mpegURL" length="0" />
         
         <!-- iTunes Episode Tags -->
-        <itunes:title>&quot;I&apos;m King of the World!&quot; - December 8, 2024</itunes:title>
-        <itunes:summary>&quot;I&apos;m King of the World!&quot; - December 8, 2024</itunes:summary>
+        <itunes:title>&quot;I&#39;m King of the World!&quot; - December 8, 2024</itunes:title>
+        <itunes:summary>&quot;I&#39;m King of the World!&quot; - December 8, 2024</itunes:summary>
         <itunes:duration>1:00:52</itunes:duration>
         <itunes:episode>49</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
@@ -962,16 +962,16 @@
         <itunes:image href="https://i.vimeocdn.com/video/1886191912-2e437a1ccb69ddd8b2e8c4eaa7ac3f68f9b8f46c15cf028436034bdcd8949f05-d_800x450?region=us" />
     </item>
     <item>
-        <title>&quot;That&apos;s Not Fair!&quot; - 6/30/2024</title>
-        <description>&quot;That&apos;s Not Fair!&quot; - 6/30/2024</description>
+        <title>&quot;That&#39;s Not Fair!&quot; - 6/30/2024</title>
+        <description>&quot;That&#39;s Not Fair!&quot; - 6/30/2024</description>
         <link>https://vimeo.com/965936309</link>
         <guid isPermaLink="false">vimeo-965936309</guid>
         <pubDate>Sun, 23 Jun 2024 15:00:45 GMT</pubDate>
         <enclosure url="https://player.vimeo.com/external/965936309.m3u8?s=8975ad214466268c541abe35c2b720d94aa5553a" type="application/x-mpegURL" length="0" />
         
         <!-- iTunes Episode Tags -->
-        <itunes:title>&quot;That&apos;s Not Fair!&quot; - 6/30/2024</itunes:title>
-        <itunes:summary>&quot;That&apos;s Not Fair!&quot; - 6/30/2024</itunes:summary>
+        <itunes:title>&quot;That&#39;s Not Fair!&quot; - 6/30/2024</itunes:title>
+        <itunes:summary>&quot;That&#39;s Not Fair!&quot; - 6/30/2024</itunes:summary>
         <itunes:duration>1:06:26</itunes:duration>
         <itunes:episode>26</itunes:episode>
         <itunes:episodeType>full</itunes:episodeType>
