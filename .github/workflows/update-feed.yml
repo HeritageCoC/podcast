@@ -39,6 +39,12 @@ jobs:
         echo "✅ config.json found"
         cat config.json
         
+        cat > package.json << 'EOF'
+        {
+          "type": "commonjs"
+        }
+        EOF
+        
         cat > generate-rss.js << 'EOF'
         const fs = require('fs');
         
