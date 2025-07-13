@@ -1,200 +1,268 @@
-const fs = require('fs');
+name: Update Podcast Feed
 
-console.log('🚀 Starting RSS generation script...');
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'config.json'
 
-let config;
-try {
-  config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-  console.log('✅ Config loaded:', config.podcastTitle);
-} catch (error) {
-  console.error('❌ Error reading config:', error);
-  process.exit(1);
-}
+permissions:
+  contents: write
 
-function escapeXML(str) {
-    if (!str) return '';
-    return str.toString()
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;'); // Changed from &apos; to &#39; for better compatibility
-}
-
-function formatDuration(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
+jobs:
+  update-feed:
+    runs-on: ubuntu-latest
     
-    if (hours > 0) {
-        return hours + ':' + minutes.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
-    } else {
-        return minutes + ':' + secs.toString().padStart(2, '0');
-    }
-}
-
-function getSampleData() {
-    return {
-        "providerName": config.podcastAuthor,
-        "lastUpdated": new Date().toISOString(),
-        "language": config.podcastLanguage,
-        "movies": [
-            {"id":"1099141295","title":"\"The Breath of Life\" Chad Hedgpath 7.13.25","shortDescription":"\"The Breath of Life\" Chad Hedgpath 7.13.25","thumbnail":"https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us","releaseDate":"2025-07-06T10:58:00-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-07-13T15:56:09-04:00","duration":4673,"videos":[{"url":"https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1","quality":"HD","videoType":"HLS","bitrate":null}]}},
-            {"id":"1097306715","title":"\"Jonah the Patriot\" Travis Roberstson 7.6.2025","shortDescription":"\"Jonah the Patriot\" Travis Roberstson 7.6.2025","thumbnail":"https://i.vimeocdn.com/video/2031613024-2931fa67f75a6ea25a14cdd23369faf4c87e649405c837b2013be878a76bdb8d-d_800x450?region=us","releaseDate":"2025-06-29T10:59:41-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-07-06T17:54:11-04:00","duration":3575,"videos":[{"url":"https://player.vimeo.com/external/1097306715.m3u8?s=26100bbb1ef991ff1dd99d8fe220fcef11a32bc1","quality":"HD","videoType":"HLS","bitrate":null}]}},
-            {"id":"1095396640","title":"\"What Goes Up, Must Come Down\"  6-29-25","shortDescription":"\"What Goes Up, Must Come Down\"  6-29-25","thumbnail":"https://i.vimeocdn.com/video/2029195244-f881c224bf8d51c558e89b35c0ebe53e98de868ceaeccac1558f98200e9fba89-d_800x450?region=us","releaseDate":"2025-06-22T10:59:56-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-06-29T11:03:03-04:00","duration":3801,"videos":[{"url":"https://player.vimeo.com/external/1095396640.m3u8?s=21ede852bbed805d4c49a9ac8f30c0d8a206237d","quality":"HD","videoType":"HLS","bitrate":null}]}},
-            {"id":"1093498929","title":"\"Was the Holy Spirit in the Old Testament\"  6-22-25","shortDescription":"\"Was the Holy Spirit in the Old Testament\"  6-22-25","thumbnail":"https://i.vimeocdn.com/video/2026857899-d3021c453cff977e363799d1bfd7e7c9bbb6fa4c50dc902d9a86dbe801ad2b41-d_800x450?region=us","releaseDate":"2025-06-15T11:00:42-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-06-22T11:01:01-04:00","duration":3677,"videos":[{"url":"https://player.vimeo.com/external/1093498929.m3u8?s=a9cb44fe6614d22ffb9ee0fad95a49ff927a5809","quality":"HD","videoType":"HLS","bitrate":null}]}},
-            {"id":"1091602933","title":"\"The Holy Spirit is Working in Our Fathers\"  6-15-25","shortDescription":"\"The Holy Spirit is Working in Our Fathers\"  6-15-25","thumbnail":"https://i.vimeocdn.com/video/2024477786-e995b97262a2dc68ce0bd1e2f7c00e077158bf0c976ab65d109a9602940901af-d_800x450?region=us","releaseDate":"2025-06-08T11:04:27-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-06-15T11:01:23-04:00","duration":3896,"videos":[{"url":"https://player.vimeo.com/external/1091602933.m3u8?s=b33d50db763b6a10232e26abab5ff9bd556270ce","quality":"HD","videoType":"HLS","bitrate":null}]}}
-        ]
-    };
-}
-
-async function fetchVimeoData() {
-    try {
-        const https = require('https');
-        return new Promise((resolve, reject) => {
-            const url = config.vimeoFeedUrl;
-            console.log('📡 Fetching from Vimeo:', url);
-            
-            https.get(url, (res) => {
-                let data = '';
-                res.on('data', chunk => data += chunk);
-                res.on('end', () => {
-                    try {
-                        const vimeoData = JSON.parse(data);
-                        console.log('✅ Fetched ' + vimeoData.movies.length + ' episodes from Vimeo');
-                        resolve(vimeoData);
-                    } catch (error) {
-                        console.error('❌ Error parsing Vimeo data:', error);
-                        console.log('🔄 Falling back to sample data');
-                        resolve(getSampleData());
-                    }
-                });
-            }).on('error', (error) => {
-                console.error('❌ Error fetching from Vimeo:', error);
-                console.log('🔄 Falling back to sample data');
-                resolve(getSampleData());
-            });
-        });
-    } catch (error) {
-        console.error('❌ Fetch error:', error);
-        return getSampleData();
-    }
-}
-
-function generateRSS(vimeoData) {
-    console.log('📝 Generating RSS with ' + vimeoData.movies.length + ' episodes');
-    
-    const baseUrl = 'https://heritagecoc.github.io/podcast';
-    const artworkUrl = config.podcastArtwork.startsWith('http') ? 
-        config.podcastArtwork : baseUrl + '/' + config.podcastArtwork.replace('./', '');
-    
-    const now = new Date().toUTCString();
-    const buildDate = new Date(vimeoData.lastUpdated).toUTCString();
-    
-    let rss = '<?xml version="1.0" encoding="UTF-8"?>\n';
-    rss += '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">\n';
-    rss += '<channel>\n';
-    rss += '    <title>' + escapeXML(config.podcastTitle) + '</title>\n';
-    rss += '    <link>' + escapeXML(config.churchWebsite) + '</link>\n'; // Added escapeXML here
-    rss += '    <description>' + escapeXML(config.podcastDescription) + '</description>\n';
-    rss += '    <language>' + escapeXML(config.podcastLanguage) + '</language>\n';
-    rss += '    <copyright>© ' + new Date().getFullYear() + ' ' + escapeXML(config.podcastAuthor) + '</copyright>\n';
-    rss += '    <managingEditor>' + escapeXML(config.podcastEmail) + ' (' + escapeXML(config.podcastAuthor) + ')</managingEditor>\n';
-    rss += '    <webMaster>' + escapeXML(config.podcastEmail) + ' (' + escapeXML(config.podcastAuthor) + ')</webMaster>\n';
-    rss += '    <pubDate>' + now + '</pubDate>\n';
-    rss += '    <lastBuildDate>' + buildDate + '</lastBuildDate>\n';
-    rss += '    <generator>GitHub Actions Podcast RSS Generator v2.0</generator>\n';
-    rss += '    \n';
-    rss += '    <!-- iTunes Podcast Tags -->\n';
-    rss += '    <itunes:author>' + escapeXML(config.podcastAuthor) + '</itunes:author>\n';
-    rss += '    <itunes:summary>' + escapeXML(config.podcastDescription) + '</itunes:summary>\n';
-    rss += '    <itunes:owner>\n';
-    rss += '        <itunes:name>' + escapeXML(config.podcastAuthor) + '</itunes:name>\n';
-    rss += '        <itunes:email>' + escapeXML(config.podcastEmail) + '</itunes:email>\n';
-    rss += '    </itunes:owner>\n';
-    rss += '    <itunes:explicit>false</itunes:explicit>\n';
-    
-    if (config.podcastSubcategory) {
-        rss += '    <itunes:category text="' + escapeXML(config.podcastCategory) + '">\n';
-        rss += '        <itunes:category text="' + escapeXML(config.podcastSubcategory) + '" />\n';
-        rss += '    </itunes:category>\n';
-    } else {
-        rss += '    <itunes:category text="' + escapeXML(config.podcastCategory) + '" />\n';
-    }
-    
-    rss += '    <itunes:image href="' + escapeXML(artworkUrl) + '" />\n';
-    rss += '    <itunes:type>episodic</itunes:type>\n';
-
-    vimeoData.movies.forEach(function(movie, index) {
-        const episodeNumber = vimeoData.movies.length - index;
-        const pubDate = new Date(movie.releaseDate).toUTCString();
-        const duration = formatDuration(movie.content.duration);
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
         
-        // Ensure we have a valid video URL
-        const videoUrl = movie.content.videos && movie.content.videos[0] ? movie.content.videos[0].url : '';
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
         
-        rss += '\n    <item>\n';
-        rss += '        <title>' + escapeXML(movie.title) + '</title>\n';
-        rss += '        <description>' + escapeXML(movie.shortDescription || movie.title) + '</description>\n';
-        rss += '        <link>https://vimeo.com/' + escapeXML(movie.id) + '</link>\n';
-        rss += '        <guid isPermaLink="false">vimeo-' + escapeXML(movie.id) + '</guid>\n';
-        rss += '        <pubDate>' + pubDate + '</pubDate>\n';
+    - name: Generate RSS Feed
+      run: |
+        echo "Starting RSS generation..."
         
-        if (videoUrl) {
-            rss += '        <enclosure url="' + escapeXML(videoUrl) + '" type="application/x-mpegURL" length="0" />\n';
+        if [ ! -f "config.json" ]; then
+          echo "❌ config.json not found!"
+          exit 1
+        fi
+        
+        echo "✅ config.json found"
+        cat config.json
+        
+        # Create package.json
+        cat > package.json << 'EOF'
+        {
+          "type": "commonjs"
         }
+        EOF
         
-        rss += '        \n';
-        rss += '        <!-- iTunes Episode Tags -->\n';
-        rss += '        <itunes:title>' + escapeXML(movie.title) + '</itunes:title>\n';
-        rss += '        <itunes:summary>' + escapeXML(movie.shortDescription || movie.title) + '</itunes:summary>\n';
-        rss += '        <itunes:duration>' + duration + '</itunes:duration>\n';
-        rss += '        <itunes:episode>' + episodeNumber + '</itunes:episode>\n';
-        rss += '        <itunes:episodeType>full</itunes:episodeType>\n';
-        rss += '        <itunes:explicit>false</itunes:explicit>\n';
+        # Create the RSS generation script
+        cat > generate-rss.js << 'SCRIPT_EOF'
+        const fs = require('fs');
         
-        if (movie.thumbnail) {
-            rss += '        <itunes:image href="' + escapeXML(movie.thumbnail) + '" />\n';
-        }
+        console.log('🚀 Starting RSS generation script...');
         
-        rss += '    </item>';
-    });
-
-    rss += '\n\n</channel>\n</rss>';
-    return rss;
-}
-
-async function main() {
-    try {
-        console.log('📡 Getting episode data...');
-        const vimeoData = await fetchVimeoData();
-        
-        console.log('📝 Generating RSS...');
-        const rss = generateRSS(vimeoData);
-        
-        console.log('💾 Writing RSS to feed.xml...');
-        fs.writeFileSync('feed.xml', rss);
-        
-        console.log('✅ RSS feed generated successfully!');
-        console.log('📄 File size: ' + fs.statSync('feed.xml').size + ' bytes');
-        console.log('🕐 Generated at: ' + new Date().toISOString());
-        
-        // Validate the XML by attempting to parse it
+        let config;
         try {
-            const xml = fs.readFileSync('feed.xml', 'utf8');
-            // Basic validation - check for common XML issues
-            if (xml.includes('&') && !xml.includes('&amp;') && !xml.includes('&lt;') && !xml.includes('&gt;')) {
-                console.warn('⚠️ Warning: Potential unescaped ampersands detected');
+          config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+          console.log('✅ Config loaded:', config.podcastTitle);
+        } catch (error) {
+          console.error('❌ Error reading config:', error);
+          process.exit(1);
+        }
+
+        function escapeXML(str) {
+            if (!str) return '';
+            return str.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            
+            if (hours > 0) {
+                return hours + ':' + minutes.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0');
+            } else {
+                return minutes + ':' + secs.toString().padStart(2, '0');
             }
-            console.log('✅ Basic XML validation passed');
-        } catch (validationError) {
-            console.error('❌ XML validation failed:', validationError);
+        }
+
+        function getSampleData() {
+            return {
+                "providerName": config.podcastAuthor,
+                "lastUpdated": new Date().toISOString(),
+                "language": config.podcastLanguage,
+                "movies": [
+                    {"id":"1099141295","title":"\"The Breath of Life\" Chad Hedgpath 7.13.25","shortDescription":"\"The Breath of Life\" Chad Hedgpath 7.13.25","thumbnail":"https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us","releaseDate":"2025-07-06T10:58:00-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-07-13T15:56:09-04:00","duration":4673,"videos":[{"url":"https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1","quality":"HD","videoType":"HLS","bitrate":null}]}},
+                    {"id":"1097306715","title":"\"Jonah the Patriot\" Travis Roberstson 7.6.2025","shortDescription":"\"Jonah the Patriot\" Travis Roberstson 7.6.2025","thumbnail":"https://i.vimeocdn.com/video/2031613024-2931fa67f75a6ea25a14cdd23369faf4c87e649405c837b2013be878a76bdb8d-d_800x450?region=us","releaseDate":"2025-06-29T10:59:41-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-07-06T17:54:11-04:00","duration":3575,"videos":[{"url":"https://player.vimeo.com/external/1097306715.m3u8?s=26100bbb1ef991ff1dd99d8fe220fcef11a32bc1","quality":"HD","videoType":"HLS","bitrate":null}]}},
+                    {"id":"1095396640","title":"\"What Goes Up, Must Come Down\"  6-29-25","shortDescription":"\"What Goes Up, Must Come Down\"  6-29-25","thumbnail":"https://i.vimeocdn.com/video/2029195244-f881c224bf8d51c558e89b35c0ebe53e98de868ceaeccac1558f98200e9fba89-d_800x450?region=us","releaseDate":"2025-06-22T10:59:56-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-06-29T11:03:03-04:00","duration":3801,"videos":[{"url":"https://player.vimeo.com/external/1095396640.m3u8?s=21ede852bbed805d4c49a9ac8f30c0d8a206237d","quality":"HD","videoType":"HLS","bitrate":null}]}},
+                    {"id":"1093498929","title":"\"Was the Holy Spirit in the Old Testament\"  6-22-25","shortDescription":"\"Was the Holy Spirit in the Old Testament\"  6-22-25","thumbnail":"https://i.vimeocdn.com/video/2026857899-d3021c453cff977e363799d1bfd7e7c9bbb6fa4c50dc902d9a86dbe801ad2b41-d_800x450?region=us","releaseDate":"2025-06-15T11:00:42-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-06-22T11:01:01-04:00","duration":3677,"videos":[{"url":"https://player.vimeo.com/external/1093498929.m3u8?s=a9cb44fe6614d22ffb9ee0fad95a49ff927a5809","quality":"HD","videoType":"HLS","bitrate":null}]}},
+                    {"id":"1091602933","title":"\"The Holy Spirit is Working in Our Fathers\"  6-15-25","shortDescription":"\"The Holy Spirit is Working in Our Fathers\"  6-15-25","thumbnail":"https://i.vimeocdn.com/video/2024477786-e995b97262a2dc68ce0bd1e2f7c00e077158bf0c976ab65d109a9602940901af-d_800x450?region=us","releaseDate":"2025-06-08T11:04:27-04:00","genres":["faith"],"tags":["faith"],"content":{"dateAdded":"2025-06-15T11:01:23-04:00","duration":3896,"videos":[{"url":"https://player.vimeo.com/external/1091602933.m3u8?s=b33d50db763b6a10232e26abab5ff9bd556270ce","quality":"HD","videoType":"HLS","bitrate":null}]}}
+                ]
+            };
+        }
+
+        async function fetchVimeoData() {
+                try {
+                    const https = require('https');
+                    return new Promise((resolve, reject) => {
+                        const url = config.vimeoFeedUrl;
+                        console.log('📡 Fetching from Vimeo:', url);
+                        
+                        https.get(url, (res) => {
+                            let data = '';
+                            res.on('data', chunk => data += chunk);
+                            res.on('end', () => {
+                                try {
+                                    const vimeoData = JSON.parse(data);
+                                    console.log('✅ Fetched ' + vimeoData.movies.length + ' episodes from Vimeo');
+                                    resolve(vimeoData);
+                                } catch (error) {
+                                    console.error('❌ Error parsing Vimeo data:', error);
+                                    console.log('🔄 Falling back to sample data');
+                                    resolve(getSampleData());
+                                }
+                            });
+                        }).on('error', (error) => {
+                            console.error('❌ Error fetching from Vimeo:', error);
+                            console.log('🔄 Falling back to sample data');
+                            resolve(getSampleData());
+                        });
+                    });
+                } catch (error) {
+                    console.error('❌ Fetch error:', error);
+                    return getSampleData();
+                }
+            }
+
+        function generateRSS(vimeoData) {
+            console.log('📝 Generating RSS with ' + vimeoData.movies.length + ' episodes');
+            
+            const baseUrl = 'https://heritagecoc.github.io/podcast';
+            const artworkUrl = config.podcastArtwork.startsWith('http') ? 
+                config.podcastArtwork : baseUrl + '/' + config.podcastArtwork.replace('./', '');
+            
+            const now = new Date().toUTCString();
+            const buildDate = new Date(vimeoData.lastUpdated).toUTCString();
+            
+            let rss = '<?xml version="1.0" encoding="UTF-8"?>\n';
+            rss += '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">\n';
+            rss += '<channel>\n';
+            rss += '    <title>' + escapeXML(config.podcastTitle) + '</title>\n';
+            rss += '    <link>' + escapeXML(config.churchWebsite) + '</link>\n';
+            rss += '    <description>' + escapeXML(config.podcastDescription) + '</description>\n';
+            rss += '    <language>' + escapeXML(config.podcastLanguage) + '</language>\n';
+            rss += '    <copyright>© ' + new Date().getFullYear() + ' ' + escapeXML(config.podcastAuthor) + '</copyright>\n';
+            rss += '    <managingEditor>' + escapeXML(config.podcastEmail) + ' (' + escapeXML(config.podcastAuthor) + ')</managingEditor>\n';
+            rss += '    <webMaster>' + escapeXML(config.podcastEmail) + ' (' + escapeXML(config.podcastAuthor) + ')</webMaster>\n';
+            rss += '    <pubDate>' + now + '</pubDate>\n';
+            rss += '    <lastBuildDate>' + buildDate + '</lastBuildDate>\n';
+            rss += '    <generator>GitHub Actions Podcast RSS Generator v2.0</generator>\n';
+            rss += '    \n';
+            rss += '    <!-- iTunes Podcast Tags -->\n';
+            rss += '    <itunes:author>' + escapeXML(config.podcastAuthor) + '</itunes:author>\n';
+            rss += '    <itunes:summary>' + escapeXML(config.podcastDescription) + '</itunes:summary>\n';
+            rss += '    <itunes:owner>\n';
+            rss += '        <itunes:name>' + escapeXML(config.podcastAuthor) + '</itunes:name>\n';
+            rss += '        <itunes:email>' + escapeXML(config.podcastEmail) + '</itunes:email>\n';
+            rss += '    </itunes:owner>\n';
+            rss += '    <itunes:explicit>false</itunes:explicit>\n';
+            
+            if (config.podcastSubcategory) {
+                rss += '    <itunes:category text="' + escapeXML(config.podcastCategory) + '">\n';
+                rss += '        <itunes:category text="' + escapeXML(config.podcastSubcategory) + '" />\n';
+                rss += '    </itunes:category>\n';
+            } else {
+                rss += '    <itunes:category text="' + escapeXML(config.podcastCategory) + '" />\n';
+            }
+            
+            rss += '    <itunes:image href="' + escapeXML(artworkUrl) + '" />\n';
+            rss += '    <itunes:type>episodic</itunes:type>\n';
+
+            vimeoData.movies.forEach(function(movie, index) {
+                const episodeNumber = vimeoData.movies.length - index;
+                const pubDate = new Date(movie.releaseDate).toUTCString();
+                const duration = formatDuration(movie.content.duration);
+                const videoUrl = movie.content.videos && movie.content.videos[0] ? movie.content.videos[0].url : '';
+                
+                rss += '\n    <item>\n';
+                rss += '        <title>' + escapeXML(movie.title) + '</title>\n';
+                rss += '        <description>' + escapeXML(movie.shortDescription || movie.title) + '</description>\n';
+                rss += '        <link>https://vimeo.com/' + escapeXML(movie.id) + '</link>\n';
+                rss += '        <guid isPermaLink="false">vimeo-' + escapeXML(movie.id) + '</guid>\n';
+                rss += '        <pubDate>' + pubDate + '</pubDate>\n';
+                
+                if (videoUrl) {
+                    rss += '        <enclosure url="' + escapeXML(videoUrl) + '" type="application/x-mpegURL" length="0" />\n';
+                }
+                
+                rss += '        \n';
+                rss += '        <!-- iTunes Episode Tags -->\n';
+                rss += '        <itunes:title>' + escapeXML(movie.title) + '</itunes:title>\n';
+                rss += '        <itunes:summary>' + escapeXML(movie.shortDescription || movie.title) + '</itunes:summary>\n';
+                rss += '        <itunes:duration>' + duration + '</itunes:duration>\n';
+                rss += '        <itunes:episode>' + episodeNumber + '</itunes:episode>\n';
+                rss += '        <itunes:episodeType>full</itunes:episodeType>\n';
+                rss += '        <itunes:explicit>false</itunes:explicit>\n';
+                
+                if (movie.thumbnail) {
+                    rss += '        <itunes:image href="' + escapeXML(movie.thumbnail) + '" />\n';
+                }
+                
+                rss += '    </item>';
+            });
+
+            rss += '\n\n</channel>\n</rss>';
+            return rss;
+        }
+
+        async function main() {
+            try {
+                console.log('📡 Getting episode data...');
+                const vimeoData = await fetchVimeoData();
+                
+                console.log('📝 Generating RSS...');
+                const rss = generateRSS(vimeoData);
+                
+                console.log('💾 Writing RSS to feed.xml...');
+                fs.writeFileSync('feed.xml', rss);
+                
+                console.log('✅ RSS feed generated successfully!');
+                console.log('📄 File size: ' + fs.statSync('feed.xml').size + ' bytes');
+                console.log('🕐 Generated at: ' + new Date().toISOString());
+                
+            } catch (error) {
+                console.error('❌ Error generating RSS:', error);
+                process.exit(1);
+            }
         }
         
-    } catch (error) {
-        console.error('❌ Error generating RSS:', error);
-        process.exit(1);
-    }
-}
-
-main();
+        main();
+        SCRIPT_EOF
+        
+        echo "📝 Running RSS generation script..."
+        node generate-rss.js
+        
+        if [ -f "feed.xml" ]; then
+          echo "✅ feed.xml created successfully!"
+          echo "📄 File size: $(wc -c < feed.xml) bytes"
+          echo "📝 First few lines:"
+          head -10 feed.xml
+        else
+          echo "❌ feed.xml was not created!"
+          exit 1
+        fi
+        
+    - name: Commit updated feed
+      run: |
+        echo "🔍 Checking for changes to feed.xml..."
+        
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action RSS Bot"
+        
+        if git diff --quiet feed.xml; then
+          echo "ℹ️ No changes to feed.xml - skipping commit"
+        else
+          echo "📝 Changes detected in feed.xml - committing..."
+          git add feed.xml
+          git status
+          git commit -m "🎙️ Auto-update RSS feed - $(date '+%Y-%m-%d %H:%M UTC')"
+          git push
+          echo "✅ RSS feed updated and committed successfully!"
+        fi
