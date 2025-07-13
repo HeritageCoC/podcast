@@ -61,15 +61,12 @@ jobs:
 
         function escapeXML(str) {
             if (!str) return '';
-            return str.replace(/[<>&'"]/g, function (c) {
-                switch (c) {
-                    case '<': return '&lt;';
-                    case '>': return '&gt;';
-                    case '&': return '&amp;';
-                    case "'": return '&apos;';
-                    case '"': return '&quot;';
-                }
-            });
+            return str.toString()
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&apos;');
         }
 
         function formatDuration(seconds) {
