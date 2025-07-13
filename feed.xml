@@ -1,1 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+    <title>Heritage Church of Christ</title>
+    <link>https://heritagecoc.org</link>
+    <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together.</description>
+    <language>en</language>
+    <copyright>© 2025 Heritage Church of Christ</copyright>
+    <managingEditor>office@heritagecoc.org (Heritage Church of Christ)</managingEditor>
+    <webMaster>office@heritagecoc.org (Heritage Church of Christ)</webMaster>
+    <pubDate>Sun, 13 Jul 2025 22:11:26 GMT</pubDate>
+    <lastBuildDate>Sun, 13 Jul 2025 22:11:26 GMT</lastBuildDate>
+    <generator>GitHub Actions Podcast RSS Generator v2.0</generator>
+    
+    <!-- iTunes Podcast Tags -->
+    <itunes:author>Heritage Church of Christ</itunes:author>
+    <itunes:summary>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together.</itunes:summary>
+    <itunes:owner>
+        <itunes:name>Heritage Church of Christ</itunes:name>
+        <itunes:email>office@heritagecoc.org</itunes:email>
+    </itunes:owner>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:category text="Religion & Spirituality">
+        <itunes:category text="Christianity" />
+    </itunes:category>
+    <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
+    <itunes:type>episodic</itunes:type>
 
+    <item>
+        <title>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</title>
+        <description>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</description>
+        <link>https://vimeo.com/1099141295</link>
+        <guid isPermaLink="false">vimeo-1099141295</guid>
+        <pubDate>Sun, 06 Jul 2025 14:58:00 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1" type="application/x-mpegURL" length="0" />
+        
+        <!-- iTunes Episode Tags -->
+        <itunes:title>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</itunes:title>
+        <itunes:summary>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</itunes:summary>
+        <itunes:duration>1:17:53</itunes:duration>
+        <itunes:episode>5</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:image href="https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us" />
+    </item>
+    <item>
+        <title>&quot;Jonah the Patriot&quot; Travis Roberstson 7.6.2025</title>
+        <description>&quot;Jonah the Patriot&quot; Travis Roberstson 7.6.2025</description>
+        <link>https://vimeo.com/1097306715</link>
+        <guid isPermaLink="false">vimeo-1097306715</guid>
+        <pubDate>Sun, 29 Jun 2025 14:59:41 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1097306715.m3u8?s=26100bbb1ef991ff1dd99d8fe220fcef11a32bc1" type="application/x-mpegURL" length="0" />
+        
+        <!-- iTunes Episode Tags -->
+        <itunes:title>&quot;Jonah the Patriot&quot; Travis Roberstson 7.6.2025</itunes:title>
+        <itunes:summary>&quot;Jonah the Patriot&quot; Travis Roberstson 7.6.2025</itunes:summary>
+        <itunes:duration>59:35</itunes:duration>
+        <itunes:episode>4</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:image href="https://i.vimeocdn.com/video/2031613024-2931fa67f75a6ea25a14cdd23369faf4c87e649405c837b2013be878a76bdb8d-d_800x450?region=us" />
+    </item>
+    <item>
+        <title>&quot;What Goes Up, Must Come Down&quot;  6-29-25</title>
+        <description>&quot;What Goes Up, Must Come Down&quot;  6-29-25</description>
+        <link>https://vimeo.com/1095396640</link>
+        <guid isPermaLink="false">vimeo-1095396640</guid>
+        <pubDate>Sun, 22 Jun 2025 14:59:56 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1095396640.m3u8?s=21ede852bbed805d4c49a9ac8f30c0d8a206237d" type="application/x-mpegURL" length="0" />
+        
+        <!-- iTunes Episode Tags -->
+        <itunes:title>&quot;What Goes Up, Must Come Down&quot;  6-29-25</itunes:title>
+        <itunes:summary>&quot;What Goes Up, Must Come Down&quot;  6-29-25</itunes:summary>
+        <itunes:duration>1:03:21</itunes:duration>
+        <itunes:episode>3</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:image href="https://i.vimeocdn.com/video/2029195244-f881c224bf8d51c558e89b35c0ebe53e98de868ceaeccac1558f98200e9fba89-d_800x450?region=us" />
+    </item>
+    <item>
+        <title>&quot;Was the Holy Spirit in the Old Testament&quot;  6-22-25</title>
+        <description>&quot;Was the Holy Spirit in the Old Testament&quot;  6-22-25</description>
+        <link>https://vimeo.com/1093498929</link>
+        <guid isPermaLink="false">vimeo-1093498929</guid>
+        <pubDate>Sun, 15 Jun 2025 15:00:42 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1093498929.m3u8?s=a9cb44fe6614d22ffb9ee0fad95a49ff927a5809" type="application/x-mpegURL" length="0" />
+        
+        <!-- iTunes Episode Tags -->
+        <itunes:title>&quot;Was the Holy Spirit in the Old Testament&quot;  6-22-25</itunes:title>
+        <itunes:summary>&quot;Was the Holy Spirit in the Old Testament&quot;  6-22-25</itunes:summary>
+        <itunes:duration>1:01:17</itunes:duration>
+        <itunes:episode>2</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:image href="https://i.vimeocdn.com/video/2026857899-d3021c453cff977e363799d1bfd7e7c9bbb6fa4c50dc902d9a86dbe801ad2b41-d_800x450?region=us" />
+    </item>
+    <item>
+        <title>&quot;The Holy Spirit is Working in Our Fathers&quot;  6-15-25</title>
+        <description>&quot;The Holy Spirit is Working in Our Fathers&quot;  6-15-25</description>
+        <link>https://vimeo.com/1091602933</link>
+        <guid isPermaLink="false">vimeo-1091602933</guid>
+        <pubDate>Sun, 08 Jun 2025 15:04:27 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1091602933.m3u8?s=b33d50db763b6a10232e26abab5ff9bd556270ce" type="application/x-mpegURL" length="0" />
+        
+        <!-- iTunes Episode Tags -->
+        <itunes:title>&quot;The Holy Spirit is Working in Our Fathers&quot;  6-15-25</itunes:title>
+        <itunes:summary>&quot;The Holy Spirit is Working in Our Fathers&quot;  6-15-25</itunes:summary>
+        <itunes:duration>1:04:56</itunes:duration>
+        <itunes:episode>1</itunes:episode>
+        <itunes:episodeType>full</itunes:episodeType>
+        <itunes:explicit>false</itunes:explicit>
+        <itunes:image href="https://i.vimeocdn.com/video/2024477786-e995b97262a2dc68ce0bd1e2f7c00e077158bf0c976ab65d109a9602940901af-d_800x450?region=us" />
+    </item>
+
+</channel>
+</rss>
