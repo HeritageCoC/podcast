@@ -130,7 +130,7 @@ jobs:
         <itunes:email>${config.podcastEmail}</itunes:email>
     </itunes:owner>
     <itunes:explicit>false</itunes:explicit>
-    <itunes:category text="${config.podcastCategory}"${config.podcastSubcategory ? `>\n        <itunes:category text="${config.podcastSubcategory}" />\n    </itunes:category` : ' /'}">
+    <itunes:category text="${config.podcastCategory}"${config.podcastSubcategory ? '>\n        <itunes:category text="' + config.podcastSubcategory + '" />\n    </itunes:category' : ' /'}">
     <itunes:image href="${artworkUrl}" />
     <itunes:type>episodic</itunes:type>
 `;
