@@ -2,6 +2,7 @@
 
 # Simple Roku Enhancement Integration
 # This script runs AFTER your existing media generator to enhance the roku-feed.json
+# Works whether file is executable or not (handles GitHub web interface uploads)
 
 echo "🚀 Starting Roku feed enhancement..."
 
@@ -14,6 +15,15 @@ if [ ! -f "roku-feed.json" ]; then
 fi
 
 echo "✅ Found existing roku-feed.json"
+
+# Check if config.json exists
+if [ ! -f "config.json" ]; then
+    echo "❌ config.json not found!"
+    echo "💡 This script reads configuration from your existing config.json"
+    exit 1
+fi
+
+echo "✅ Found existing config.json"
 
 # Check if Node.js is available
 if ! command -v node &> /dev/null; then
@@ -28,12 +38,16 @@ if [ ! -f "roku-feed-enhancer.js" ]; then
     exit 1
 fi
 
-# Get info about existing feed
+# Get info about existing feed and config
 EXISTING_COUNT=$(jq '.movies | length' roku-feed.json 2>/dev/null || echo "0")
+CHURCH_NAME=$(jq -r '.podcastTitle // "Heritage Church"' config.json 2>/dev/null)
+
 echo "📚 Existing roku-feed.json has $EXISTING_COUNT movies"
+echo "⛪ Church: $CHURCH_NAME"
 
 # Run the enhancer
 echo "🔧 Enhancing Roku feed with live streaming and additional content..."
+echo "📖 Reading configuration from config.json..."
 node roku-feed-enhancer.js
 
 # Check if enhancement was successful
@@ -59,11 +73,12 @@ if [ $? -eq 0 ]; then
     [ -f "roku-enhancement-info.json" ] && echo "  ✓ roku-enhancement-info.json (deployment guide)"
     
     echo ""
-    echo "🎯 Next steps:"
-    echo "1. Configure Vimeo showcase IDs in roku-feed-enhancer.js"
-    echo "2. Set up your livestream URL"
-    echo "3. Submit this URL to Roku Direct Publisher:"
+    echo "🎯 Roku Direct Publisher URL:"
     echo "   https://heritagecoc.github.io/podcast/roku-direct-publisher-feed.json"
+    echo ""
+    echo "⚙️  Configuration:"
+    echo "   To add livestream and additional showcases, edit your config.json"
+    echo "   See roku-enhancement-info.json for detailed setup instructions"
     
 else
     echo "❌ Roku feed enhancement failed!"
