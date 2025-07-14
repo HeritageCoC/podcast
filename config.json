@@ -66,9 +66,6 @@
       "smartTrimming": {
         "enabled": true,
         "generateBothVersions": true,
-        "interactiveApproval": true,
-        "autoApproveAfter": 30,
-        "pushoverActions": true,
         "silenceThreshold": -30,
         "minServiceLength": 45,
         "maxServiceLength": 90,
