@@ -1177,7 +1177,22 @@ jobs:
         
         echo "📝 Running comprehensive feed generator..."
         node generate-comprehensive.js
-        
+    
+    - name: Enhance Roku feed for Direct Publisher
+      run: |
+        echo "📺 Enhancing Roku feed for Direct Publisher..."
+        if [ -f "roku-feed-enhancer.js" ]; then
+          # Make script executable (handles GitHub web interface uploads)
+          chmod +x roku-enhancement-integration.sh 2>/dev/null || true
+          
+          # Run the enhancement (reads local roku-feed.json)
+          bash roku-enhancement-integration.sh
+          
+          echo "✅ Roku enhancement completed"
+        else
+          echo "ℹ️ Roku enhancer not found - skipping enhancement"
+        fi    
+    
     - name: Create index page
       run: |
         echo "📄 Creating feed index page..."
