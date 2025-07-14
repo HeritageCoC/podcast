@@ -1,0 +1,319 @@
+name: Phone Audio Decision Handler
+
+on:
+  repository_dispatch:
+    types: [pushover_response]
+  schedule:
+    # Auto-approve after 30 minutes if no user response
+    - cron: '*/30 * * * *'  # Every 30 minutes
+  workflow_dispatch:
+    inputs:
+      decision:
+        description: 'Manual decision (keep_trimmed or use_full)'
+        required: false
+        type: choice
+        options:
+          - keep_trimmed
+          - use_full
+
+permissions:
+  contents: write
+
+jobs:
+  handle-phone-audio-decision:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Process phone audio decision
+      run: |
+        echo "📱 Processing phone audio decision..."
+        
+        cat > handle-decision.js << 'SCRIPT_EOF'
+        const fs = require('fs');
+        const https = require('https');
+        
+        let config;
+        try {
+          config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        } catch (error) {
+          console.error('❌ Error reading config:', error);
+          process.exit(1);
+        }
+        
+        // Get decision from workflow input or repository dispatch
+        let decision = process.env.MANUAL_DECISION;
+        
+        if (process.env.GITHUB_EVENT_NAME === 'repository_dispatch') {
+          const eventPayload = JSON.parse(process.env.GITHUB_EVENT_PAYLOAD || '{}');
+          decision = eventPayload.client_payload?.action;
+          console.log('📱 Received Pushover response:', decision);
+        } else if (process.env.GITHUB_EVENT_NAME === 'schedule') {
+          // Auto-approve logic
+          decision = await checkForAutoApproval();
+        }
+        
+        if (!decision) {
+          console.log('ℹ️ No decision to process');
+          return;
+        }
+        
+        await processDecision(decision);
+        
+        async function checkForAutoApproval() {
+          const smartTrimming = config.outputs?.phoneTree?.smartTrimming;
+          
+          if (!smartTrimming?.enabled || !smartTrimming?.interactiveApproval) {
+            console.log('📱 Interactive approval disabled');
+            return null;
+          }
+          
+          // Check if we have both files and no recent decision
+          const hasBothFiles = fs.existsSync('latest-sermon-phone.mp3') && 
+                               fs.existsSync('latest-sermon-phone-full.mp3');
+          
+          if (!hasBothFiles) {
+            console.log('📱 No pending decision found');
+            return null;
+          }
+          
+          // Check if files are recent (within auto-approve window)
+          const autoApproveMinutes = smartTrimming.autoApproveAfter || 30;
+          const trimmedStat = fs.statSync('latest-sermon-phone.mp3');
+          const ageMinutes = (Date.now() - trimmedStat.mtime.getTime()) / (1000 * 60);
+          
+          if (ageMinutes >= autoApproveMinutes) {
+            console.log(`⏰ Auto-approving trimmed version after ${autoApproveMinutes} minutes`);
+            return 'auto_approve_trimmed';
+          }
+          
+          console.log(`⏰ Waiting for user decision (${Math.round(autoApproveMinutes - ageMinutes)} min remaining)`);
+          return null;
+        }
+        
+        async function processDecision(decision) {
+          console.log(`🎯 Processing decision: ${decision}`);
+          
+          let actionTaken = decision;
+          let statusMessage = '';
+          
+          try {
+            switch (decision) {
+              case 'keep_trimmed':
+              case 'auto_approve_trimmed':
+                // Remove the full version backup
+                if (fs.existsSync('latest-sermon-phone-full.mp3')) {
+                  fs.unlinkSync('latest-sermon-phone-full.mp3');
+                  console.log('🗑️ Removed full version backup');
+                }
+                statusMessage = decision === 'auto_approve_trimmed' ? 
+                  'Auto-approved trimmed version (no user response)' :
+                  'User approved trimmed version';
+                break;
+                
+              case 'use_full':
+                // Replace trimmed with full version
+                if (fs.existsSync('latest-sermon-phone-full.mp3')) {
+                  fs.copyFileSync('latest-sermon-phone-full.mp3', 'latest-sermon-phone.mp3');
+                  fs.unlinkSync('latest-sermon-phone-full.mp3');
+                  console.log('🔄 Replaced trimmed version with full version');
+                  
+                  // Update phone-tree-info.json
+                  try {
+                    const phoneInfo = JSON.parse(fs.readFileSync('phone-tree-info.json', 'utf8'));
+                    phoneInfo.trimmingApplied = false;
+                    phoneInfo.userSelectedFull = true;
+                    phoneInfo.decisionTimestamp = new Date().toISOString();
+                    fs.writeFileSync('phone-tree-info.json', JSON.stringify(phoneInfo, null, 2));
+                  } catch (error) {
+                    console.warn('⚠️ Could not update phone-tree-info.json:', error);
+                  }
+                  
+                  statusMessage = 'User selected full version - trimmed version replaced';
+                } else {
+                  console.error('❌ Full version file not found');
+                  return;
+                }
+                break;
+                
+              default:
+                console.warn('⚠️ Unknown decision:', decision);
+                return;
+            }
+            
+            // Log the decision
+            logPhoneDecision(actionTaken, statusMessage);
+            
+            // Send confirmation notification
+            await sendConfirmationNotification(statusMessage);
+            
+            console.log(`✅ Successfully processed decision: ${actionTaken}`);
+            
+          } catch (error) {
+            console.error('❌ Error processing decision:', error);
+            await sendErrorNotification(`Failed to process decision: ${error.message}`);
+          }
+        }
+        
+        function logPhoneDecision(action, message) {
+          try {
+            let trimmedInfo = {};
+            
+            // Try to get info from phone-tree-info.json
+            try {
+              trimmedInfo = JSON.parse(fs.readFileSync('phone-tree-info.json', 'utf8'));
+            } catch (error) {
+              console.warn('⚠️ Could not read phone-tree-info.json for logging');
+            }
+            
+            const logEntry = {
+              timestamp: new Date().toISOString(),
+              action: action,
+              message: message,
+              sermon: {
+                title: trimmedInfo.title || 'Unknown',
+                date: trimmedInfo.date || 'Unknown'
+              },
+              finalFile: {
+                size: fs.existsSync('latest-sermon-phone.mp3') ? fs.statSync('latest-sermon-phone.mp3').size : 0,
+                trimmingApplied: trimmedInfo.trimmingApplied || false
+              }
+            };
+            
+            const logLine = JSON.stringify(logEntry) + '\n';
+            fs.appendFileSync('phone-audio-decisions.log', logLine);
+            
+            console.log(`📝 Logged decision: ${action}`);
+          } catch (error) {
+            console.error('⚠️ Failed to log decision:', error);
+          }
+        }
+        
+        async function sendConfirmationNotification(message) {
+          if (!config.pushover?.enabled) return;
+          
+          const userKey = process.env.PUSHOVER_USER_KEY;
+          const appToken = process.env.PUSHOVER_APP_TOKEN;
+          
+          if (!userKey || !appToken) return;
+          
+          const postData = JSON.stringify({
+            token: appToken,
+            user: userKey,
+            message: `✅ ${message}\n\n🔗 Final audio: ${config.baseUrl}/latest-sermon-phone.mp3`,
+            title: 'Phone Audio Decision Processed',
+            priority: -1,  // Low priority confirmation
+            sound: 'none'
+          });
+          
+          return new Promise((resolve) => {
+            const options = {
+              hostname: 'api.pushover.net',
+              port: 443,
+              path: '/1/messages.json',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+              }
+            };
+            
+            const req = https.request(options, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  console.log('📱 Confirmation notification sent');
+                } else {
+                  console.warn('⚠️ Confirmation notification failed:', res.statusCode);
+                }
+                resolve();
+              });
+            });
+            
+            req.on('error', () => {
+              console.warn('⚠️ Confirmation notification error');
+              resolve();
+            });
+            
+            req.write(postData);
+            req.end();
+          });
+        }
+        
+        async function sendErrorNotification(errorMessage) {
+          if (!config.pushover?.enabled) return;
+          
+          const userKey = process.env.PUSHOVER_USER_KEY;
+          const appToken = process.env.PUSHOVER_APP_TOKEN;
+          
+          if (!userKey || !appToken) return;
+          
+          const postData = JSON.stringify({
+            token: appToken,
+            user: userKey,
+            message: `❌ Phone Audio Decision Error:\n${errorMessage}`,
+            title: 'Phone Audio System Error',
+            priority: 1,  // High priority for errors
+            sound: 'falling'
+          });
+          
+          return new Promise((resolve) => {
+            const options = {
+              hostname: 'api.pushover.net',
+              port: 443,
+              path: '/1/messages.json',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+              }
+            };
+            
+            const req = https.request(options, (res) => {
+              resolve();
+            });
+            
+            req.on('error', () => resolve());
+            req.write(postData);
+            req.end();
+          });
+        }
+        
+        // Main execution
+        await processDecision();
+        
+        SCRIPT_EOF
+        
+        # Run the decision handler
+        MANUAL_DECISION=${{ github.event.inputs.decision }} node handle-decision.js
+        
+      env:
+        PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+        PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
+        GITHUB_EVENT_PAYLOAD: ${{ toJson(github.event) }}
+        
+    - name: Commit any changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Phone Audio Decision Handler"
+        
+        # Add any modified files
+        git add latest-sermon-phone.mp3 phone-tree-info.json phone-audio-decisions.log 2>/dev/null || true
+        
+        if git diff --cached --quiet; then
+          echo "ℹ️ No changes to commit"
+        else
+          echo "📝 Committing phone audio decision changes..."
+          git status
+          git commit -m "📞 Phone audio decision processed - $(date '+%Y-%m-%d %H:%M UTC')"
+          git push
+          echo "✅ Phone audio decision changes committed!"
+        fi
