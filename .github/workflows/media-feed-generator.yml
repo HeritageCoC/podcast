@@ -695,7 +695,18 @@ jobs:
               return;
             }
             
-            console.log(`📝 Processing ${vimeoData.episodes.length} episodes...`);
+            console.log(`📝 Found ${vimeoData.episodes.length} episodes...`);
+            
+            // Check if content has changed since last run
+            const hasContentChanged = await checkForContentChanges(vimeoData);
+            
+            if (!hasContentChanged && !process.env.FORCE_REFRESH) {
+              console.log('ℹ️ No new content detected - skipping file generation');
+              console.log('📊 Feeds are up to date');
+              return;
+            }
+            
+            console.log('🔄 Content changes detected - generating feeds...');
             
             const results = {};
             
@@ -719,19 +730,29 @@ jobs:
               }
             }
             
-            // Generate phone quality MP3
+            // Generate phone quality MP3 (only if latest episode changed)
             if (config.outputs?.phoneTree?.enabled) {
-              try {
-                const phoneInfo = await generatePhoneQualityMp3(vimeoData);
-                if (phoneInfo) {
-                  results.phoneTree = `latest-sermon-phone.mp3 (${fs.statSync('latest-sermon-phone.mp3').size} bytes)`;
-                  console.log('✅ Phone quality MP3 generated');
+              const shouldGeneratePhoneMp3 = await checkIfLatestEpisodeChanged(vimeoData);
+              
+              if (shouldGeneratePhoneMp3 || process.env.FORCE_REFRESH) {
+                try {
+                  const phoneInfo = await generatePhoneQualityMp3(vimeoData);
+                  if (phoneInfo) {
+                    results.phoneTree = `latest-sermon-phone.mp3 (${fs.statSync('latest-sermon-phone.mp3').size} bytes)`;
+                    console.log('✅ Phone quality MP3 generated');
+                  }
+                } catch (error) {
+                  console.error('❌ Phone MP3 generation failed:', error);
+                  results.phoneTree = 'Failed: ' + error.message;
                 }
-              } catch (error) {
-                console.error('❌ Phone MP3 generation failed:', error);
-                results.phoneTree = 'Failed: ' + error.message;
+              } else {
+                console.log('ℹ️ Latest episode unchanged - skipping phone MP3 generation');
+                results.phoneTree = 'Skipped (no changes)';
               }
             }
+            
+            // Update content hash for next run
+            await updateContentHash(vimeoData);
             
             // Create summary
             console.log('\n📊 Generation Summary:');
@@ -744,6 +765,119 @@ jobs:
           } catch (error) {
             console.error('❌ Error during generation:', error);
             process.exit(1);
+          }
+        }
+        
+        // Check if content has changed since last run
+        async function checkForContentChanges(vimeoData) {
+          try {
+            // Create a hash of current content
+            const currentContent = {
+              episodeCount: vimeoData.episodes.length,
+              latestEpisode: vimeoData.episodes.length > 0 ? {
+                id: vimeoData.episodes[0].id,
+                title: vimeoData.episodes[0].title,
+                releaseDate: vimeoData.episodes[0].releaseDate
+              } : null,
+              // Hash of all episode IDs and dates
+              episodeSignature: vimeoData.episodes
+                .map(ep => `${ep.id}:${ep.releaseDate}`)
+                .sort()
+                .join('|')
+            };
+            
+            const currentHash = require('crypto')
+              .createHash('sha256')
+              .update(JSON.stringify(currentContent))
+              .digest('hex');
+            
+            // Check if we have a previous hash
+            let previousHash = '';
+            try {
+              if (fs.existsSync('.content-hash')) {
+                previousHash = fs.readFileSync('.content-hash', 'utf8').trim();
+              }
+            } catch (error) {
+              console.log('📝 No previous content hash found - treating as new content');
+            }
+            
+            console.log(`🔍 Content hash: ${currentHash.substring(0, 12)}...`);
+            console.log(`🔍 Previous hash: ${previousHash.substring(0, 12)}...`);
+            
+            return currentHash !== previousHash;
+            
+          } catch (error) {
+            console.error('⚠️ Error checking content changes:', error);
+            return true; // Generate on error to be safe
+          }
+        }
+        
+        // Check if latest episode specifically changed (for phone MP3)
+        async function checkIfLatestEpisodeChanged(vimeoData) {
+          if (vimeoData.episodes.length === 0) return false;
+          
+          try {
+            const latestEpisode = vimeoData.episodes
+              .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
+            
+            const currentLatest = `${latestEpisode.id}:${latestEpisode.releaseDate}`;
+            
+            let previousLatest = '';
+            try {
+              if (fs.existsSync('.latest-episode')) {
+                previousLatest = fs.readFileSync('.latest-episode', 'utf8').trim();
+              }
+            } catch (error) {
+              console.log('📝 No previous latest episode found');
+            }
+            
+            console.log(`🎙️ Current latest: ${latestEpisode.title} (${latestEpisode.id})`);
+            console.log(`🎙️ Previous latest: ${previousLatest}`);
+            
+            return currentLatest !== previousLatest;
+            
+          } catch (error) {
+            console.error('⚠️ Error checking latest episode:', error);
+            return true; // Generate on error
+          }
+        }
+        
+        // Update content hash for next run
+        async function updateContentHash(vimeoData) {
+          try {
+            // Update overall content hash
+            const currentContent = {
+              episodeCount: vimeoData.episodes.length,
+              latestEpisode: vimeoData.episodes.length > 0 ? {
+                id: vimeoData.episodes[0].id,
+                title: vimeoData.episodes[0].title,
+                releaseDate: vimeoData.episodes[0].releaseDate
+              } : null,
+              episodeSignature: vimeoData.episodes
+                .map(ep => `${ep.id}:${ep.releaseDate}`)
+                .sort()
+                .join('|')
+            };
+            
+            const currentHash = require('crypto')
+              .createHash('sha256')
+              .update(JSON.stringify(currentContent))
+              .digest('hex');
+            
+            fs.writeFileSync('.content-hash', currentHash);
+            
+            // Update latest episode tracking
+            if (vimeoData.episodes.length > 0) {
+              const latestEpisode = vimeoData.episodes
+                .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
+              const latestInfo = `${latestEpisode.id}:${latestEpisode.releaseDate}`;
+              fs.writeFileSync('.latest-episode', latestInfo);
+            }
+            
+            console.log('💾 Content tracking updated');
+            
+          } catch (error) {
+            console.error('⚠️ Error updating content hash:', error);
           }
         }
         
@@ -837,7 +971,8 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "Comprehensive Media Generator"
         
-        git add -A
+        # Add generated files and tracking files
+        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 phone-tree-info.json index.html .content-hash .latest-episode 2>/dev/null || true
         
         if git diff --cached --quiet; then
           echo "ℹ️ No changes to commit"
