@@ -213,15 +213,29 @@ jobs:
           const timeSinceLatest = getCentralTime() - latestDate;
           
           console.log(`📹 Latest video: "${latestVideo.title}"`);
-          console.log(`📅 Latest video date: ${latestDate.toLocaleString()}`);
+          console.log(`📅 Latest video date (raw): ${latestVideo.releaseDate}`);
+          console.log(`📅 Latest video date (parsed): ${latestDate.toLocaleString()}`);
           console.log(`⏰ Time since service: ${Math.round(timeSinceService / (1000 * 60 * 60))} hours`);
           console.log(`⏰ Time since latest video: ${Math.round(timeSinceLatest / (1000 * 60 * 60))} hours`);
           
-          // Check if latest video is from expected service
-          const videoFromExpectedService = latestDate >= lastSunday && latestDate <= gracePeriod;
+          // Account for Vimeo's 7-day date offset issue
+          const adjustedLatestDate = new Date(latestDate.getTime() + (7 * 24 * 60 * 60 * 1000)); // Add 7 days
+          const adjustedTimeSinceLatest = getCentralTime() - adjustedLatestDate;
           
-          if (!videoFromExpectedService && timeSinceService > (graceHours * 60 * 60 * 1000)) {
-            const message = `Missing expected sermon from ${lastSunday.toLocaleDateString()}. Latest video: "${latestVideo.title}" from ${latestDate.toLocaleDateString()}.`;
+          console.log(`📅 Adjusted latest video date (+7 days): ${adjustedLatestDate.toLocaleString()}`);
+          console.log(`⏰ Adjusted time since latest video: ${Math.round(adjustedTimeSinceLatest / (1000 * 60 * 60))} hours`);
+          
+          // Check if adjusted date is from expected service
+          const videoFromExpectedService = adjustedLatestDate >= lastSunday && adjustedLatestDate <= gracePeriod;
+          
+          // Also check if the video was uploaded recently (within last 24 hours) regardless of date
+          const wasUploadedRecently = Math.abs(adjustedTimeSinceLatest) < (24 * 60 * 60 * 1000);
+          
+          console.log(`🎯 Video from expected service window: ${videoFromExpectedService}`);
+          console.log(`🕐 Video uploaded recently: ${wasUploadedRecently}`);
+          
+          if (!videoFromExpectedService && !wasUploadedRecently && timeSinceService > (graceHours * 60 * 60 * 1000)) {
+            const message = `Missing expected sermon from ${lastSunday.toLocaleDateString()}. Latest video: "${latestVideo.title}" from ${latestVideo.releaseDate} (Vimeo date may be offset).`;
             
             await sendPushoverNotification(message, 1); // High priority
             
@@ -234,7 +248,7 @@ jobs:
           
           return {
             isMissing: false,
-            message: 'Latest sermon found as expected',
+            message: `Latest sermon found: "${latestVideo.title}" (accounting for Vimeo date offset)`,
             shouldStop: false
           };
         }
