@@ -1,0 +1,29 @@
+{
+  "generated": "2025-07-14T05:51:43.055Z",
+  "baseRokuFeed": "roku-feed.json (from your existing media generator)",
+  "enhancedRokuFeed": "roku-feed-enhanced.json (this enhancement)",
+  "rokuDirectPublisherFeed": "roku-direct-publisher-feed.json (submit this to Roku)",
+  "feedUrls": {
+    "original": "https://heritagecoc.github.io/podcast/roku-feed.json",
+    "enhanced": "https://heritagecoc.github.io/podcast/roku-feed-enhanced.json",
+    "directPublisher": "https://heritagecoc.github.io/podcast/roku-direct-publisher-feed.json"
+  },
+  "contentSummary": {
+    "totalMovies": 82,
+    "liveContent": 0,
+    "mainSermons": 81,
+    "additionalContent": 0,
+    "isLiveServiceTime": false
+  },
+  "nextSteps": [
+    "1. Configure your Vimeo showcase IDs in this script",
+    "2. Set up your livestream URL",
+    "3. Test the enhanced feed during service hours",
+    "4. Submit roku-direct-publisher-feed.json URL to Roku Direct Publisher",
+    "5. Keep running your existing media generator - this enhances it!"
+  ],
+  "configuration": {
+    "livestreamConfigured": false,
+    "additionalContentConfigured": 0
+  }
+}
