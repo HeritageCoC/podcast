@@ -1,0 +1,832 @@
+name: Comprehensive Multi-Platform Podcast & Roku Generator
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # Check every 2 hours
+    - cron: '0 18 * * 0'   # Special check Sundays at 6pm Central (00:00 UTC Monday)
+  workflow_dispatch:
+    inputs:
+      force_refresh:
+        description: 'Force refresh all episodes'
+        required: false
+        default: false
+        type: boolean
+      skip_sermon_check:
+        description: 'Skip missing sermon detection'
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches: [ main ]
+    paths:
+      - 'config.json'
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-check:
+    runs-on: ubuntu-latest
+    outputs:
+      should-continue: ${{ steps.sermon-check.outputs.should-continue }}
+      sermon-status: ${{ steps.sermon-check.outputs.status }}
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Validate configuration
+      run: |
+        echo "🔍 Validating configuration..."
+        
+        if [ ! -f "config.json" ]; then
+          echo "❌ config.json not found!"
+          exit 1
+        fi
+        
+        if ! jq . config.json > /dev/null 2>&1; then
+          echo "❌ config.json contains invalid JSON!"
+          exit 1
+        fi
+        
+        echo "✅ Configuration valid"
+        jq '.outputs' config.json
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Check for missing sermon
+      id: sermon-check
+      run: |
+        echo "🕐 Checking for expected sermon..."
+        
+        cat > check-sermon.js << 'SCRIPT_EOF'
+        const fs = require('fs');
+        const https = require('https');
+        
+        let config;
+        try {
+          config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+        } catch (error) {
+          console.error('❌ Error reading config:', error);
+          process.exit(1);
+        }
+        
+        function getCentralTime() {
+          const now = new Date();
+          const centralTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Chicago"}));
+          return centralTime;
+        }
+        
+        function getLastSunday() {
+          const now = getCentralTime();
+          const dayOfWeek = now.getDay(); // 0 = Sunday
+          const daysBack = dayOfWeek === 0 ? 0 : dayOfWeek;
+          const lastSunday = new Date(now);
+          lastSunday.setDate(now.getDate() - daysBack);
+          lastSunday.setHours(11, 0, 0, 0); // 11 AM service time
+          return lastSunday;
+        }
+        
+        function shouldCheckForSermon() {
+          if (process.env.SKIP_SERMON_CHECK === 'true') {
+            console.log('📋 Sermon check skipped by user input');
+            return false;
+          }
+          
+          const now = getCentralTime();
+          const lastSunday = getLastSunday();
+          const dayOfWeek = now.getDay();
+          const hour = now.getHours();
+          
+          // Check on Sunday after 5 PM, or any time Monday-Saturday
+          const shouldCheck = (dayOfWeek === 0 && hour >= 17) || dayOfWeek > 0;
+          
+          console.log(`📅 Current time: ${now.toLocaleString()}`);
+          console.log(`📅 Last Sunday service: ${lastSunday.toLocaleString()}`);
+          console.log(`🔍 Should check for sermon: ${shouldCheck}`);
+          
+          return shouldCheck;
+        }
+        
+        async function fetchVimeoData() {
+          return new Promise((resolve, reject) => {
+            const url = config.vimeoFeedUrl || config.platformConfigs?.vimeo?.feedUrl;
+            if (!url) {
+              reject(new Error('No Vimeo feed URL configured'));
+              return;
+            }
+            
+            console.log('📡 Fetching from:', url);
+            
+            https.get(url, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                try {
+                  const vimeoData = JSON.parse(data);
+                  resolve(vimeoData);
+                } catch (error) {
+                  reject(error);
+                }
+              });
+            }).on('error', reject);
+          });
+        }
+        
+        async function sendPushoverNotification(message, priority = 0) {
+          if (!config.pushover?.enabled) {
+            console.log('📱 Pushover disabled, skipping notification');
+            return;
+          }
+          
+          const userKey = process.env.PUSHOVER_USER_KEY;
+          const appToken = process.env.PUSHOVER_APP_TOKEN;
+          
+          if (!userKey || !appToken) {
+            console.error('❌ Pushover credentials not configured');
+            return;
+          }
+          
+          const postData = JSON.stringify({
+            token: appToken,
+            user: userKey,
+            message: message,
+            title: 'Sermon Feed Alert',
+            priority: priority,
+            sound: priority > 0 ? 'falling' : 'pushover'
+          });
+          
+          return new Promise((resolve, reject) => {
+            const options = {
+              hostname: 'api.pushover.net',
+              port: 443,
+              path: '/1/messages.json',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+              }
+            };
+            
+            const req = https.request(options, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  console.log('📱 Pushover notification sent successfully');
+                  resolve(data);
+                } else {
+                  console.error('❌ Pushover notification failed:', res.statusCode, data);
+                  reject(new Error(`Pushover failed: ${res.statusCode}`));
+                }
+              });
+            });
+            
+            req.on('error', reject);
+            req.write(postData);
+            req.end();
+          });
+        }
+        
+        async function checkSermonExpectation(vimeoData) {
+          const lastSunday = getLastSunday();
+          const graceHours = config.schedule?.graceHours || 6;
+          const gracePeriod = new Date(lastSunday.getTime() + (graceHours * 60 * 60 * 1000));
+          
+          if (!vimeoData.movies || vimeoData.movies.length === 0) {
+            return {
+              isMissing: true,
+              message: 'No videos found in Vimeo feed',
+              shouldStop: true
+            };
+          }
+          
+          // Get the most recent video
+          const latestVideo = vimeoData.movies
+            .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
+          
+          const latestDate = new Date(latestVideo.releaseDate);
+          const timeSinceService = getCentralTime() - lastSunday;
+          const timeSinceLatest = getCentralTime() - latestDate;
+          
+          console.log(`📹 Latest video: "${latestVideo.title}"`);
+          console.log(`📅 Latest video date: ${latestDate.toLocaleString()}`);
+          console.log(`⏰ Time since service: ${Math.round(timeSinceService / (1000 * 60 * 60))} hours`);
+          console.log(`⏰ Time since latest video: ${Math.round(timeSinceLatest / (1000 * 60 * 60))} hours`);
+          
+          // Check if latest video is from expected service
+          const videoFromExpectedService = latestDate >= lastSunday && latestDate <= gracePeriod;
+          
+          if (!videoFromExpectedService && timeSinceService > (graceHours * 60 * 60 * 1000)) {
+            const message = `Missing expected sermon from ${lastSunday.toLocaleDateString()}. Latest video: "${latestVideo.title}" from ${latestDate.toLocaleDateString()}.`;
+            
+            await sendPushoverNotification(message, 1); // High priority
+            
+            return {
+              isMissing: true,
+              message: message,
+              shouldStop: true
+            };
+          }
+          
+          return {
+            isMissing: false,
+            message: 'Latest sermon found as expected',
+            shouldStop: false
+          };
+        }
+        
+        async function main() {
+          try {
+            if (!shouldCheckForSermon()) {
+              console.log('✅ Sermon check not needed at this time');
+              console.log('should-continue=true');
+              console.log('status=skipped');
+              return;
+            }
+            
+            const vimeoData = await fetchVimeoData();
+            const result = await checkSermonExpectation(vimeoData);
+            
+            console.log(`📊 Sermon check result: ${result.message}`);
+            
+            if (result.shouldStop) {
+              console.log('should-continue=false');
+              console.log('status=missing');
+            } else {
+              console.log('should-continue=true');
+              console.log('status=found');
+            }
+            
+          } catch (error) {
+            console.error('❌ Error during sermon check:', error);
+            
+            // Send error notification
+            if (config.pushover?.enabled) {
+              await sendPushoverNotification(`Sermon check failed: ${error.message}`, 0);
+            }
+            
+            console.log('should-continue=true'); // Continue on error
+            console.log('status=error');
+          }
+        }
+        
+        main();
+        SCRIPT_EOF
+        
+        # Run the sermon check and capture outputs
+        node check-sermon.js > check_output.txt 2>&1
+        
+        # Extract outputs from the script
+        if grep -q "should-continue=false" check_output.txt; then
+          echo "should-continue=false" >> $GITHUB_OUTPUT
+        else
+          echo "should-continue=true" >> $GITHUB_OUTPUT
+        fi
+        
+        if grep -q "status=missing" check_output.txt; then
+          echo "status=missing" >> $GITHUB_OUTPUT
+        elif grep -q "status=found" check_output.txt; then
+          echo "status=found" >> $GITHUB_OUTPUT
+        elif grep -q "status=skipped" check_output.txt; then
+          echo "status=skipped" >> $GITHUB_OUTPUT
+        else
+          echo "status=error" >> $GITHUB_OUTPUT
+        fi
+        
+        # Show the output
+        cat check_output.txt
+        
+      env:
+        PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+        PUSHOVER_APP_TOKEN: ${{ secrets.PUSHOVER_APP_TOKEN }}
+        SKIP_SERMON_CHECK: ${{ github.event.inputs.skip_sermon_check }}
+
+  generate-feeds:
+    needs: validate-and-check
+    runs-on: ubuntu-latest
+    if: needs.validate-and-check.outputs.should-continue == 'true'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Setup FFmpeg
+      uses: FedericoCarboni/setup-ffmpeg@v3
+      
+    - name: Generate all feeds and media
+      run: |
+        echo "🚀 Starting comprehensive feed generation..."
+        
+        cat > generate-comprehensive.js << 'SCRIPT_EOF'
+        const fs = require('fs');
+        const https = require('https');
+        const { spawn } = require('child_process');
+        const { URL } = require('url');
+        
+        console.log('🚀 Starting comprehensive feed generation...');
+        
+        let config;
+        try {
+          config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+          console.log('✅ Config loaded:', config.podcastTitle);
+        } catch (error) {
+          console.error('❌ Error reading config:', error);
+          process.exit(1);
+        }
+        
+        // Enhanced XML escaping
+        function escapeXML(str) {
+          if (!str) return '';
+          return str.toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;')
+            .replace(/&rsquo;/g, "'")
+            .replace(/&lsquo;/g, "'")
+            .replace(/&ldquo;/g, '"')
+            .replace(/&rdquo;/g, '"')
+            .replace(/&ndash;/g, '-')
+            .replace(/&mdash;/g, '--')
+            .replace(/&hellip;/g, '...')
+            .replace(/&nbsp;/g, ' ')
+            .replace(/<[^>]*>/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+        }
+        
+        function formatRFC2822Date(dateString) {
+          const date = new Date(dateString);
+          return isNaN(date.getTime()) ? new Date().toUTCString() : date.toUTCString();
+        }
+        
+        function formatDuration(seconds) {
+          if (!seconds || seconds <= 0) return '0:00';
+          const hours = Math.floor(seconds / 3600);
+          const minutes = Math.floor((seconds % 3600) / 60);
+          const secs = Math.floor(seconds % 60);
+          return hours > 0 ? 
+            `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}` :
+            `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Enhanced Vimeo Roku feed fetcher
+        async function fetchVimeoData() {
+          return new Promise((resolve, reject) => {
+            const url = config.vimeoFeedUrl;
+            if (!url) {
+              reject(new Error('No Vimeo feed URL configured'));
+              return;
+            }
+            
+            console.log('📡 Fetching from Vimeo Roku feed:', url);
+            
+            https.get(url, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                try {
+                  const vimeoData = JSON.parse(data);
+                  
+                  // The Vimeo Roku feed already has the right structure!
+                  // Just enhance it with our additional processing
+                  const episodes = vimeoData.movies?.map(movie => {
+                    const videoFormats = {};
+                    
+                    // Extract all video formats from Roku feed
+                    if (movie.content?.videos) {
+                      movie.content.videos.forEach(video => {
+                        if (video.videoType === 'HLS' || video.url.includes('.m3u8')) {
+                          videoFormats.hls = video.url;
+                        } else if (video.videoType === 'MP4') {
+                          const quality = video.quality?.toLowerCase() || 'hd';
+                          videoFormats[`mp4_${quality}`] = video.url;
+                        }
+                      });
+                    }
+                    
+                    return {
+                      id: movie.id,
+                      title: movie.title,
+                      description: movie.shortDescription || movie.title,
+                      thumbnail: movie.thumbnail,
+                      releaseDate: movie.releaseDate,
+                      duration: movie.content?.duration || 0,
+                      videoFormats: videoFormats,
+                      primaryVideoUrl: movie.content?.videos?.[0]?.url,
+                      quality: movie.content?.videos?.[0]?.quality || 'HD',
+                      tags: movie.tags || [],
+                      genres: movie.genres || [],
+                      // Keep original Roku data for passthrough
+                      originalRokuData: movie
+                    };
+                  }) || [];
+                  
+                  console.log(`✅ Processed ${episodes.length} episodes from Vimeo Roku feed`);
+                  resolve({
+                    ...vimeoData,
+                    episodes: episodes
+                  });
+                } catch (error) {
+                  reject(error);
+                }
+              });
+            }).on('error', reject);
+          });
+        }
+        
+        // File size detection
+        async function getFileSize(url) {
+          return new Promise((resolve) => {
+            try {
+              const urlObj = new URL(url);
+              const requester = urlObj.protocol === 'https:' ? https : require('http');
+              
+              const request = requester.request(url, { method: 'HEAD' }, (res) => {
+                resolve(res.headers['content-length'] || '0');
+              });
+              
+              request.on('error', () => resolve('0'));
+              request.setTimeout(8000, () => {
+                request.destroy();
+                resolve('0');
+              });
+              
+              request.end();
+            } catch (error) {
+              resolve('0');
+            }
+          });
+        }
+        
+        // Video Podcast RSS Generator
+        async function generateVideoRSS(vimeoData) {
+          if (!config.outputs?.videoPodcast?.enabled) return null;
+          
+          console.log('📺 Generating video podcast RSS...');
+          
+          const baseUrl = config.baseUrl || 'https://heritagecoc.github.io/heritage-media-feeds';
+          const artworkUrl = config.podcastArtwork?.startsWith('http') ? 
+            config.podcastArtwork : `${baseUrl}/${config.podcastArtwork.replace('./', '')}`;
+          
+          const now = formatRFC2822Date(new Date().toISOString());
+          
+          let rss = '<?xml version="1.0" encoding="UTF-8"?>\n';
+          rss += '<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">\n';
+          rss += '<channel>\n';
+          rss += `    <title>${escapeXML(config.podcastTitle)} - Video</title>\n`;
+          rss += `    <link>${escapeXML(config.churchWebsite || baseUrl)}</link>\n`;
+          rss += `    <description>${escapeXML(config.podcastDescription)} - Full video sermons</description>\n`;
+          rss += `    <language>${escapeXML(config.podcastLanguage || 'en')}</language>\n`;
+          rss += `    <pubDate>${now}</pubDate>\n`;
+          rss += `    <lastBuildDate>${now}</lastBuildDate>\n`;
+          rss += `    <itunes:author>${escapeXML(config.podcastAuthor)}</itunes:author>\n`;
+          rss += `    <itunes:image href="${escapeXML(artworkUrl)}" />\n`;
+          rss += `    <itunes:explicit>false</itunes:explicit>\n`;
+          
+          // Use existing category structure
+          if (config.podcastSubcategory) {
+            rss += `    <itunes:category text="${escapeXML(config.podcastCategory)}">\n`;
+            rss += `        <itunes:category text="${escapeXML(config.podcastSubcategory)}" />\n`;
+            rss += `    </itunes:category>\n`;
+          } else {
+            rss += `    <itunes:category text="${escapeXML(config.podcastCategory || 'Religion & Spirituality')}" />\n`;
+          }
+          
+          const sortedEpisodes = vimeoData.episodes.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+          
+          for (let i = 0; i < sortedEpisodes.length; i++) {
+            const episode = sortedEpisodes[i];
+            if (!episode.primaryVideoUrl) continue;
+            
+            const episodeNumber = sortedEpisodes.length - i;
+            const pubDate = formatRFC2822Date(episode.releaseDate);
+            const duration = formatDuration(episode.duration);
+            const fileSize = await getFileSize(episode.primaryVideoUrl);
+            
+            rss += '\n    <item>\n';
+            rss += `        <title>${escapeXML(episode.title)}</title>\n`;
+            rss += `        <description>${escapeXML(episode.description)}</description>\n`;
+            rss += `        <guid isPermaLink="false">vimeo-video-${escapeXML(episode.id)}</guid>\n`;
+            rss += `        <pubDate>${pubDate}</pubDate>\n`;
+            rss += `        <enclosure url="${escapeXML(episode.primaryVideoUrl)}" length="${fileSize}" type="application/x-mpegURL" />\n`;
+            rss += `        <itunes:title>${escapeXML(episode.title)}</itunes:title>\n`;
+            rss += `        <itunes:duration>${duration}</itunes:duration>\n`;
+            rss += `        <itunes:episode>${episodeNumber}</itunes:episode>\n`;
+            
+            if (episode.thumbnail) {
+              rss += `        <itunes:image href="${escapeXML(episode.thumbnail)}" />\n`;
+            }
+            
+            rss += '    </item>';
+          }
+          
+          rss += '\n\n</channel>\n</rss>';
+          return rss;
+        }
+        
+        // Enhanced Roku feed generator (optimized for existing Roku feed)
+        async function generateRokuFeed(vimeoData) {
+          if (!config.outputs?.roku?.enabled) return null;
+          
+          console.log('📺 Generating enhanced Roku Direct Publisher feed...');
+          
+          // Since your Vimeo feed is already Roku-compatible, we can enhance it
+          const enhancedRokuFeed = {
+            providerName: config.podcastAuthor,
+            language: config.podcastLanguage || 'en',
+            lastUpdated: new Date().toISOString(),
+            movies: []
+          };
+          
+          const sortedEpisodes = vimeoData.episodes.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+          
+          for (const episode of sortedEpisodes) {
+            if (!episode.primaryVideoUrl) continue;
+            
+            // Use original Roku data as base, then enhance
+            const rokuEpisode = {
+              ...episode.originalRokuData,
+              // Ensure these fields are properly set
+              id: episode.id,
+              title: episode.title,
+              shortDescription: episode.description,
+              thumbnail: episode.thumbnail || '',
+              releaseDate: episode.releaseDate,
+              genres: episode.genres.length > 0 ? episode.genres : ['faith'],
+              tags: episode.tags.length > 0 ? episode.tags : ['sermon']
+            };
+            
+            // Ensure content structure is complete
+            if (!rokuEpisode.content) {
+              rokuEpisode.content = {
+                dateAdded: episode.releaseDate,
+                captions: [],
+                duration: episode.duration,
+                videos: []
+              };
+            }
+            
+            // Ensure videos array is populated
+            if (!rokuEpisode.content.videos || rokuEpisode.content.videos.length === 0) {
+              rokuEpisode.content.videos = [];
+              
+              if (episode.videoFormats.hls) {
+                rokuEpisode.content.videos.push({
+                  url: episode.videoFormats.hls,
+                  quality: 'HD',
+                  videoType: 'HLS'
+                });
+              }
+              
+              // Add MP4 versions if available
+              Object.entries(episode.videoFormats).forEach(([format, url]) => {
+                if (format.startsWith('mp4_')) {
+                  const quality = format.replace('mp4_', '').toUpperCase();
+                  rokuEpisode.content.videos.push({
+                    url: url,
+                    quality: quality,
+                    videoType: 'MP4'
+                  });
+                }
+              });
+            }
+            
+            enhancedRokuFeed.movies.push(rokuEpisode);
+          }
+          
+          return JSON.stringify(enhancedRokuFeed, null, 2);
+        }
+        
+        // Phone Quality MP3 Generator
+        async function generatePhoneQualityMp3(vimeoData) {
+          if (!config.outputs?.phoneTree?.enabled) return null;
+          
+          console.log('📞 Generating phone quality MP3...');
+          
+          const latestEpisode = vimeoData.episodes
+            .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
+          
+          if (!latestEpisode || !latestEpisode.primaryVideoUrl) {
+            console.warn('⚠️ No latest episode found for phone MP3');
+            return null;
+          }
+          
+          return new Promise((resolve, reject) => {
+            console.log(`🎵 Converting "${latestEpisode.title}" to phone quality MP3...`);
+            
+            const ffmpeg = spawn('ffmpeg', [
+              '-i', latestEpisode.primaryVideoUrl,
+              '-vn', // No video
+              '-acodec', 'mp3',
+              '-ar', '22050', // 22kHz sample rate
+              '-ab', '64k', // 64kbps bitrate
+              '-ac', '1', // Mono
+              '-f', 'mp3',
+              '-y', // Overwrite
+              'latest-sermon-phone.mp3'
+            ]);
+            
+            let stderr = '';
+            ffmpeg.stderr.on('data', (data) => {
+              stderr += data.toString();
+            });
+            
+            ffmpeg.on('close', (code) => {
+              if (code === 0) {
+                console.log('✅ Phone quality MP3 generated successfully');
+                
+                // Create phone tree info file
+                const phoneInfo = {
+                  title: latestEpisode.title,
+                  date: latestEpisode.releaseDate,
+                  url: `${config.baseUrl || 'https://heritagecoc.github.io/podcast'}/latest-sermon-phone.mp3`,
+                  generated: new Date().toISOString()
+                };
+                
+                fs.writeFileSync('phone-tree-info.json', JSON.stringify(phoneInfo, null, 2));
+                resolve(phoneInfo);
+              } else {
+                console.error('❌ FFmpeg failed:', stderr);
+                reject(new Error(`FFmpeg failed with code ${code}`));
+              }
+            });
+            
+            ffmpeg.on('error', reject);
+          });
+        }
+        
+        // Main execution
+        async function main() {
+          try {
+            console.log('📡 Fetching Vimeo data...');
+            const vimeoData = await fetchVimeoData();
+            
+            if (!vimeoData.episodes || vimeoData.episodes.length === 0) {
+              console.warn('⚠️ No episodes found');
+              return;
+            }
+            
+            console.log(`📝 Processing ${vimeoData.episodes.length} episodes...`);
+            
+            const results = {};
+            
+            // Generate video podcast RSS
+            if (config.outputs?.videoPodcast?.enabled) {
+              const videoRSS = await generateVideoRSS(vimeoData);
+              if (videoRSS) {
+                fs.writeFileSync('feed-video.xml', videoRSS, 'utf8');
+                results.videoPodcast = `feed-video.xml (${fs.statSync('feed-video.xml').size} bytes)`;
+                console.log('✅ Video podcast RSS generated');
+              }
+            }
+            
+            // Generate Roku feed
+            if (config.outputs?.roku?.enabled) {
+              const rokuFeed = await generateRokuFeed(vimeoData);
+              if (rokuFeed) {
+                fs.writeFileSync('roku-feed.json', rokuFeed, 'utf8');
+                results.roku = `roku-feed.json (${fs.statSync('roku-feed.json').size} bytes)`;
+                console.log('✅ Roku feed generated');
+              }
+            }
+            
+            // Generate phone quality MP3
+            if (config.outputs?.phoneTree?.enabled) {
+              try {
+                const phoneInfo = await generatePhoneQualityMp3(vimeoData);
+                if (phoneInfo) {
+                  results.phoneTree = `latest-sermon-phone.mp3 (${fs.statSync('latest-sermon-phone.mp3').size} bytes)`;
+                  console.log('✅ Phone quality MP3 generated');
+                }
+              } catch (error) {
+                console.error('❌ Phone MP3 generation failed:', error);
+                results.phoneTree = 'Failed: ' + error.message;
+              }
+            }
+            
+            // Create summary
+            console.log('\n📊 Generation Summary:');
+            Object.entries(results).forEach(([type, result]) => {
+              console.log(`   ${type}: ${result}`);
+            });
+            
+            console.log('\n✅ Comprehensive feed generation complete!');
+            
+          } catch (error) {
+            console.error('❌ Error during generation:', error);
+            process.exit(1);
+          }
+        }
+        
+        main();
+        SCRIPT_EOF
+        
+        echo "📝 Running comprehensive feed generator..."
+        node generate-comprehensive.js
+        
+    - name: Create index page
+      run: |
+        echo "📄 Creating feed index page..."
+        
+        cat > index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Heritage Church of Christ - Media Feeds</title>
+            <style>
+                body { 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                    max-width: 900px; 
+                    margin: 0 auto; 
+                    padding: 20px; 
+                    background: #f8f9fa;
+                }
+                .header { text-align: center; margin-bottom: 40px; }
+                .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+                .feed-card { 
+                    background: white; 
+                    padding: 20px; 
+                    border-radius: 8px; 
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    text-decoration: none;
+                    color: inherit;
+                    transition: transform 0.2s;
+                }
+                .feed-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+                .feed-title { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+                .feed-description { color: #666; margin-bottom: 15px; }
+                .feed-button { 
+                    background: #3498db; 
+                    color: white; 
+                    padding: 8px 16px; 
+                    border-radius: 4px; 
+                    text-decoration: none; 
+                    display: inline-block;
+                }
+                .phone-info { background: #e8f5e8; border-left: 4px solid #27ae60; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Heritage Church of Christ</h1>
+                <p>Sermons and Media Feeds</p>
+            </div>
+            
+            <div class="feed-grid">
+                <a href="feed-video.xml" class="feed-card">
+                    <div class="feed-title">📺 Video Podcast</div>
+                    <div class="feed-description">Full video sermons for video podcast apps and Apple Podcasts</div>
+                    <span class="feed-button">Subscribe to Video Feed</span>
+                </a>
+                
+                <a href="roku-feed.json" class="feed-card">
+                    <div class="feed-title">📱 Roku Channel</div>
+                    <div class="feed-description">JSON feed for Roku Direct Publisher streaming channel</div>
+                    <span class="feed-button">View Roku Feed</span>
+                </a>
+                
+                <div class="feed-card phone-info">
+                    <div class="feed-title">📞 Phone Tree Audio</div>
+                    <div class="feed-description">Latest sermon in phone-optimized quality</div>
+                    <a href="latest-sermon-phone.mp3" class="feed-button">Download Latest</a>
+                    <a href="phone-tree-info.json" class="feed-button">Info JSON</a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; text-align: center; color: #666;">
+                <p>Updated automatically every 2 hours • Special checks Sunday evenings</p>
+                <p><a href="https://heritagecoc.org">Visit our website</a></p>
+            </div>
+        </body>
+        </html>
+        EOF
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Comprehensive Media Generator"
+        
+        git add -A
+        
+        if git diff --cached --quiet; then
+          echo "ℹ️ No changes to commit"
+        else
+          echo "📝 Changes detected - committing..."
+          git status
+          git commit -m "🎙️ Auto-update comprehensive media feeds - $(date '+%Y-%m-%d %H:%M UTC')"
+          git push
+          echo "✅ Comprehensive media feeds updated successfully!"
+        fi
