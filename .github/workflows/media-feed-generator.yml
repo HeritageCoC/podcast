@@ -895,13 +895,13 @@ jobs:
           const fullDurationMin = Math.round(fullInfo.originalDuration / 60);
           const removedMin = fullDurationMin - trimmedDurationMin;
           
-          const message = `📞 Phone Audio Generated for "${trimmedInfo.title}":
+          const message = '📞 Phone Audio Generated for "${trimmedInfo.title}":
 
 🎯 Trimmed Version: ${trimmedSize} (${trimmedDurationMin} min) - Active
 📹 Full Version: ${fullSize} (${fullDurationMin} min) - Backup
 ✂️ Removed: ${removedMin} minutes of silence/intro/outro
 
-Both versions available for download.`;
+Both versions available for download.';
           
           const postData = JSON.stringify({
             token: appToken,
