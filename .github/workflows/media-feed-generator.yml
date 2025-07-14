@@ -646,7 +646,7 @@ jobs:
           return new Promise((resolve, reject) => {
             console.log(`🎵 Converting "${latestEpisode.title}" to phone quality MP3...`);
             
-            // Generate trimmed version first
+            // Generate trimmed version first if smart trimming is enabled
             const generateTrimmed = () => {
               return new Promise((resolveTrimmed, rejectTrimmed) => {
                 if (!smartTrimming?.enabled) {
@@ -786,8 +786,8 @@ jobs:
                 generateTrimmed(),
                 new Promise((resolveFull, rejectFull) => generateStandardMp3(resolveFull, rejectFull))
               ]).then(([trimmedInfo, fullInfo]) => {
-                // Send interactive Pushover notification
-                sendInteractivePhoneNotification(trimmedInfo, fullInfo).then(() => {
+                // Simple notification without interactive approval
+                sendSimplePhoneNotification(trimmedInfo, fullInfo).then(() => {
                   // Log the decision point
                   logPhoneDecision('generated_both', trimmedInfo, fullInfo);
                   resolve(trimmedInfo); // Return trimmed as default
@@ -871,10 +871,10 @@ jobs:
             `${minutes}:${secs.toString().padStart(2, '0')}`;
         }
         
-        // Send interactive Pushover notification
-        async function sendInteractivePhoneNotification(trimmedInfo, fullInfo) {
-          if (!config.pushover?.enabled || !config.outputs?.phoneTree?.smartTrimming?.pushoverActions) {
-            console.log('📱 Interactive Pushover notifications disabled');
+        // Send simple Pushover notification (no interactive approval)
+        async function sendSimplePhoneNotification(trimmedInfo, fullInfo) {
+          if (!config.pushover?.enabled) {
+            console.log('📱 Pushover notifications disabled');
             return;
           }
           
@@ -895,33 +895,23 @@ jobs:
           const fullDurationMin = Math.round(fullInfo.originalDuration / 60);
           const removedMin = fullDurationMin - trimmedDurationMin;
           
-          const message = `📞 Phone Audio Generated:
-• Trimmed: ${trimmedSize} (${trimmedDurationMin} min) - Removed ${removedMin} min
-• Full: ${fullSize} (${fullDurationMin} min)
+          const message = `📞 Phone Audio Generated for "${trimmedInfo.title}":
 
-🔗 Trimmed: ${trimmedInfo.trimmedUrl}
-🔗 Full: ${trimmedInfo.trimmedUrl.replace('.mp3', '-full.mp3')}
+🎯 Trimmed Version: ${trimmedSize} (${trimmedDurationMin} min) - Active
+📹 Full Version: ${fullSize} (${fullDurationMin} min) - Backup
+✂️ Removed: ${removedMin} minutes of silence/intro/outro
 
-Trimmed version is live. Use buttons to switch if needed.`;
+Both versions available for download.`;
           
           const postData = JSON.stringify({
             token: appToken,
             user: userKey,
             message: message,
-            title: `Sermon Audio: ${trimmedInfo.title}`,
+            title: `Sermon Audio Ready`,
             url: trimmedInfo.trimmedUrl,
-            url_title: "Play Trimmed Version",
+            url_title: "Download Trimmed Audio",
             priority: 0,
-            actions: [
-              {
-                action: "keep_trimmed",
-                title: "✅ Keep Trimmed"
-              },
-              {
-                action: "use_full",
-                title: "❌ Use Full Version"
-              }
-            ]
+            sound: "pushover"
           });
           
           return new Promise((resolve, reject) => {
@@ -941,7 +931,7 @@ Trimmed version is live. Use buttons to switch if needed.`;
               res.on('data', chunk => data += chunk);
               res.on('end', () => {
                 if (res.statusCode === 200) {
-                  console.log('📱 Interactive Pushover notification sent successfully');
+                  console.log('📱 Simple Pushover notification sent successfully');
                   resolve(data);
                 } else {
                   console.error('❌ Pushover notification failed:', res.statusCode, data);
@@ -961,7 +951,7 @@ Trimmed version is live. Use buttons to switch if needed.`;
           try {
             const logEntry = {
               timestamp: new Date().toISOString(),
-              action: action, // 'generated_both', 'auto_approved', 'user_kept_trimmed', 'user_chose_full'
+              action: action, // 'generated_both', 'trimmed_only', 'full_only'
               sermon: {
                 title: trimmedInfo.title,
                 date: trimmedInfo.date
@@ -1230,6 +1220,8 @@ Trimmed version is live. Use buttons to switch if needed.`;
                     border-radius: 4px; 
                     text-decoration: none; 
                     display: inline-block;
+                    margin-right: 10px;
+                    margin-bottom: 5px;
                 }
                 .phone-info { background: #e8f5e8; border-left: 4px solid #27ae60; }
             </style>
@@ -1255,8 +1247,9 @@ Trimmed version is live. Use buttons to switch if needed.`;
                 
                 <div class="feed-card phone-info">
                     <div class="feed-title">📞 Phone Tree Audio</div>
-                    <div class="feed-description">Latest sermon in phone-optimized quality</div>
-                    <a href="latest-sermon-phone.mp3" class="feed-button">Download Latest</a>
+                    <div class="feed-description">Latest sermon in phone-optimized quality with smart trimming</div>
+                    <a href="latest-sermon-phone.mp3" class="feed-button">Download Trimmed</a>
+                    <a href="latest-sermon-phone-full.mp3" class="feed-button">Download Full</a>
                     <a href="phone-tree-info.json" class="feed-button">Info JSON</a>
                 </div>
             </div>
