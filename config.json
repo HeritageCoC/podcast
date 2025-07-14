@@ -1,12 +1,133 @@
 {
   "vimeoFeedUrl": "https://vimeo.com/showcase/10541314/feed/roku/1d8161aeb9",
   "podcastTitle": "Heritage Church of Christ",
-  "podcastAuthor": "Heritage Church of Christ",
+  "podcastAuthor": "Heritage Church of Christ", 
   "podcastEmail": "office@heritagecoc.org",
   "podcastDescription": "Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God's Word together.",
   "podcastCategory": "Religion & Spirituality",
   "podcastSubcategory": "Christianity",
   "podcastLanguage": "en",
   "churchWebsite": "https://heritagecoc.org",
-  "podcastArtwork": "./podcast-artwork.jpg"
+  "baseUrl": "https://heritagecoc.github.io/podcast",
+  "podcastArtwork": "./podcast-artwork.jpg",
+  "explicit": false,
+  
+  "schedule": {
+    "serviceTime": "11:00",
+    "timezone": "America/Chicago",
+    "graceHours": 6,
+    "serviceDays": ["sunday"]
+  },
+  
+  "pushover": {
+    "enabled": true,
+    "userKey": "${{ secrets.PUSHOVER_USER_KEY }}",
+    "appToken": "${{ secrets.PUSHOVER_APP_TOKEN }}",
+    "notifications": {
+      "missingSermon": {
+        "enabled": true,
+        "priority": 1,
+        "sound": "falling"
+      },
+      "errors": {
+        "enabled": true,
+        "priority": 0,
+        "sound": "pushover"
+      },
+      "success": {
+        "enabled": false,
+        "priority": -1
+      }
+    }
+  },
+  
+  "outputs": {
+    "videoPodcast": {
+      "enabled": true,
+      "filename": "feed-video.xml",
+      "title": "Heritage Church - Video Sermons",
+      "description": "Full video sermons from Heritage Church of Christ",
+      "maxEpisodes": 50
+    },
+    "roku": {
+      "enabled": true,
+      "filename": "roku-feed.json",
+      "maxEpisodes": 100,
+      "categories": ["faith", "sermon", "church"],
+      "contentRating": "G",
+      "videoQuality": {
+        "preferred": "HD",
+        "fallback": "SD"
+      }
+    },
+    "phoneTree": {
+      "enabled": true,
+      "filename": "latest-sermon-phone.mp3",
+      "audioSettings": {
+        "sampleRate": 22050,
+        "bitrate": "64k",
+        "channels": 1,
+        "format": "mp3"
+      },
+      "maxSizeMB": 15,
+      "infoFile": "phone-tree-info.json"
+    }
+  },
+  
+  "platformConfigs": {
+    "vimeo": {
+      "enabled": true,
+      "apiKey": null,
+      "quality": "HD",
+      "preferHLS": true
+    }
+  },
+  
+  "accessibility": {
+    "transcriptsAvailable": false,
+    "closedCaptionsEnabled": false,
+    "chaptersEnabled": false,
+    "audioDescriptionAvailable": false
+  },
+  
+  "seo": {
+    "enableSitemap": true,
+    "metaDescription": "Listen to inspiring sermons from Heritage Church of Christ",
+    "keywords": ["sermon", "church", "christian", "faith", "bible", "heritage"],
+    "structuredData": true,
+    "socialMedia": {
+      "twitter": "@heritagecoc",
+      "facebook": "heritagecoc"
+    }
+  },
+  
+  "customization": {
+    "theme": {
+      "primaryColor": "#2c3e50",
+      "secondaryColor": "#3498db",
+      "backgroundColor": "#f8f9fa",
+      "textColor": "#333333"
+    },
+    "branding": {
+      "logo": "https://heritagecoc.org/assets/logo.png",
+      "favicon": "https://heritagecoc.org/assets/favicon.ico"
+    }
+  },
+  
+  "advanced": {
+    "caching": {
+      "enabled": true,
+      "duration": 3600
+    },
+    "errorHandling": {
+      "retryAttempts": 3,
+      "fallbackToSample": true,
+      "notifyOnError": true
+    },
+    "performance": {
+      "maxConcurrentRequests": 5,
+      "requestTimeout": 30000,
+      "enableGzip": true
+    }
+  }
 }
