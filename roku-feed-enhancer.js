@@ -16,67 +16,100 @@
 const fs = require('fs');
 const https = require('https');
 
-// Enhanced configuration (extends your existing setup)
-const ENHANCEMENT_CONFIG = {
-  // Live streaming configuration
-  livestream: {
-    enabled: true,
-    vimeoLiveUrl: "YOUR_VIMEO_LIVESTREAM_URL_HERE", // Replace with your actual URL
-    
-    // Service schedule (when to show live vs on-demand)
-    services: [
-      {
-        day: "sunday",
-        startTime: "09:00",
-        endTime: "11:00", 
-        timezone: "America/Chicago",
-        title: "Sunday Morning Worship",
-        description: "Join us live for worship, prayer, and biblical teaching"
-      }
-    ]
-  },
-
-  // Additional content sources (beyond your main sermon feed)
-  additionalContent: {
-    // "60 Seconds of Power" series
-    sixtySeconds: {
-      enabled: true,
-      vimeoShowcaseId: "YOUR_60_SECONDS_SHOWCASE_ID", // Replace with actual ID
-      title: "60 Seconds of Power",
-      description: "Quick daily inspirational messages",
-      priority: 10
-    },
-    
-    // Special teaching series
-    specialSeries: {
-      enabled: true, 
-      vimeoShowcaseId: "YOUR_SPECIAL_SERIES_SHOWCASE_ID", // Replace with actual ID
-      title: "Teaching Series", 
-      description: "Special sermon series and extended teachings",
-      priority: 5
-    },
-    
-    // Bible study content
-    bibleStudy: {
-      enabled: true,
-      vimeoShowcaseId: "YOUR_BIBLE_STUDY_SHOWCASE_ID", // Replace with actual ID
-      title: "Bible Study",
-      description: "Wednesday evening Bible studies",
-      priority: 8
-    }
-  },
-
-  // Roku channel settings
-  roku: {
-    providerName: "Heritage Church of Christ",
-    enhancedTitle: "Heritage Church - Complete Media Library",
-    enhancedDescription: "Live worship services, sermons, Bible studies, and inspirational content from Heritage Church of Christ"
+/**
+ * Load and extend configuration from existing config.json
+ */
+function loadEnhancedConfig() {
+  let baseConfig;
+  
+  try {
+    // Load your existing config.json
+    const configData = fs.readFileSync('config.json', 'utf8');
+    baseConfig = JSON.parse(configData);
+    console.log('✅ Loaded existing config.json');
+  } catch (error) {
+    console.error('❌ Could not load config.json:', error.message);
+    process.exit(1);
   }
-};
+
+  // Extend with Roku enhancement configuration
+  const enhancementConfig = {
+    // Use existing config values where possible
+    church: {
+      name: baseConfig.podcastTitle || "Heritage Church of Christ",
+      website: baseConfig.churchWebsite || "https://heritagecoc.org",
+      description: baseConfig.podcastDescription || "Weekly sermons and teachings",
+      logo: baseConfig.podcastArtwork?.startsWith('http') ? 
+            baseConfig.podcastArtwork : 
+            `${baseConfig.baseUrl}/${baseConfig.podcastArtwork.replace('./', '')}`,
+      email: baseConfig.podcastEmail || "office@heritagecoc.org"
+    },
+
+    // Live streaming configuration (extend existing schedule)
+    livestream: {
+      enabled: baseConfig.livestream?.enabled || true,
+      vimeoLiveUrl: baseConfig.livestream?.vimeoLiveUrl || "YOUR_VIMEO_LIVESTREAM_URL_HERE",
+      
+      // Use existing schedule configuration
+      services: baseConfig.livestream?.services || [
+        {
+          day: "sunday",
+          startTime: baseConfig.schedule?.serviceTime || "09:00",
+          endTime: "11:00", 
+          timezone: baseConfig.schedule?.timezone || "America/Chicago",
+          title: "Sunday Morning Worship",
+          description: "Join us live for worship, prayer, and biblical teaching"
+        }
+      ]
+    },
+
+    // Additional content sources (check for existing roku config)
+    additionalContent: baseConfig.rokuEnhancement?.additionalContent || {
+      // "60 Seconds of Power" series
+      sixtySeconds: {
+        enabled: true,
+        vimeoShowcaseId: baseConfig.rokuEnhancement?.sixtySecondsShowcaseId || "YOUR_60_SECONDS_SHOWCASE_ID",
+        title: "60 Seconds of Power",
+        description: "Quick daily inspirational messages",
+        priority: 10
+      },
+      
+      // Special teaching series
+      specialSeries: {
+        enabled: true, 
+        vimeoShowcaseId: baseConfig.rokuEnhancement?.specialSeriesShowcaseId || "YOUR_SPECIAL_SERIES_SHOWCASE_ID",
+        title: "Teaching Series", 
+        description: "Special sermon series and extended teachings",
+        priority: 5
+      },
+      
+      // Bible study content
+      bibleStudy: {
+        enabled: true,
+        vimeoShowcaseId: baseConfig.rokuEnhancement?.bibleStudyShowcaseId || "YOUR_BIBLE_STUDY_SHOWCASE_ID",
+        title: "Bible Study",
+        description: "Wednesday evening Bible studies",
+        priority: 8
+      }
+    },
+
+    // Roku channel settings (use existing values)
+    roku: {
+      providerName: baseConfig.podcastAuthor || "Heritage Church of Christ",
+      enhancedTitle: `${baseConfig.podcastTitle} - Complete Media Library`,
+      enhancedDescription: `${baseConfig.podcastDescription} - Now with live streaming and additional content.`
+    },
+
+    // Keep reference to original config
+    baseConfig: baseConfig
+  };
+
+  return enhancementConfig;
+}
 
 class RokuFeedEnhancer {
-  constructor(config = ENHANCEMENT_CONFIG) {
-    this.config = config;
+  constructor() {
+    this.config = loadEnhancedConfig(); // Load from config.json
     this.baseRokuFeed = null;
     this.generatedTime = new Date();
   }
