@@ -8,7 +8,7 @@
   "podcastSubcategory": "Christianity",
   "podcastLanguage": "en",
   "churchWebsite": "https://heritagecoc.org",
-  "baseUrl": "https://heritagecoc.github.io/heritage-media-feeds",
+  "baseUrl": "https://heritagecoc.github.io/podcast",
   "podcastArtwork": "./podcast-artwork.jpg",
   "explicit": false,
   
