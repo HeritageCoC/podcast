@@ -334,7 +334,11 @@ jobs:
         node-version: '20'
         
     - name: Setup FFmpeg
-      uses: FedericoCarboni/setup-ffmpeg@v3
+      run: |
+        echo "📦 Installing FFmpeg via apt..."
+        sudo apt-get update
+        sudo apt-get install -y ffmpeg
+        ffmpeg -version
       
     - name: Generate all feeds and media
       run: |
