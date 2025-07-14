@@ -83,6 +83,54 @@
       "logFile": "phone-audio-decisions.log"
     }
   },
+
+  "_comment_roku_enhancement": "=== ROKU ENHANCEMENT SETTINGS ===",
+  "_comment_roku_enhancement_2": "Add these settings to enable live streaming and additional content",
+  
+  "rokuEnhancement": {
+    "_comment": "Roku Direct Publisher enhancement settings",
+    
+    "livestream": {
+      "enabled": true,
+      "vimeoLiveUrl": "YOUR_VIMEO_LIVESTREAM_URL_HERE",
+      "services": [
+        {
+          "day": "sunday",
+          "startTime": "09:00",
+          "endTime": "11:00",
+          "timezone": "America/Chicago", 
+          "title": "Sunday Morning Worship",
+          "description": "Join us live for worship, prayer, and biblical teaching"
+        }
+      ]
+    },
+    
+    "additionalContent": {
+      "sixtySeconds": {
+        "enabled": true,
+        "vimeoShowcaseId": "YOUR_60_SECONDS_SHOWCASE_ID",
+        "title": "60 Seconds of Power",
+        "description": "Quick daily inspirational messages",
+        "priority": 10
+      },
+      
+      "specialSeries": {
+        "enabled": true,
+        "vimeoShowcaseId": "YOUR_SPECIAL_SERIES_SHOWCASE_ID",
+        "title": "Teaching Series",
+        "description": "Special sermon series and extended teachings", 
+        "priority": 5
+      },
+      
+      "bibleStudy": {
+        "enabled": true,
+        "vimeoShowcaseId": "YOUR_BIBLE_STUDY_SHOWCASE_ID",
+        "title": "Bible Study",
+        "description": "Wednesday evening Bible studies",
+        "priority": 8
+      }
+    }
+  },
   
   "platformConfigs": {
     "vimeo": {
