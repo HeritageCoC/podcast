@@ -1,0 +1,2032 @@
+{
+  "providerName": "Heritage Church of Christ",
+  "language": "en",
+  "lastUpdated": "2025-07-14T02:48:21.712Z",
+  "movies": [
+    {
+      "id": "1099141295",
+      "title": "\"The Breath of Life\" Chad Hedgpath 7.13.25",
+      "shortDescription": "\"The Breath of Life\" Chad Hedgpath 7.13.25",
+      "thumbnail": "https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us",
+      "releaseDate": "2025-07-06T10:58:00-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-07-13T15:56:09-04:00",
+        "duration": 4673,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1097306715",
+      "title": "\"Jonah the Patriot\" Travis Roberstson 7.6.2025",
+      "shortDescription": "\"Jonah the Patriot\" Travis Roberstson 7.6.2025",
+      "thumbnail": "https://i.vimeocdn.com/video/2031613024-2931fa67f75a6ea25a14cdd23369faf4c87e649405c837b2013be878a76bdb8d-d_800x450?region=us",
+      "releaseDate": "2025-06-29T10:59:41-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-07-06T17:54:11-04:00",
+        "duration": 3575,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1097306715.m3u8?s=26100bbb1ef991ff1dd99d8fe220fcef11a32bc1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1095396640",
+      "title": "\"What Goes Up, Must Come Down\"  6-29-25",
+      "shortDescription": "\"What Goes Up, Must Come Down\"  6-29-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2029195244-f881c224bf8d51c558e89b35c0ebe53e98de868ceaeccac1558f98200e9fba89-d_800x450?region=us",
+      "releaseDate": "2025-06-22T10:59:56-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-06-29T11:03:03-04:00",
+        "duration": 3801,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1095396640.m3u8?s=21ede852bbed805d4c49a9ac8f30c0d8a206237d",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1093498929",
+      "title": "\"Was the Holy Spirit in the Old Testament\"  6-22-25",
+      "shortDescription": "\"Was the Holy Spirit in the Old Testament\"  6-22-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2026857899-d3021c453cff977e363799d1bfd7e7c9bbb6fa4c50dc902d9a86dbe801ad2b41-d_800x450?region=us",
+      "releaseDate": "2025-06-15T11:00:42-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-06-22T11:01:01-04:00",
+        "duration": 3677,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1093498929.m3u8?s=a9cb44fe6614d22ffb9ee0fad95a49ff927a5809",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1091602933",
+      "title": "\"The Holy Spirit is Working in Our Fathers\"  6-15-25",
+      "shortDescription": "\"The Holy Spirit is Working in Our Fathers\"  6-15-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2024477786-e995b97262a2dc68ce0bd1e2f7c00e077158bf0c976ab65d109a9602940901af-d_800x450?region=us",
+      "releaseDate": "2025-06-08T11:04:27-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-06-15T11:01:23-04:00",
+        "duration": 3896,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1091602933.m3u8?s=b33d50db763b6a10232e26abab5ff9bd556270ce",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1089496187",
+      "title": "\"Was the Holy Spirit in the Old Testament\"  6-1-25",
+      "shortDescription": "\"Was the Holy Spirit in the Old Testament\"  6-1-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2021953967-3ec035bad5e601994b883fb5c13e62df4f88bf93304c30b443c5cc46ad3d6947-d_800x450?region=us",
+      "releaseDate": "2025-06-01T11:03:42-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-06-08T18:30:29-04:00",
+        "duration": 3667,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1089496187.m3u8?s=27dc98177434b66163a6c91c8b1dcc23a0763a07",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1087522237",
+      "title": "\"We Appreciate Our Bible Class Teachers\"  6-1-25",
+      "shortDescription": "\"We Appreciate Our Bible Class Teachers\"  6-1-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2019542702-8c28d88dafa906927048b78a71b8148eea971438a602dce0b9781b8ea07ae5a2-d_800x450?region=us",
+      "releaseDate": "2025-05-25T11:02:19-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-06-01T18:31:09-04:00",
+        "duration": 3764,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1087522237.m3u8?s=00238d3da02109ee3ab0db48ee5873025f535b1f",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1085458001",
+      "title": "\"Praying IN The Holy Spirit\"  5-25-25",
+      "shortDescription": "\"Praying IN The Holy Spirit\"  5-25-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2017029135-6f7ae70cfd5e84a7becc8f34a4edfb77ea6a1ff90f89e0fea2c75616c5bdf209-d_800x450?region=us",
+      "releaseDate": "2025-05-18T11:20:43-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-05-25T11:03:32-04:00",
+        "duration": 4010,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1085458001.m3u8?s=59cf6b26f7de6b06c26ad6f23f3b9dc81124151c",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1083301208",
+      "title": "\"Lessons Shared\"  5-18-25",
+      "shortDescription": "\"Lessons Shared\"  5-18-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2017034711-ca5fa0ca88565c2d4764d84ff668f8fa197b63d7e67d4e46e47875ce613ab223-d_800x450?region=us",
+      "releaseDate": "2025-05-11T11:45:43-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-05-18T11:49:55-04:00",
+        "duration": 4786,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1083301208.m3u8?s=d4e805ac02330b707aec5bb951c24689136e4252",
+            "quality": "FHD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1081271097",
+      "title": "\"Does the Holy Spirit Work in Moms \"  5-11-25",
+      "shortDescription": "\"Does the Holy Spirit Work in Moms \"  5-11-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2012019691-e6abd4b227da1f120b2b74d9f84b879a74fd6d44020fc73341b94b2e5123601e-d_800x450?region=us",
+      "releaseDate": "2025-05-04T11:16:39-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-05-11T17:35:39-04:00",
+        "duration": 6381,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1081271097.m3u8?s=106507a3e3243626ed4514234ad0cb87b203e62c",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1079122114",
+      "title": "\"Do We See The Holy Spirit Working in Each Other\"  5-4-25",
+      "shortDescription": "\"Do We See The Holy Spirit Working in Each Other\"  5-4-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2009492802-3c6273eee101525a037a775aab535cbcfb0a535600e7a2368a9f38ab55d29cef-d_800x450?region=us",
+      "releaseDate": "2025-04-27T11:02:24-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-05-04T18:28:54-04:00",
+        "duration": 4833,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1079122114.m3u8?s=938c9614c6f66f89c5b60a287d5d48285c9af75e",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1077082722",
+      "title": "\"Do We See The Holy Spirit Working in Each Other\"  4-27-25",
+      "shortDescription": "\"Do We See The Holy Spirit Working in Each Other\"  4-27-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2007026570-6859d9c55e790b330363eb37d43643f6ea6edf327712efec89109235bfec0ba5-d_800x450?region=us",
+      "releaseDate": "2025-04-20T11:03:13-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-04-27T13:01:59-04:00",
+        "duration": 3760,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1077082722.m3u8?s=848581e041d6cd21269a42c10187dab0b7e45184",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1075080142",
+      "title": "\"For He Is Risen\"  4-20-25",
+      "shortDescription": "\"For He Is Risen\"  4-20-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2004581990-830a017680b08e4a430d0a77c115615b9f1912703e13b1fe1823af4f49017702-d_800x450?region=us",
+      "releaseDate": "2025-04-13T11:06:16-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-04-20T11:50:15-04:00",
+        "duration": 3820,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1075080142.m3u8?s=6344b651a49209ff04f1a0ccaabeff98f37cbdf1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1072964685",
+      "title": "\"I Want to Be Baptized\"  4-13-25",
+      "shortDescription": "\"I Want to Be Baptized\"  4-13-25",
+      "thumbnail": "https://i.vimeocdn.com/video/2001999714-f21816d90057df76a5a1712036d940e3c2e63f94d0992d7e0d9e1b26f973844e-d_800x450?region=us",
+      "releaseDate": "2025-04-06T11:03:32-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-04-16T20:33:55-04:00",
+        "duration": 4210,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1072964685.m3u8?s=13c2830edca90f0c125653ecd861177e4f99d6b4",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1070794499",
+      "title": "\"Eggs From a Helicopter\"  4-6-25",
+      "shortDescription": "\"Eggs From a Helicopter\"  4-6-25",
+      "thumbnail": "https://i.vimeocdn.com/video/1999391476-7671f7eae3dcdb8ad39560f1800cbd0c17684f936f246dc0af8305e99d29e62f-d_800x450?region=us",
+      "releaseDate": "2025-03-30T11:01:04-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-04-06T11:10:02-04:00",
+        "duration": 3971,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1070794499.m3u8?s=3d7d1d214a3c27f19f9698aee3788136bd4d8c67",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1068592347",
+      "title": "\"Here I Am to Worship\" Travis Robertson 3.30.25",
+      "shortDescription": "\"Here I Am to Worship\" Travis Robertson 3.30.25",
+      "thumbnail": "https://i.vimeocdn.com/video/1996739442-4f6e4968e0a8d5129c3d5d48cfb8934ed314897d7d1616fd8779278e0a91c73c-d_800x450?region=us",
+      "releaseDate": "2025-03-23T10:58:51-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-03-30T18:16:28-04:00",
+        "duration": 3768,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1068592347.m3u8?s=dd3c0b54b137ad4b6d44f79a968cab3b3273449e",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1066325577",
+      "title": "\"The Holy Spirit's Groanings\" 3-23-2025",
+      "shortDescription": "\"The Holy Spirit's Groanings\" 3-23-2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1994017781-1c8b2df1dd937d5f3edcda17d39c3b9b3ecd51700f823deb8922895d22370d34-d_800x450?region=us",
+      "releaseDate": "2025-03-16T11:02:42-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-03-23T11:08:21-04:00",
+        "duration": 3640,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1066325577.m3u8?s=2916a1cb2e109941a7c3fc47c485dc2fefc4c378",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1064034119",
+      "title": "\"The Fruit of the Spirit: Part 3\" 3-16-2025",
+      "shortDescription": "\"The Fruit of the Spirit: Part 3\" 3-16-2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1991264199-d147c5cc8216d89123ea5e7327191338ab1b8032ed9761faa023f10923c17794-d_800x450?region=us",
+      "releaseDate": "2025-03-09T10:57:31-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-03-23T11:08:21-04:00",
+        "duration": 4102,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1064034119.m3u8?s=fde17a0fe35f13a2c117eca520993cf487e38c46",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1061774373",
+      "title": "\"The Fruit of the Spirit: Part 2\" 3-9-2025",
+      "shortDescription": "\"The Fruit of the Spirit: Part 2\" 3-9-2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1988569416-76c7d7124f8324b92bf62551a73bf55a89d8bad12c8a7fb3e2a7954cf02e2901-d_800x450?region=us",
+      "releaseDate": "2025-03-02T11:03:41-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-03-16T11:04:10-04:00",
+        "duration": 3518,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1061774373.m3u8?s=aeb99a76e5eb230491631ebc6d42c799b4a376a9",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1059468071",
+      "title": "\"The Fruit of the Spirit: Part 1\" 3-2-2025",
+      "shortDescription": "\"The Fruit of the Spirit: Part 1\" 3-2-2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1985824430-d947f7e8198e2911653c5e7f6e89bfa743a45b9c506d42c47df0a28e2c3054ba-d_800x450?region=us",
+      "releaseDate": "2025-02-23T11:02:46-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-03-16T11:04:10-04:00",
+        "duration": 4079,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1059468071.m3u8?s=d1d136076e50be7de322cd99eed7df7a13cfdff3",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1057263396",
+      "title": "\"Jesus is...\" 02.23.25",
+      "shortDescription": "\"Jesus is...\" 02.23.25",
+      "thumbnail": "https://i.vimeocdn.com/video/1983176918-8c5bcd98845839054c36460f38e0301622b093ea5f47afee3e7f257452d8824d-d_800x450?region=us",
+      "releaseDate": "2025-02-16T11:03:47-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-02-23T11:09:26-05:00",
+        "duration": 3814,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1057263396.m3u8?s=2645ac1b135c442a4511c271bf3e86eb79afe187",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1054972208",
+      "title": "\"How do I know I have the HOLY SPIRIT?\" 02.16.25",
+      "shortDescription": "\"How do I know I have the HOLY SPIRIT?\" 02.16.25",
+      "thumbnail": "https://i.vimeocdn.com/video/1980445711-63741ac372c99f2e5594034c97da2edaee69daa7208cad0c65be29afd20bf4c7-d_800x450?region=us",
+      "releaseDate": "2025-02-09T11:08:59-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-02-16T11:07:02-05:00",
+        "duration": 3516,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1054972208.m3u8?s=67637b7fc74a694ca32fcccb59b42c158177a345",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1052769119",
+      "title": "\"Do you want to be empowered?\" 2.09.25",
+      "shortDescription": "\"Do you want to be empowered?\" 2.09.25",
+      "thumbnail": "https://i.vimeocdn.com/video/1977814490-f330ba12c29d9181842f6da59277d56aa25b6a0477ff9b7e8782577d3c5f4bf7-d_800x450?region=us",
+      "releaseDate": "2025-02-02T11:04:04-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-02-09T11:09:57-05:00",
+        "duration": 4339,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1052769119.m3u8?s=e93e13838bcf939cd5e89d8a9a0240a80e148585",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1050515823",
+      "title": "\"What Does the Holy Spirit Do For Us?\" - 2/2/2025",
+      "shortDescription": "\"What Does the Holy Spirit Do For Us?\" - 2/2/2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1975126433-3e2c9745c1f639b29eaf05947d2c84f4f962ae54d03d7e0ed4889b0d21928114-d_800x450?region=us",
+      "releaseDate": "2025-01-26T11:09:06-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-02-02T11:05:08-05:00",
+        "duration": 3976,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1050515823.m3u8?s=6b959c0471829405cd121d939d48eb667deae75c",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1048323063",
+      "title": "\"How Do I Receive the Holy Spirit?\" - 1/26/2025",
+      "shortDescription": "\"How Do I Receive the Holy Spirit?\" - 1/26/2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1972451196-86b47aa43748b9e3a3305abda7567284ac4b555974e646e43952abad11693b0b-d_800x450?region=us",
+      "releaseDate": "2025-01-19T11:06:22-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-02-02T09:56:50-05:00",
+        "duration": 4305,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1048323063.m3u8?s=e56765fb8af4dd3af621f7ce8513c2a424dd3d23",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1046181555",
+      "title": "\"Does Jesus Talk About the Holy Spirit?\" - 1/19/2025",
+      "shortDescription": "\"Does Jesus Talk About the Holy Spirit?\" - 1/19/2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1969896968-0a25ddb430acc5db05d0803458cb65559430cda8546573cd4bc6de97c3cd7681-d_800x450?region=us",
+      "releaseDate": "2025-01-12T12:08:08-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-01-19T17:51:13-05:00",
+        "duration": 4226,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1046181555.m3u8?s=f6e7f75898da2dae0c6e85fe969d0cfc7ecee6e3",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1044087883",
+      "title": "\"Are You Authentic?\" - 1/12/2025",
+      "shortDescription": "\"Are You Authentic?\" - 1/12/2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1967423135-b60f47ee7a13329154495c2d2e8ddd1eac42cfef3d336925614854e96a10b6be-d_800x450?region=us",
+      "releaseDate": "2025-01-05T11:08:20-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-01-12T18:16:11-05:00",
+        "duration": 4183,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1044087883.m3u8?s=d2c5aafeffb058a1379878ef5f658da49290fd87",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1042758646",
+      "title": "\"Do I Understand What the Trinity Is?\" - 1/5/2025",
+      "shortDescription": "\"Do I Understand What the Trinity Is?\" - 1/5/2025",
+      "thumbnail": "https://i.vimeocdn.com/video/1965812978-45122aac4c392a56c80345243d6228bf9e84877d9054bc79c316fc0c58a9a646-d_800x450?region=us",
+      "releaseDate": "2024-12-29T11:00:47-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-01-12T18:15:44-05:00",
+        "duration": 4386,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1042758646.m3u8?s=af056c15a03312f942bd4f3cbe95325e042013eb",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1041539839",
+      "title": "\"How Are You Doing Spiritually?\" - 12/29/2024",
+      "shortDescription": "\"How Are You Doing Spiritually?\" - 12/29/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1964331274-0fcb4dd4e42b57a23e1e7a2aef2b17244f529db1c350e6245a8402dadc171b76-d_800x450?region=us",
+      "releaseDate": "2024-12-22T11:57:44-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-01-05T09:33:42-05:00",
+        "duration": 482,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1041539839.m3u8?s=67e355d440565a432daf371b02bb7c045351ad82",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1041531638",
+      "title": "\"How Are You Doing Spiritually?\" - 12/29/2024",
+      "shortDescription": "\"How Are You Doing Spiritually?\" - 12/29/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1964321836-71aeb91179c0cf9832ecaeca652d14d7c50bdb521ae689cfd8ce4146123fe7cb-d_800x450?region=us",
+      "releaseDate": "2024-12-22T11:07:33-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-02-23T11:09:03-05:00",
+        "duration": 3403,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1041531638.m3u8?s=d9ce98295139b030b4139b1749e7a17937b11f58",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1039416357",
+      "title": "\"Immanuel!\" - December 22, 2024",
+      "shortDescription": "\"Immanuel!\" - December 22, 2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1961789295-c7caa5469b2e8b3dcd5a5e97882a9e6350ea7342482681f401f0e81414174c06-d_800x450?region=us",
+      "releaseDate": "2024-12-15T11:11:28-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-01-05T09:33:03-05:00",
+        "duration": 4074,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1039416357.m3u8?s=05d5001c668d8823df9afc9791a5e802a2bd1c21",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1037203516",
+      "title": "\"Who Can This Be?\" - December 15, 2024",
+      "shortDescription": "\"Who Can This Be?\" - December 15, 2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1959126547-a7c4aaa3aed8b630ff528677a9c6504cf45f71013d6d7a4c28ade20e356e2d6a-d_800x450?region=us",
+      "releaseDate": "2024-12-08T10:57:43-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-01-05T09:33:03-05:00",
+        "duration": 3751,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1037203516.m3u8?s=bb6327c976ab07b5e653f7abc4136272a4eab9b1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1034957925",
+      "title": "\"I'm King of the World!\" - December 8, 2024",
+      "shortDescription": "\"I'm King of the World!\" - December 8, 2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1956379648-2fbd7df252e508cf6bfac40b28fa8f854b7100fab9b333d553695456f7ac620d-d_800x450?region=us",
+      "releaseDate": "2024-12-01T10:59:22-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-12-08T11:02:41-05:00",
+        "duration": 3652,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1034957925.m3u8?s=6ed83ce5fa74c5dcd2d11b2423fa9b49808a28a6",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1032826913",
+      "title": "\"Are You a King\" - December 1, 2024",
+      "shortDescription": "\"Are You a King\" - December 1, 2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1953829723-900af5234834d4a62602de62f582ea55e1586e64eac459655c92879aabd34d51-d_800x450?region=us",
+      "releaseDate": "2024-11-24T11:06:34-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-12-08T11:02:41-05:00",
+        "duration": 3559,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1032826913.m3u8?s=129c922da8389315bf408717ef9d2920a1fd39cc",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1030492222",
+      "title": "\"An Expression of Gratitude\" - Travis Robertson - November 24, 2024",
+      "shortDescription": "\"An Expression of Gratitude\" - Travis Robertson - November 24, 2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1951037827-550ff2c3a913d60b9354fc7df6d27a31c082d3b1aac1071be20284ddd13c0c08-d_800x450?region=us",
+      "releaseDate": "2024-11-17T11:08:26-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-24T11:08:18-05:00",
+        "duration": 4246,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1030492222.m3u8?s=36a54a5e836c24b157a4faa9bcc9b5ef17d0f9d0",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1028159506",
+      "title": "\"King Jesus\" - November 17, 2024",
+      "shortDescription": "\"King Jesus\" - November 17, 2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1948264894-ba18e695c44f69d4057ad3f84b9938b0f7e65c3ba1ffa1d2e49b4af3d5f2e6a9-d_800x450?region=us",
+      "releaseDate": "2024-11-10T11:14:28-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-12-01T09:28:25-05:00",
+        "duration": 4033,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1028159506.m3u8?s=4d8aa3d5fcd1609faf0b5d397851d6cba2e384ad",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1025890740",
+      "title": "\"A Year of Discipleship\" - 11/10/2024",
+      "shortDescription": "\"A Year of Discipleship\" - 11/10/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1945562151-b59a582c3563708461f92f1e9291c3ea570933ec7833d19518429b8f3dc905b7-d_800x450?region=us",
+      "releaseDate": "2024-11-03T12:03:17-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-14T09:06:23-05:00",
+        "duration": 4808,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1025890740.m3u8?s=fdb76fcc360ccc5ea8c7013e5dfd7b97e5697bf1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1023711869",
+      "title": "\"How Do I Serve?\" 11/3/24",
+      "shortDescription": "\"How Do I Serve?\" 11/3/24",
+      "thumbnail": "https://i.vimeocdn.com/video/1942919547-9f88b8e7efcf64ce2df1e029f909dc56dbfeacf5c2516a83a24f69256c0a9ff5-d_800x450?region=us",
+      "releaseDate": "2024-10-27T11:11:03-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 7523,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1023711869.m3u8?s=60157a5a6c8236413a13c8bb4a2ba00914260f90",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1021442158",
+      "title": "\"A Great Example?\" 10/27/24",
+      "shortDescription": "\"A Great Example?\" 10/27/24",
+      "thumbnail": "https://i.vimeocdn.com/video/1940210310-5e98264e6c57eee2d7024b1bd514a78302682c2522fb2e1c58af04d90ade66c0-d_800x450?region=us",
+      "releaseDate": "2024-10-20T11:09:16-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 4539,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1021442158.m3u8?s=0ab449ce7f1a85a391bf8c250f34f5fb8be9d944",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1019154939",
+      "title": "\"WDJD - What Did Jesus Do?\" - 10/20/2024",
+      "shortDescription": "\"WDJD - What Did Jesus Do?\" - 10/20/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1937484505-5c9d6bb0a1aa74113677ce49ec2fbb7f9da2d2e7444f6ccdeb36eaf7c03b389a-d_800x450?region=us",
+      "releaseDate": "2024-10-13T10:58:55-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 4375,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1019154939.m3u8?s=5ec2edd9f7891fd662899c9a5592e45d46d914ff",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1016760032",
+      "title": "\"What Would Jesus Do\" - 10/13/2024",
+      "shortDescription": "\"What Would Jesus Do\" - 10/13/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1934781162-9840f6dbde7263bb4d7f0e280de044d54d01d38f6cd63e908cd9c3ca9b02e996-d_800x450?region=us",
+      "releaseDate": "2024-10-06T11:09:24-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 3584,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1016760032.m3u8?s=fa98e7b300041ec8f6f2c02ea6b13f1583bbfc1c",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1014039014",
+      "title": "\"Grace and Peace\" - 10/6/2024",
+      "shortDescription": "\"Grace and Peace\" - 10/6/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1932119278-4530cd2fc9ad1a53033e0fc78bcdb2eb886b655befaae6b9915340afd8104fa3-d_800x450?region=us",
+      "releaseDate": "2024-09-29T11:02:55-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 4428,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1014039014.m3u8?s=7ffd51d314a41c4db2a4d4abe500e74e7c096216",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1011774265",
+      "title": "\"Grow in Grace\" - 9/22/2024",
+      "shortDescription": "\"Grow in Grace\" - 9/22/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1929403718-fd01e5abfc5e4a697e5d80bb1169fba2f8fc573ddb9af5dad60567ea19fdf605-d_800x450?region=us",
+      "releaseDate": "2024-09-22T11:03:17-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 3760,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1011774265.m3u8?s=70454b88f2f4e957e51b2f230c06bc4450f93db1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1009622427",
+      "title": "\"Grow in Grace\" - 9/22/2024",
+      "shortDescription": "\"Grow in Grace\" - 9/22/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1926842325-eb11fa20136715417749ce4d5ad67a9b76c2d6bc1324455f05b939d9b88a2810-d_800x450?region=us",
+      "releaseDate": "2024-09-15T11:03:12-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-09-22T11:14:51-04:00",
+        "duration": 4072,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1009622427.m3u8?s=5bf030e901788875a29fb216ef8c030fcdc7e562",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1007411477",
+      "title": "\"Are There Several Kinds of Grace?\" - 9/15/2024",
+      "shortDescription": "\"Are There Several Kinds of Grace?\" - 9/15/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1924276771-8b1cb6e33561897d3a8ee39217d6af8814648fcf11193ef185b3484c2859de0a-d_800x450?region=us",
+      "releaseDate": "2024-09-08T11:00:49-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-11-05T14:08:51-05:00",
+        "duration": 4030,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1007411477.m3u8?s=f2d11014ec50d2556b491ee527f55127b3815778",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1005129643",
+      "title": "\"Grace Is Gracious\" - 9/8/2024",
+      "shortDescription": "\"Grace Is Gracious\" - 9/8/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1921701655-91d6168684f9a0d169286aca8036fa0eb984c20f094c12301c37b59436720d20-d_800x450?region=us",
+      "releaseDate": "2024-09-01T11:04:11-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-09-08T11:05:20-04:00",
+        "duration": 4216,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1005129643.m3u8?s=2574dcf59c540098bac4da94ca65188df35e5b9a",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1002422574",
+      "title": "\"Anger with Grace\" - 9/1/2024",
+      "shortDescription": "\"Anger with Grace\" - 9/1/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1918765718-1418fdad1d181f09a1d77e447e7c59828d191145d8dfeb88df9b3309492b3f70-d_800x450?region=us",
+      "releaseDate": "2024-08-25T11:08:12-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-09-08T11:05:20-04:00",
+        "duration": 3896,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1002422574.m3u8?s=6f768918c5184150b14ada2379ff519ddfc0ea8e",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "1000082246",
+      "title": "\"The Value of Grace\" - 8/25/2024",
+      "shortDescription": "\"The Value of Grace\" - 8/25/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1916178728-617377d031d48c94f59e1171c728edb1cbd77850de30c092ed37483f7ef5ff4f-d_800x450?region=us",
+      "releaseDate": "2024-08-18T11:13:55-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-25T11:09:31-04:00",
+        "duration": 4329,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1000082246.m3u8?s=eac1467dca0f3ce0bf479010fd1882c5dce615c0",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "997393948",
+      "title": "\"There is Grace in the OT\" - 8/11/2024",
+      "shortDescription": "\"There is Grace in the OT\" - 8/11/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1913528045-56ddcb9d25ccf1a23cc3285c71e0c785486f398fed6b9af8c1cc2638bd2e5887-d_800x450?region=us",
+      "releaseDate": "2024-08-11T11:19:07-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-18T18:52:21-04:00",
+        "duration": 4330,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/997393948.m3u8?s=fae49bc60a8420212fcca3cf87bc9defe5c453a1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "994775350",
+      "title": "\"There is Grace in the OT\" - 8/11/2024",
+      "shortDescription": "\"There is Grace in the OT\" - 8/11/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1910820965-95ee751df46f8f8528aaeefa4776f3652410173851920882420899caa469d639-d_800x450?region=us",
+      "releaseDate": "2024-08-04T11:09:47-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-11T11:21:34-04:00",
+        "duration": 4900,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/994775350.m3u8?s=22733aac8a4d0dcf06927a776ad35e81feddde3f",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "991185283",
+      "title": "\"The Power of Grace\" - 8/4/2024",
+      "shortDescription": "\"The Power of Grace\" - 8/4/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1907016891-c85206176880a0e989e9c4f0e51bc7b870e642100cea2d3ffc64bdc30f67391a-d_800x450?region=us",
+      "releaseDate": "2024-07-28T10:55:38-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4399,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/991185283.m3u8?s=66eebc300d27a7856ee319df0cc95091257dbeca",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "988007668",
+      "title": "\"The Focus is Christ!\" - 7/28/2024",
+      "shortDescription": "\"The Focus is Christ!\" - 7/28/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1903630615-9c45ec8bd8d693ce5fae5b2cf94f13a5e8edc76483a51ca5a25027d0d6120854-d_800x450?region=us",
+      "releaseDate": "2024-07-21T11:06:14-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3381,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/988007668.m3u8?s=5598ffe9e56b332ddc3a11b4b8f34ada44d2e276",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "983881961",
+      "title": "\"Can You Fall From Grace?\" - 7/21/2024",
+      "shortDescription": "\"Can You Fall From Grace?\" - 7/21/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1899294765-6893d58e0b41e76996f21366b0630221a9d0107c3905debd74778a10fd1de458-d_800x450?region=us",
+      "releaseDate": "2024-07-14T11:04:24-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-21T11:10:34-04:00",
+        "duration": 4148,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/983881961.m3u8?s=639106066f82e41ce2e6eb5b8c31bc20606e0cae",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "979968660",
+      "title": "\"It all points to Christ\" - 7/14/2024",
+      "shortDescription": "\"It all points to Christ\" - 7/14/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1895009004-d6804c73d22de26478d1289fca1802e230c43a6308cbfbfecd1734fe6ae5c01a-d_800x450?region=us",
+      "releaseDate": "2024-07-07T11:09:11-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-14T17:59:31-04:00",
+        "duration": 3979,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/979968660.m3u8?s=c8deb1f7bfbddf36cf1b758558f7a95c391bee8d",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "972263641",
+      "title": "\"Sing It! Preach It! Live It!\" - 7/7/2024",
+      "shortDescription": "\"Sing It! Preach It! Live It!\" - 7/7/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1886191912-2e437a1ccb69ddd8b2e8c4eaa7ac3f68f9b8f46c15cf028436034bdcd8949f05-d_800x450?region=us",
+      "releaseDate": "2024-06-30T11:03:10-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-07T11:53:59-04:00",
+        "duration": 4290,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/972263641.m3u8?s=4a140ddffe796c76edb490367a9868dea8bbb445",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "965936309",
+      "title": "\"That's Not Fair!\" - 6/30/2024",
+      "shortDescription": "\"That's Not Fair!\" - 6/30/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1878777016-dea8661c476f96de5de8b0c42a81ef747780733f7597a3dd1c9fdc59a73f9179-d_800x450?region=us",
+      "releaseDate": "2024-06-23T11:00:45-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-06-30T13:58:27-04:00",
+        "duration": 3986,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/965936309.m3u8?s=8975ad214466268c541abe35c2b720d94aa5553a",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "959615328",
+      "title": "\"Amazing Grace\" - 6/23/2024",
+      "shortDescription": "\"Amazing Grace\" - 6/23/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1872011055-fba5ef49545da22798c1e4115f50b6042e83265c06bdbad46dba044f97c7bf59-d_800x450?region=us",
+      "releaseDate": "2024-06-16T10:56:32-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-06-23T11:15:29-04:00",
+        "duration": 3902,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/959615328.m3u8?s=73cc718cebf12c8cef821cc8abd07244cadeff86",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "955510899",
+      "title": "\"Fatherhood\" - 6/16/2024",
+      "shortDescription": "\"Fatherhood\" - 6/16/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1866875480-bedc888cf653bd6320aa666fe086378762d2e562ba7bdd9643a7ba0fc31b87a3-d_800x450?region=us",
+      "releaseDate": "2024-06-09T11:00:22-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3560,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/955510899.m3u8?s=7d180f9da044c39aa3125a76bb141a9951426acb",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "952861318",
+      "title": "\"Worship IS Your Life\" - 6/9/2024",
+      "shortDescription": "\"Worship IS Your Life\" - 6/9/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1862880729-6475bac1d1628f39b64b2670dcd516ecf89eb165b29df0ede3108e54c3f43046-d_800x450?region=us",
+      "releaseDate": "2024-06-02T11:19:21-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3807,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/952861318.m3u8?s=e1e368bb9af44e26361bb9c85f330ee94f3f1639",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "950511746",
+      "title": "\"Courage\" - 6/2/2024 (Travis Robertson)",
+      "shortDescription": "\"Courage\" - 6/2/2024 (Travis Robertson)",
+      "thumbnail": "https://i.vimeocdn.com/video/1859086856-050e0c8d6259c375f40c4c1fa1d44e9b3208b1d1bc14a97200d733f56093cb1f-d_800x450?region=us",
+      "releaseDate": "2024-06-02T11:19:21-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4736,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/950511746.m3u8?s=c93c31354db740ce015758cce3cce2d02f9ced1c",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "948038404",
+      "title": "\"Do You Remember?\" - 5/26/2024",
+      "shortDescription": "\"Do You Remember?\" - 5/26/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1854987948-f5159f7b0dd29cdf08864b4e0545f64d432c1c67fe4918e8f8cbde6dfee2ef57-d_800x450?region=us",
+      "releaseDate": "2024-05-26T11:02:24-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3955,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/948038404.m3u8?s=4b72c7bc2b2c3a458c5d0fcf6afa52112b2e7e38",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "945512422",
+      "title": "\"Congratulations, Graduates\" - 5/19/2024",
+      "shortDescription": "\"Congratulations, Graduates\" - 5/19/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1850975155-b898b01490aca87914e4b785ab650334362f9841c5606ce19ef06e285b3b6882-d_800x450?region=us",
+      "releaseDate": "2024-05-19T11:07:02-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3816,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/945512422.m3u8?s=468f160fec49b25917f47421bce17b18c7f1b4bb",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "942972807",
+      "title": "\"I Love You, Mom\" - 5/12/2024",
+      "shortDescription": "\"I Love You, Mom\" - 5/12/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1846878885-41322db2c66866c0661b16616ffca1825ec10295ca0268280ead5f02662055e9-d_800x450?region=us",
+      "releaseDate": "2024-05-12T11:05:20-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4157,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/942972807.m3u8?s=5e54bae8c1c796f34390118e511a28ac540b01f3",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "940418689",
+      "title": "\"Discipleship = Teachers\" - 5/5/2024",
+      "shortDescription": "\"Discipleship = Teachers\" - 5/5/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1842653810-99c6b03871b170a9e44f10e97ca49cd7eb57d64f3ad391b52f497663680f48f4-d_800x450?region=us",
+      "releaseDate": "2024-05-05T11:02:34-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3686,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/940418689.m3u8?s=1f1711c4c08e36e615f58684091358fd87d9cff8",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "937387219",
+      "title": "\"Four Steps to Coming Home\" - 4/28/2024 (Logan Peters)",
+      "shortDescription": "\"Four Steps to Coming Home\" - 4/28/2024 (Logan Peters)",
+      "thumbnail": "https://i.vimeocdn.com/video/1837912856-a9dff8db400fe5827df46763133990dcabb0c269f81a7bc26c123d28e7cecf0f-d_800x450?region=us",
+      "releaseDate": "2024-04-28T11:11:14-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4553,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/937387219.m3u8?s=2a3ac2e132a50cc189cbd5ac5ca39edaec8b2d28",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "934511968",
+      "title": "\"The Holy What?\" - 4/21/2024",
+      "shortDescription": "\"The Holy What?\" - 4/21/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1833326535-e16a0a92a65b18079fc08d9dec482125281dcf027e9ad1e258b1af476e263a23-d_800x450?region=us",
+      "releaseDate": "2024-04-21T11:07:40-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4237,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/934511968.m3u8?s=f6b0c740860f7b0f03b58aee4c93e6a900b372bc",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "931749576",
+      "title": "\"Identity Theft\" - 4/14/2024 (Remington Afre)",
+      "shortDescription": "\"Identity Theft\" - 4/14/2024 (Remington Afre)",
+      "thumbnail": "https://i.vimeocdn.com/video/1829131498-d01763a7f0e46091b0895536af758465227b408e26b21d3c5c06fd5729a7a3e1-d_800x450?region=us",
+      "releaseDate": "2024-04-14T11:09:43-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4345,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/931749576.m3u8?s=e524f67ce811fe79e448d7769970ee9f59913a00",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "929295455",
+      "title": "\"What Happens After a Resurrection?\" - 4/7/2024",
+      "shortDescription": "\"What Happens After a Resurrection?\" - 4/7/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1825224179-ab90f5ab975c79dd3ad522723bdd09b3b29578145963eeb04c060f0ee1d1a2b9-d_800x450?region=us",
+      "releaseDate": "2024-04-07T11:05:38-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4264,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/929295455.m3u8?s=07b8133d2ee228905cc79888ffa21323ef4c0892",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "926837581",
+      "title": "\"It All Changed\" - 3/31/2024",
+      "shortDescription": "\"It All Changed\" - 3/31/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1821354689-6dac3661d6033715abc54bc5c16a864e1503ad03d99cb465ff180f41477f00df-d_800x450?region=us",
+      "releaseDate": "2024-03-31T11:21:46-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 5022,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/926837581.m3u8?s=b0cd0e98ef508815ce745cdbdbf4054377b5cdeb",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "924350295",
+      "title": "\"Do We Know What We Believe\" - 3/10/2024",
+      "shortDescription": "\"Do We Know What We Believe\" - 3/10/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1817182317-4fead64c4846ed22d03d91da6153a0c667bd5c12ec096cff141a3efa2da94401-d_800x450?region=us",
+      "releaseDate": "2024-03-24T11:12:39-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4651,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/924350295.m3u8?s=9029d22e36e9f3abde0cfeaa16764b4da7f08a8f",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "921734463",
+      "title": "\"What is the Gospel?\" - 3/17/2024",
+      "shortDescription": "\"What is the Gospel?\" - 3/17/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1812399721-f69bd7628e1de77c63a13cf31df68a8dfddeabe0ae0fd87e168977a0137a306f-d_800x450?region=us",
+      "releaseDate": "2024-03-17T11:07:38-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4439,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/921734463.m3u8?s=98db0eecca8762f258727da06ad77f2946ee4e37",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "918877560",
+      "title": "\"Do We Know What We Believe\" 3/10/24",
+      "shortDescription": "\"Do We Know What We Believe\" 3/10/24",
+      "thumbnail": "https://i.vimeocdn.com/video/1808046936-8a5717f5c1a4740a171d3b514223ba0ff7dda6141a41ebe1bb601ed55c74ae02-d_800x450?region=us",
+      "releaseDate": "2024-03-10T11:13:40-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4152,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/918877560.m3u8?s=4137e20470e3ec6f0c58cd0145118dee836c4b41",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "916454136",
+      "title": "\"A Parable of Urgency?\" 3/3/2024",
+      "shortDescription": "\"A Parable of Urgency?\" 3/3/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1807648584-8ecffba6bb23bc030edc763a5085ab13365158a5fa7c26312104fd28987ae531-d_800x450?region=us",
+      "releaseDate": "2024-03-03T11:04:25-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3961,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/916454136.m3u8?s=443423e9793a2f827590a34eb0c0b3b03fdeacb6",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "914173658",
+      "title": "\"How Do We Live In This World?\" - 2/25/2024",
+      "shortDescription": "\"How Do We Live In This World?\" - 2/25/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1800518289-93988d865335f2a09f532575f2efff5e9315e07ac65684cb0d1fda7a522c2e3c-d_800x450?region=us",
+      "releaseDate": "2024-02-25T11:10:20-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4444,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/914173658.m3u8?s=1592d7cb903c488eef6d3778977607fc4dfcbf70",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "912021026",
+      "title": "\"What is the Result?\" - 2/18/2024",
+      "shortDescription": "\"What is the Result?\" - 2/18/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1796987192-c6a3b6660bed7040d567974b5901d2e5265dcc815bba2c44f326457af6a49f71-d_800x450?region=us",
+      "releaseDate": "2024-02-18T11:06:02-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3949,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/912021026.m3u8?s=c012a085bad5705cc9298e76460c6bdacf49cb28",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "909757147",
+      "title": "\"The Core Mission of the Church\" - 2/11/2024",
+      "shortDescription": "\"The Core Mission of the Church\" - 2/11/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1793377628-af75d3a0b3771142a0a380834a2637aa6f2b594d589187c6511fb8b21c392a3c-d_800x450?region=us",
+      "releaseDate": "2024-02-11T11:10:04-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 4405,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/909757147.m3u8?s=1db2d91a6cbee5a950bb81c88b18f7abf620a6e1",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "909738762",
+      "title": "\"You did it to me\" - 2/4/2024",
+      "shortDescription": "\"You did it to me\" - 2/4/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1793352151-d61ded790b753ef3041d94901e3dc59ec8489739b663ed5e765924882f2a3ea1-d_800x450?region=us",
+      "releaseDate": "2024-02-04T11:14:01-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-03T07:52:49-04:00",
+        "duration": 4611,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/909738762.m3u8?s=6b2e9fce31f107566fc4777941a847675a4dd2bd",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "904948043",
+      "title": "\"Come follow Me\" Part 2 - 1/28/2024",
+      "shortDescription": "\"Come follow Me\" Part 2 - 1/28/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1785940577-5b97d8f568c6ca6d7428b1afd6d200e56c9c17342805147c621cec9bce0ae8ac-d_800x450?region=us",
+      "releaseDate": "2024-01-28T10:59:39-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-03T07:52:49-04:00",
+        "duration": 3706,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/904948043.m3u8?s=83649b904de299ba1afd669c6ea959583c3f13b6",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "902724139",
+      "title": "\"The Wise Man Built His House Upon a...\" - 1/21/2024",
+      "shortDescription": "\"The Wise Man Built His House Upon a...\" - 1/21/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1782408718-44c85a676dd36cdc272eb867f4e0e8cc0d7f3bc6167b22eb2534fed4e5567c42-d_800x450?region=us",
+      "releaseDate": "2024-01-21T12:01:00-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-03T07:52:49-04:00",
+        "duration": 3771,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/902724139.m3u8?s=e7b33d74656461c8ec46f0b6f4498ee0c0e8e4fd",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "900557466",
+      "title": "\"Do I have to love them?\" - 1/14/2024",
+      "shortDescription": "\"Do I have to love them?\" - 1/14/2024",
+      "thumbnail": "https://i.vimeocdn.com/video/1778954168-3d2805b19636a828fbd60ad00c80563dc4a73f37ad25c8bd9d2893727e8f5d59-d_800x450?region=us",
+      "releaseDate": "2024-01-14T11:15:19-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-07-03T07:52:49-04:00",
+        "duration": 4503,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/900557466.m3u8?s=cc0d9829abdbb30a7dc6d84dbe3ef5e3e77ce2dc",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "898907294",
+      "title": "\"Do You Have Tendons on Those Bones\" (1.7.24)",
+      "shortDescription": "\"Do You Have Tendons on Those Bones\" (1.7.24)",
+      "thumbnail": "https://i.vimeocdn.com/video/1776081402-69b77e2ae5de45ef7aea5fcbe1d5e0deefc5185e467f9ae58d5030155d50ddd5-d_800x450?region=us",
+      "releaseDate": "2023-12-31T10:53:43-05:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2024-08-05T22:03:45-04:00",
+        "duration": 3756,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/898907294.m3u8?s=b399395092d103fadd92693ca11de7df5766f564",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    }
+  ]
+}
