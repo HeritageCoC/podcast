@@ -626,11 +626,11 @@ jobs:
           return JSON.stringify(enhancedRokuFeed, null, 2);
         }
         
-        // Phone Quality MP3 Generator
+        // Enhanced Phone Quality MP3 Generator with Smart Trimming
         async function generatePhoneQualityMp3(vimeoData) {
           if (!config.outputs?.phoneTree?.enabled) return null;
           
-          console.log('📞 Generating phone quality MP3...');
+          console.log('📞 Generating phone quality MP3 with smart trimming...');
           
           const latestEpisode = vimeoData.episodes
             .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
@@ -640,48 +640,351 @@ jobs:
             return null;
           }
           
+          const smartTrimming = config.outputs.phoneTree.smartTrimming;
+          const generateBoth = smartTrimming?.enabled && smartTrimming?.generateBothVersions;
+          
           return new Promise((resolve, reject) => {
             console.log(`🎵 Converting "${latestEpisode.title}" to phone quality MP3...`);
             
-            const ffmpeg = spawn('ffmpeg', [
-              '-i', latestEpisode.primaryVideoUrl,
-              '-vn', // No video
-              '-acodec', 'mp3',
-              '-ar', '22050', // 22kHz sample rate
-              '-ab', '64k', // 64kbps bitrate
-              '-ac', '1', // Mono
-              '-f', 'mp3',
-              '-y', // Overwrite
-              'latest-sermon-phone.mp3'
-            ]);
-            
-            let stderr = '';
-            ffmpeg.stderr.on('data', (data) => {
-              stderr += data.toString();
-            });
-            
-            ffmpeg.on('close', (code) => {
-              if (code === 0) {
-                console.log('✅ Phone quality MP3 generated successfully');
+            // Generate trimmed version first
+            const generateTrimmed = () => {
+              return new Promise((resolveTrimmed, rejectTrimmed) => {
+                if (!smartTrimming?.enabled) {
+                  console.log('📱 Smart trimming disabled - generating full audio');
+                  generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                  return;
+                }
                 
-                // Create phone tree info file
-                const phoneInfo = {
-                  title: latestEpisode.title,
-                  date: latestEpisode.releaseDate,
-                  url: `${config.baseUrl || 'https://heritagecoc.github.io/podcast'}/latest-sermon-phone.mp3`,
-                  generated: new Date().toISOString()
-                };
+                console.log('✂️ Analyzing audio for smart trimming...');
                 
-                fs.writeFileSync('phone-tree-info.json', JSON.stringify(phoneInfo, null, 2));
-                resolve(phoneInfo);
-              } else {
-                console.error('❌ FFmpeg failed:', stderr);
-                reject(new Error(`FFmpeg failed with code ${code}`));
-              }
-            });
+                // Step 1: Analyze audio to find trim points
+                const analyzeArgs = [
+                  '-i', latestEpisode.primaryVideoUrl,
+                  '-af', `silencedetect=noise=${smartTrimming.silenceThreshold}dB:duration=5`,
+                  '-f', 'null',
+                  '-'
+                ];
+                
+                const analyze = spawn('ffmpeg', analyzeArgs);
+                let analysisOutput = '';
+                
+                analyze.stderr.on('data', (data) => {
+                  analysisOutput += data.toString();
+                });
+                
+                analyze.on('close', (code) => {
+                  try {
+                    const trimPoints = detectTrimPoints(analysisOutput, latestEpisode.duration);
+                    console.log(`🎯 Detected trim points: ${trimPoints.start}s to ${trimPoints.end}s`);
+                    
+                    // Step 2: Generate trimmed MP3
+                    const trimmedArgs = [
+                      '-i', latestEpisode.primaryVideoUrl,
+                      '-ss', trimPoints.start.toString(),
+                      '-to', trimPoints.end.toString(),
+                      '-vn', // No video
+                      '-acodec', 'mp3',
+                      '-ar', '22050',
+                      '-ab', '64k',
+                      '-ac', '1',
+                      '-f', 'mp3',
+                      '-y',
+                      'latest-sermon-phone.mp3'
+                    ];
+                    
+                    const ffmpegTrimmed = spawn('ffmpeg', trimmedArgs);
+                    let stderrTrimmed = '';
+                    
+                    ffmpegTrimmed.stderr.on('data', (data) => {
+                      stderrTrimmed += data.toString();
+                    });
+                    
+                    ffmpegTrimmed.on('close', (trimCode) => {
+                      if (trimCode === 0) {
+                        const trimmedInfo = {
+                          title: latestEpisode.title,
+                          date: latestEpisode.releaseDate,
+                          originalDuration: latestEpisode.duration,
+                          trimmedDuration: trimPoints.end - trimPoints.start,
+                          trimStartTime: formatTime(trimPoints.start),
+                          trimEndTime: formatTime(trimPoints.end),
+                          trimmingApplied: true,
+                          trimmedUrl: `${config.baseUrl || 'https://heritagecoc.github.io/podcast'}/latest-sermon-phone.mp3`,
+                          generated: new Date().toISOString()
+                        };
+                        
+                        console.log(`✅ Trimmed MP3 generated: ${trimmedInfo.trimmedDuration}s (removed ${latestEpisode.duration - trimmedInfo.trimmedDuration}s)`);
+                        resolveTrimmed(trimmedInfo);
+                      } else {
+                        console.warn('⚠️ Smart trimming failed, falling back to full audio');
+                        generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                      }
+                    });
+                    
+                  } catch (error) {
+                    console.warn('⚠️ Audio analysis failed, falling back to full audio:', error);
+                    generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                  }
+                });
+                
+                analyze.on('error', () => {
+                  console.warn('⚠️ Audio analysis failed, falling back to full audio');
+                  generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                });
+              });
+            };
             
-            ffmpeg.on('error', reject);
+            // Generate standard full MP3
+            const generateStandardMp3 = (resolveStd, rejectStd) => {
+              const standardArgs = [
+                '-i', latestEpisode.primaryVideoUrl,
+                '-vn',
+                '-acodec', 'mp3',
+                '-ar', '22050',
+                '-ab', '64k',
+                '-ac', '1',
+                '-f', 'mp3',
+                '-y',
+                generateBoth ? 'latest-sermon-phone-full.mp3' : 'latest-sermon-phone.mp3'
+              ];
+              
+              const ffmpegStandard = spawn('ffmpeg', standardArgs);
+              let stderrStandard = '';
+              
+              ffmpegStandard.stderr.on('data', (data) => {
+                stderrStandard += data.toString();
+              });
+              
+              ffmpegStandard.on('close', (stdCode) => {
+                if (stdCode === 0) {
+                  const standardInfo = {
+                    title: latestEpisode.title,
+                    date: latestEpisode.releaseDate,
+                    originalDuration: latestEpisode.duration,
+                    trimmedDuration: latestEpisode.duration,
+                    trimmingApplied: false,
+                    url: `${config.baseUrl || 'https://heritagecoc.github.io/podcast'}/latest-sermon-phone.mp3`,
+                    generated: new Date().toISOString()
+                  };
+                  
+                  console.log('✅ Standard MP3 generated successfully');
+                  resolveStd(standardInfo);
+                } else {
+                  console.error('❌ Standard MP3 generation failed:', stderrStandard);
+                  rejectStd(new Error(`FFmpeg failed with code ${stdCode}`));
+                }
+              });
+              
+              ffmpegStandard.on('error', rejectStd);
+            };
+            
+            // Main generation flow
+            if (generateBoth) {
+              console.log('🔄 Generating both trimmed and full versions...');
+              
+              Promise.all([
+                generateTrimmed(),
+                new Promise((resolveFull, rejectFull) => generateStandardMp3(resolveFull, rejectFull))
+              ]).then(([trimmedInfo, fullInfo]) => {
+                // Send interactive Pushover notification
+                sendInteractivePhoneNotification(trimmedInfo, fullInfo).then(() => {
+                  // Log the decision point
+                  logPhoneDecision('generated_both', trimmedInfo, fullInfo);
+                  resolve(trimmedInfo); // Return trimmed as default
+                }).catch(error => {
+                  console.error('⚠️ Pushover notification failed:', error);
+                  resolve(trimmedInfo); // Continue anyway
+                });
+              }).catch(reject);
+              
+            } else {
+              // Generate only one version
+              generateTrimmed().then(resolve).catch(reject);
+            }
           });
+        }
+        
+        // Helper function to detect trim points from silence analysis
+        function detectTrimPoints(analysisOutput, totalDuration) {
+          const smartTrimming = config.outputs.phoneTree.smartTrimming;
+          const startBuffer = smartTrimming?.startBuffer || 30;
+          const endBuffer = smartTrimming?.endBuffer || 60;
+          const minLength = (smartTrimming?.minServiceLength || 45) * 60; // Convert to seconds
+          const maxLength = (smartTrimming?.maxServiceLength || 90) * 60;
+          
+          // Parse silence detection output
+          const silenceRegex = /silence_start: ([\d.]+)/g;
+          const silenceEndRegex = /silence_end: ([\d.]+)/g;
+          
+          let silenceStarts = [];
+          let silenceEnds = [];
+          let match;
+          
+          while ((match = silenceRegex.exec(analysisOutput)) !== null) {
+            silenceStarts.push(parseFloat(match[1]));
+          }
+          
+          while ((match = silenceEndRegex.exec(analysisOutput)) !== null) {
+            silenceEnds.push(parseFloat(match[1]));
+          }
+          
+          // Conservative trimming logic
+          let trimStart = 0;
+          let trimEnd = totalDuration;
+          
+          // Find start point: first significant silence end (service likely starts after)
+          if (silenceEnds.length > 0) {
+            const firstSignificantSilenceEnd = silenceEnds.find(end => end > 60); // Skip very early silence
+            if (firstSignificantSilenceEnd) {
+              trimStart = Math.max(0, firstSignificantSilenceEnd - startBuffer);
+            }
+          }
+          
+          // Find end point: last significant silence start (service likely ends before)
+          if (silenceStarts.length > 0) {
+            const lastSignificantSilenceStart = silenceStarts.reverse().find(start => 
+              start < totalDuration - 60 && // Not too close to end
+              (totalDuration - start) > 120  // At least 2 minutes of silence
+            );
+            if (lastSignificantSilenceStart) {
+              trimEnd = lastSignificantSilenceStart + endBuffer;
+            }
+          }
+          
+          // Sanity checks
+          const trimmedLength = trimEnd - trimStart;
+          if (trimmedLength < minLength || trimmedLength > maxLength) {
+            console.log(`⚠️ Trimmed length ${Math.round(trimmedLength/60)}min outside expected range, using full audio`);
+            return { start: 0, end: totalDuration };
+          }
+          
+          return { start: Math.round(trimStart), end: Math.round(trimEnd) };
+        }
+        
+        // Helper function to format seconds as HH:MM:SS
+        function formatTime(seconds) {
+          const hours = Math.floor(seconds / 3600);
+          const minutes = Math.floor((seconds % 3600) / 60);
+          const secs = Math.floor(seconds % 60);
+          return hours > 0 ? 
+            `${hours}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}` :
+            `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        // Send interactive Pushover notification
+        async function sendInteractivePhoneNotification(trimmedInfo, fullInfo) {
+          if (!config.pushover?.enabled || !config.outputs?.phoneTree?.smartTrimming?.pushoverActions) {
+            console.log('📱 Interactive Pushover notifications disabled');
+            return;
+          }
+          
+          const userKey = process.env.PUSHOVER_USER_KEY;
+          const appToken = process.env.PUSHOVER_APP_TOKEN;
+          
+          if (!userKey || !appToken) {
+            console.error('❌ Pushover credentials not configured');
+            return;
+          }
+          
+          const trimmedSize = fs.existsSync('latest-sermon-phone.mp3') ? 
+            `${(fs.statSync('latest-sermon-phone.mp3').size / 1024 / 1024).toFixed(1)} MB` : 'Unknown';
+          const fullSize = fs.existsSync('latest-sermon-phone-full.mp3') ? 
+            `${(fs.statSync('latest-sermon-phone-full.mp3').size / 1024 / 1024).toFixed(1)} MB` : 'Unknown';
+          
+          const trimmedDurationMin = Math.round(trimmedInfo.trimmedDuration / 60);
+          const fullDurationMin = Math.round(fullInfo.originalDuration / 60);
+          const removedMin = fullDurationMin - trimmedDurationMin;
+          
+          const message = `📞 Phone Audio Generated:
+• Trimmed: ${trimmedSize} (${trimmedDurationMin} min) - Removed ${removedMin} min
+• Full: ${fullSize} (${fullDurationMin} min)
+
+🔗 Trimmed: ${trimmedInfo.trimmedUrl}
+🔗 Full: ${trimmedInfo.trimmedUrl.replace('.mp3', '-full.mp3')}
+
+Trimmed version is live. Use buttons to switch if needed.`;
+          
+          const postData = JSON.stringify({
+            token: appToken,
+            user: userKey,
+            message: message,
+            title: `Sermon Audio: ${trimmedInfo.title}`,
+            url: trimmedInfo.trimmedUrl,
+            url_title: "Play Trimmed Version",
+            priority: 0,
+            actions: [
+              {
+                action: "keep_trimmed",
+                title: "✅ Keep Trimmed"
+              },
+              {
+                action: "use_full",
+                title: "❌ Use Full Version"
+              }
+            ]
+          });
+          
+          return new Promise((resolve, reject) => {
+            const options = {
+              hostname: 'api.pushover.net',
+              port: 443,
+              path: '/1/messages.json',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+              }
+            };
+            
+            const req = https.request(options, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  console.log('📱 Interactive Pushover notification sent successfully');
+                  resolve(data);
+                } else {
+                  console.error('❌ Pushover notification failed:', res.statusCode, data);
+                  reject(new Error(`Pushover failed: ${res.statusCode}`));
+                }
+              });
+            });
+            
+            req.on('error', reject);
+            req.write(postData);
+            req.end();
+          });
+        }
+        
+        // Log phone audio decisions
+        function logPhoneDecision(action, trimmedInfo, fullInfo = null) {
+          try {
+            const logEntry = {
+              timestamp: new Date().toISOString(),
+              action: action, // 'generated_both', 'auto_approved', 'user_kept_trimmed', 'user_chose_full'
+              sermon: {
+                title: trimmedInfo.title,
+                date: trimmedInfo.date
+              },
+              trimmed: {
+                duration: trimmedInfo.trimmedDuration,
+                size: fs.existsSync('latest-sermon-phone.mp3') ? fs.statSync('latest-sermon-phone.mp3').size : 0
+              },
+              full: fullInfo ? {
+                duration: fullInfo.originalDuration,
+                size: fs.existsSync('latest-sermon-phone-full.mp3') ? fs.statSync('latest-sermon-phone-full.mp3').size : 0
+              } : null,
+              trimmingApplied: trimmedInfo.trimmingApplied
+            };
+            
+            // Append to log file
+            const logLine = JSON.stringify(logEntry) + '\n';
+            fs.appendFileSync('phone-audio-decisions.log', logLine);
+            
+            console.log(`📝 Logged phone audio decision: ${action}`);
+          } catch (error) {
+            console.error('⚠️ Failed to log phone decision:', error);
+          }
         }
         
         // Main execution
@@ -972,7 +1275,7 @@ jobs:
         git config --local user.name "Comprehensive Media Generator"
         
         # Add generated files and tracking files
-        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 phone-tree-info.json index.html .content-hash .latest-episode 2>/dev/null || true
+        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 latest-sermon-phone-full.mp3 phone-tree-info.json index.html .content-hash .latest-episode phone-audio-decisions.log 2>/dev/null || true
         
         if git diff --cached --quiet; then
           echo "ℹ️ No changes to commit"
