@@ -63,7 +63,7 @@ if [ $? -eq 0 ]; then
     echo "1. Configure Vimeo showcase IDs in roku-feed-enhancer.js"
     echo "2. Set up your livestream URL"
     echo "3. Submit this URL to Roku Direct Publisher:"
-    echo "   https://heritagecoc.github.io/heritage-media-feeds/roku-direct-publisher-feed.json"
+    echo "   https://heritagecoc.github.io/podcast/roku-direct-publisher-feed.json"
     
 else
     echo "❌ Roku feed enhancement failed!"
