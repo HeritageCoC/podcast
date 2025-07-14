@@ -91,7 +91,7 @@
     "_comment": "Roku Direct Publisher enhancement settings",
     
     "livestream": {
-      "enabled": true,
+      "enabled": false,
       "vimeoLiveUrl": "YOUR_VIMEO_LIVESTREAM_URL_HERE",
       "services": [
         {
@@ -107,7 +107,7 @@
     
     "additionalContent": {
       "sixtySeconds": {
-        "enabled": true,
+        "enabled": false,
         "vimeoShowcaseId": "YOUR_60_SECONDS_SHOWCASE_ID",
         "title": "60 Seconds of Power",
         "description": "Quick daily inspirational messages",
@@ -115,7 +115,7 @@
       },
       
       "specialSeries": {
-        "enabled": true,
+        "enabled": false,
         "vimeoShowcaseId": "YOUR_SPECIAL_SERIES_SHOWCASE_ID",
         "title": "Teaching Series",
         "description": "Special sermon series and extended teachings", 
@@ -123,7 +123,7 @@
       },
       
       "bibleStudy": {
-        "enabled": true,
+        "enabled": false,
         "vimeoShowcaseId": "YOUR_BIBLE_STUDY_SHOWCASE_ID",
         "title": "Bible Study",
         "description": "Wednesday evening Bible studies",
