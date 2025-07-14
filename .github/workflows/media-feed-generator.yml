@@ -804,6 +804,34 @@ jobs:
           });
         }
         
+        // Generate phone info JSON file
+        function generatePhoneInfoJson(phoneInfo) {
+          if (!phoneInfo) return;
+          
+          const infoData = {
+            latestSermon: {
+              title: phoneInfo.title,
+              date: phoneInfo.date,
+              originalDuration: phoneInfo.originalDuration,
+              trimmedDuration: phoneInfo.trimmedDuration,
+              trimmingApplied: phoneInfo.trimmingApplied,
+              generated: phoneInfo.generated
+            },
+            files: {
+              trimmed: 'latest-sermon-phone.mp3',
+              full: fs.existsSync('latest-sermon-phone-full.mp3') ? 'latest-sermon-phone-full.mp3' : null
+            },
+            urls: {
+              trimmed: phoneInfo.trimmedUrl || phoneInfo.url,
+              full: fs.existsSync('latest-sermon-phone-full.mp3') ? 
+                (config.baseUrl || 'https://heritagecoc.github.io/podcast') + '/latest-sermon-phone-full.mp3' : null
+            }
+          };
+          
+          fs.writeFileSync('phone-tree-info.json', JSON.stringify(infoData, null, 2));
+          console.log('📄 Phone tree info JSON generated');
+        }
+        
         // Helper function to detect trim points from silence analysis
         function detectTrimPoints(analysisOutput, totalDuration) {
           const smartTrimming = config.outputs.phoneTree.smartTrimming;
@@ -1029,6 +1057,9 @@ jobs:
                 try {
                   const phoneInfo = await generatePhoneQualityMp3(vimeoData);
                   if (phoneInfo) {
+                    // Generate phone info JSON
+                    generatePhoneInfoJson(phoneInfo);
+                    
                     results.phoneTree = 'latest-sermon-phone.mp3 (' + fs.statSync('latest-sermon-phone.mp3').size + ' bytes)';
                     console.log('✅ Phone quality MP3 generated');
                   }
@@ -1280,14 +1311,37 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "Comprehensive Media Generator"
         
-        # Add generated files and tracking files
-        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 latest-sermon-phone-full.mp3 phone-tree-info.json index.html .content-hash .latest-episode phone-audio-decisions.log roku-feed-enhanced.json roku-direct-publisher-feed.json roku-enhancement-info.json 2>/dev/null || true
+        echo "📋 Files to add:"
+        ls -la | grep -E "(feed-video\.xml|roku-feed\.json|latest-sermon-phone.*\.mp3|phone-tree-info\.json|index\.html|\.content-hash|\.latest-episode|phone-audio-decisions\.log|roku-feed-enhanced\.json|roku-direct-publisher-feed\.json|roku-enhancement-info\.json)" || echo "No matching files found"
+        
+        # Add files one by one with explicit checking
+        echo "📝 Adding files individually..."
+        
+        # Core generated files
+        [ -f "feed-video.xml" ] && git add feed-video.xml && echo "✅ Added feed-video.xml"
+        [ -f "roku-feed.json" ] && git add roku-feed.json && echo "✅ Added roku-feed.json"
+        [ -f "latest-sermon-phone.mp3" ] && git add latest-sermon-phone.mp3 && echo "✅ Added latest-sermon-phone.mp3"
+        [ -f "latest-sermon-phone-full.mp3" ] && git add latest-sermon-phone-full.mp3 && echo "✅ Added latest-sermon-phone-full.mp3"
+        [ -f "phone-tree-info.json" ] && git add phone-tree-info.json && echo "✅ Added phone-tree-info.json"
+        [ -f "index.html" ] && git add index.html && echo "✅ Added index.html"
+        
+        # Tracking files
+        [ -f ".content-hash" ] && git add .content-hash && echo "✅ Added .content-hash"
+        [ -f ".latest-episode" ] && git add .latest-episode && echo "✅ Added .latest-episode"
+        [ -f "phone-audio-decisions.log" ] && git add phone-audio-decisions.log && echo "✅ Added phone-audio-decisions.log"
+        
+        # Roku enhancement files
+        [ -f "roku-feed-enhanced.json" ] && git add roku-feed-enhanced.json && echo "✅ Added roku-feed-enhanced.json"
+        [ -f "roku-direct-publisher-feed.json" ] && git add roku-direct-publisher-feed.json && echo "✅ Added roku-direct-publisher-feed.json"
+        [ -f "roku-enhancement-info.json" ] && git add roku-enhancement-info.json && echo "✅ Added roku-enhancement-info.json"
+        
+        echo "📊 Git status after adding files:"
+        git status
         
         if git diff --cached --quiet; then
           echo "ℹ️ No changes to commit"
         else
           echo "📝 Changes detected - committing..."
-          git status
           git commit -m "🎙️ Auto-update comprehensive media feeds - $(date '+%Y-%m-%d %H:%M UTC')"
           git push
           echo "✅ Comprehensive media feeds updated successfully!"
