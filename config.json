@@ -8,7 +8,7 @@
   "podcastSubcategory": "Christianity",
   "podcastLanguage": "en",
   "churchWebsite": "https://heritagecoc.org",
-  "baseUrl": "https://heritagecoc.github.io/podcast",
+  "baseUrl": "https://heritagecoc.github.io/heritage-media-feeds",
   "podcastArtwork": "./podcast-artwork.jpg",
   "explicit": false,
   
@@ -63,6 +63,18 @@
     "phoneTree": {
       "enabled": true,
       "filename": "latest-sermon-phone.mp3",
+      "smartTrimming": {
+        "enabled": true,
+        "generateBothVersions": true,
+        "interactiveApproval": true,
+        "autoApproveAfter": 30,
+        "pushoverActions": true,
+        "silenceThreshold": -30,
+        "minServiceLength": 45,
+        "maxServiceLength": 90,
+        "startBuffer": 30,
+        "endBuffer": 60
+      },
       "audioSettings": {
         "sampleRate": 22050,
         "bitrate": "64k",
@@ -70,7 +82,8 @@
         "format": "mp3"
       },
       "maxSizeMB": 15,
-      "infoFile": "phone-tree-info.json"
+      "infoFile": "phone-tree-info.json",
+      "logFile": "phone-audio-decisions.log"
     }
   },
   
