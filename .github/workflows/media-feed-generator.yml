@@ -1281,7 +1281,7 @@ jobs:
         git config --local user.name "Comprehensive Media Generator"
         
         # Add generated files and tracking files
-        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 latest-sermon-phone-full.mp3 phone-tree-info.json index.html .content-hash .latest-episode phone-audio-decisions.log 2>/dev/null || true
+        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 latest-sermon-phone-full.mp3 phone-tree-info.json index.html .content-hash .latest-episode phone-audio-decisions.log roku-feed-enhanced.json roku-direct-publisher-feed.json roku-enhancement-info.json 2>/dev/null || true
         
         if git diff --cached --quiet; then
           echo "ℹ️ No changes to commit"
