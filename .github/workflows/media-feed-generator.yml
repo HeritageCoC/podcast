@@ -716,4 +716,564 @@ jobs:
                         console.log('✅ Trimmed MP3 generated: ' + trimmedInfo.trimmedDuration + 's (removed ' + (latestEpisode.duration - trimmedInfo.trimmedDuration) + 's)');
                         resolveTrimmed(trimmedInfo);
                       } else {
-                        console.warn('
+                        console.warn('⚠️ Smart trimming failed, falling back to full audio');
+                        generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                      }
+                    });
+                    
+                  } catch (error) {
+                    console.warn('⚠️ Audio analysis failed, falling back to full audio:', error);
+                    generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                  }
+                });
+                
+                analyze.on('error', () => {
+                  console.warn('⚠️ Audio analysis failed, falling back to full audio');
+                  generateStandardMp3(resolveTrimmed, rejectTrimmed);
+                });
+              });
+            };
+            
+            // Generate standard full MP3
+            const generateStandardMp3 = (resolveStd, rejectStd) => {
+              const standardArgs = [
+                '-i', latestEpisode.primaryVideoUrl,
+                '-vn',
+                '-acodec', 'mp3',
+                '-ar', '22050',
+                '-ab', '64k',
+                '-ac', '1',
+                '-f', 'mp3',
+                '-y',
+                generateBoth ? 'latest-sermon-phone-full.mp3' : 'latest-sermon-phone.mp3'
+              ];
+              
+              const ffmpegStandard = spawn('ffmpeg', standardArgs);
+              let stderrStandard = '';
+              
+              ffmpegStandard.stderr.on('data', (data) => {
+                stderrStandard += data.toString();
+              });
+              
+              ffmpegStandard.on('close', (stdCode) => {
+                if (stdCode === 0) {
+                  const standardInfo = {
+                    title: latestEpisode.title,
+                    date: latestEpisode.releaseDate,
+                    originalDuration: latestEpisode.duration,
+                    trimmedDuration: latestEpisode.duration,
+                    trimmingApplied: false,
+                    url: (config.baseUrl || 'https://heritagecoc.github.io/podcast') + '/latest-sermon-phone.mp3',
+                    generated: new Date().toISOString()
+                  };
+                  
+                  console.log('✅ Standard MP3 generated successfully');
+                  resolveStd(standardInfo);
+                } else {
+                  console.error('❌ Standard MP3 generation failed:', stderrStandard);
+                  rejectStd(new Error('FFmpeg failed with code ' + stdCode));
+                }
+              });
+              
+              ffmpegStandard.on('error', rejectStd);
+            };
+            
+            // Main generation flow
+            if (generateBoth) {
+              console.log('🔄 Generating both trimmed and full versions...');
+              
+              Promise.all([
+                generateTrimmed(),
+                new Promise((resolveFull, rejectFull) => generateStandardMp3(resolveFull, rejectFull))
+              ]).then(([trimmedInfo, fullInfo]) => {
+                // Simple notification without interactive approval
+                sendSimplePhoneNotification(trimmedInfo, fullInfo).then(() => {
+                  // Log the decision point
+                  logPhoneDecision('generated_both', trimmedInfo, fullInfo);
+                  resolve(trimmedInfo); // Return trimmed as default
+                }).catch(error => {
+                  console.error('⚠️ Pushover notification failed:', error);
+                  resolve(trimmedInfo); // Continue anyway
+                });
+              }).catch(reject);
+              
+            } else {
+              // Generate only one version
+              generateTrimmed().then(resolve).catch(reject);
+            }
+          });
+        }
+        
+        // Helper function to detect trim points from silence analysis
+        function detectTrimPoints(analysisOutput, totalDuration) {
+          const smartTrimming = config.outputs.phoneTree.smartTrimming;
+          const startBuffer = smartTrimming?.startBuffer || 30;
+          const endBuffer = smartTrimming?.endBuffer || 60;
+          const minLength = (smartTrimming?.minServiceLength || 45) * 60; // Convert to seconds
+          const maxLength = (smartTrimming?.maxServiceLength || 90) * 60;
+          
+          // Parse silence detection output
+          const silenceRegex = /silence_start: ([\d.]+)/g;
+          const silenceEndRegex = /silence_end: ([\d.]+)/g;
+          
+          let silenceStarts = [];
+          let silenceEnds = [];
+          let match;
+          
+          while ((match = silenceRegex.exec(analysisOutput)) !== null) {
+            silenceStarts.push(parseFloat(match[1]));
+          }
+          
+          while ((match = silenceEndRegex.exec(analysisOutput)) !== null) {
+            silenceEnds.push(parseFloat(match[1]));
+          }
+          
+          // Conservative trimming logic
+          let trimStart = 0;
+          let trimEnd = totalDuration;
+          
+          // Find start point: first significant silence end (service likely starts after)
+          if (silenceEnds.length > 0) {
+            const firstSignificantSilenceEnd = silenceEnds.find(end => end > 60); // Skip very early silence
+            if (firstSignificantSilenceEnd) {
+              trimStart = Math.max(0, firstSignificantSilenceEnd - startBuffer);
+            }
+          }
+          
+          // Find end point: last significant silence start (service likely ends before)
+          if (silenceStarts.length > 0) {
+            const lastSignificantSilenceStart = silenceStarts.reverse().find(start => 
+              start < totalDuration - 60 && // Not too close to end
+              (totalDuration - start) > 120  // At least 2 minutes of silence
+            );
+            if (lastSignificantSilenceStart) {
+              trimEnd = lastSignificantSilenceStart + endBuffer;
+            }
+          }
+          
+          // Sanity checks
+          const trimmedLength = trimEnd - trimStart;
+          if (trimmedLength < minLength || trimmedLength > maxLength) {
+            console.log('⚠️ Trimmed length ' + Math.round(trimmedLength/60) + 'min outside expected range, using full audio');
+            return { start: 0, end: totalDuration };
+          }
+          
+          return { start: Math.round(trimStart), end: Math.round(trimEnd) };
+        }
+        
+        // Helper function to format seconds as HH:MM:SS
+        function formatTime(seconds) {
+          const hours = Math.floor(seconds / 3600);
+          const minutes = Math.floor((seconds % 3600) / 60);
+          const secs = Math.floor(seconds % 60);
+          return hours > 0 ? 
+            hours + ':' + minutes.toString().padStart(2, '0') + ':' + secs.toString().padStart(2, '0') :
+            minutes + ':' + secs.toString().padStart(2, '0');
+        }
+        
+        // Send simple Pushover notification (no interactive approval)
+        async function sendSimplePhoneNotification(trimmedInfo, fullInfo) {
+          if (!config.pushover?.enabled) {
+            console.log('📱 Pushover notifications disabled');
+            return;
+          }
+          
+          const userKey = process.env.PUSHOVER_USER_KEY;
+          const appToken = process.env.PUSHOVER_APP_TOKEN;
+          
+          if (!userKey || !appToken) {
+            console.error('❌ Pushover credentials not configured');
+            return;
+          }
+          
+          const trimmedSize = fs.existsSync('latest-sermon-phone.mp3') ? 
+            (fs.statSync('latest-sermon-phone.mp3').size / 1024 / 1024).toFixed(1) + ' MB' : 'Unknown';
+          const fullSize = fs.existsSync('latest-sermon-phone-full.mp3') ? 
+            (fs.statSync('latest-sermon-phone-full.mp3').size / 1024 / 1024).toFixed(1) + ' MB' : 'Unknown';
+          
+          const trimmedDurationMin = Math.round(trimmedInfo.trimmedDuration / 60);
+          const fullDurationMin = Math.round(fullInfo.originalDuration / 60);
+          const removedMin = fullDurationMin - trimmedDurationMin;
+          
+          const message = '📞 Phone Audio Generated for "' + trimmedInfo.title + '":\n\n' +
+            '🎯 Trimmed Version: ' + trimmedSize + ' (' + trimmedDurationMin + ' min) - Active\n' +
+            '📹 Full Version: ' + fullSize + ' (' + fullDurationMin + ' min) - Backup\n' +
+            '✂️ Removed: ' + removedMin + ' minutes of silence/intro/outro\n\n' +
+            'Both versions available for download.';
+          
+          const postData = JSON.stringify({
+            token: appToken,
+            user: userKey,
+            message: message,
+            title: 'Sermon Audio Ready',
+            url: trimmedInfo.trimmedUrl,
+            url_title: "Download Trimmed Audio",
+            priority: 0,
+            sound: "pushover"
+          });
+          
+          return new Promise((resolve, reject) => {
+            const options = {
+              hostname: 'api.pushover.net',
+              port: 443,
+              path: '/1/messages.json',
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(postData)
+              }
+            };
+            
+            const req = https.request(options, (res) => {
+              let data = '';
+              res.on('data', chunk => data += chunk);
+              res.on('end', () => {
+                if (res.statusCode === 200) {
+                  console.log('📱 Simple Pushover notification sent successfully');
+                  resolve(data);
+                } else {
+                  console.error('❌ Pushover notification failed:', res.statusCode, data);
+                  reject(new Error('Pushover failed: ' + res.statusCode));
+                }
+              });
+            });
+            
+            req.on('error', reject);
+            req.write(postData);
+            req.end();
+          });
+        }
+        
+        // Log phone audio decisions
+        function logPhoneDecision(action, trimmedInfo, fullInfo = null) {
+          try {
+            const logEntry = {
+              timestamp: new Date().toISOString(),
+              action: action, // 'generated_both', 'trimmed_only', 'full_only'
+              sermon: {
+                title: trimmedInfo.title,
+                date: trimmedInfo.date
+              },
+              trimmed: {
+                duration: trimmedInfo.trimmedDuration,
+                size: fs.existsSync('latest-sermon-phone.mp3') ? fs.statSync('latest-sermon-phone.mp3').size : 0
+              },
+              full: fullInfo ? {
+                duration: fullInfo.originalDuration,
+                size: fs.existsSync('latest-sermon-phone-full.mp3') ? fs.statSync('latest-sermon-phone-full.mp3').size : 0
+              } : null,
+              trimmingApplied: trimmedInfo.trimmingApplied
+            };
+            
+            // Append to log file
+            const logLine = JSON.stringify(logEntry) + '\n';
+            fs.appendFileSync('phone-audio-decisions.log', logLine);
+            
+            console.log('📝 Logged phone audio decision: ' + action);
+          } catch (error) {
+            console.error('⚠️ Failed to log phone decision:', error);
+          }
+        }
+        
+        // Main execution
+        async function main() {
+          try {
+            console.log('📡 Fetching Vimeo data...');
+            const vimeoData = await fetchVimeoData();
+            
+            if (!vimeoData.episodes || vimeoData.episodes.length === 0) {
+              console.warn('⚠️ No episodes found');
+              return;
+            }
+            
+            console.log('📝 Found ' + vimeoData.episodes.length + ' episodes...');
+            
+            // Check if content has changed since last run
+            const hasContentChanged = await checkForContentChanges(vimeoData);
+            
+            if (!hasContentChanged && !process.env.FORCE_REFRESH) {
+              console.log('ℹ️ No new content detected - skipping file generation');
+              console.log('📊 Feeds are up to date');
+              return;
+            }
+            
+            console.log('🔄 Content changes detected - generating feeds...');
+            
+            const results = {};
+            
+            // Generate video podcast RSS
+            if (config.outputs?.videoPodcast?.enabled) {
+              const videoRSS = await generateVideoRSS(vimeoData);
+              if (videoRSS) {
+                fs.writeFileSync('feed-video.xml', videoRSS, 'utf8');
+                results.videoPodcast = 'feed-video.xml (' + fs.statSync('feed-video.xml').size + ' bytes)';
+                console.log('✅ Video podcast RSS generated');
+              }
+            }
+            
+            // Generate Roku feed
+            if (config.outputs?.roku?.enabled) {
+              const rokuFeed = await generateRokuFeed(vimeoData);
+              if (rokuFeed) {
+                fs.writeFileSync('roku-feed.json', rokuFeed, 'utf8');
+                results.roku = 'roku-feed.json (' + fs.statSync('roku-feed.json').size + ' bytes)';
+                console.log('✅ Roku feed generated');
+              }
+            }
+            
+            // Generate phone quality MP3 (only if latest episode changed)
+            if (config.outputs?.phoneTree?.enabled) {
+              const shouldGeneratePhoneMp3 = await checkIfLatestEpisodeChanged(vimeoData);
+              
+              if (shouldGeneratePhoneMp3 || process.env.FORCE_REFRESH) {
+                try {
+                  const phoneInfo = await generatePhoneQualityMp3(vimeoData);
+                  if (phoneInfo) {
+                    results.phoneTree = 'latest-sermon-phone.mp3 (' + fs.statSync('latest-sermon-phone.mp3').size + ' bytes)';
+                    console.log('✅ Phone quality MP3 generated');
+                  }
+                } catch (error) {
+                  console.error('❌ Phone MP3 generation failed:', error);
+                  results.phoneTree = 'Failed: ' + error.message;
+                }
+              } else {
+                console.log('ℹ️ Latest episode unchanged - skipping phone MP3 generation');
+                results.phoneTree = 'Skipped (no changes)';
+              }
+            }
+            
+            // Update content hash for next run
+            await updateContentHash(vimeoData);
+            
+            // Create summary
+            console.log('\n📊 Generation Summary:');
+            Object.entries(results).forEach(([type, result]) => {
+              console.log('   ' + type + ': ' + result);
+            });
+            
+            console.log('\n✅ Comprehensive feed generation complete!');
+            
+          } catch (error) {
+            console.error('❌ Error during generation:', error);
+            process.exit(1);
+          }
+        }
+        
+        // Check if content has changed since last run
+        async function checkForContentChanges(vimeoData) {
+          try {
+            // Create a hash of current content
+            const currentContent = {
+              episodeCount: vimeoData.episodes.length,
+              latestEpisode: vimeoData.episodes.length > 0 ? {
+                id: vimeoData.episodes[0].id,
+                title: vimeoData.episodes[0].title,
+                releaseDate: vimeoData.episodes[0].releaseDate
+              } : null,
+              // Hash of all episode IDs and dates
+              episodeSignature: vimeoData.episodes
+                .map(ep => ep.id + ':' + ep.releaseDate)
+                .sort()
+                .join('|')
+            };
+            
+            const currentHash = require('crypto')
+              .createHash('sha256')
+              .update(JSON.stringify(currentContent))
+              .digest('hex');
+            
+            // Check if we have a previous hash
+            let previousHash = '';
+            try {
+              if (fs.existsSync('.content-hash')) {
+                previousHash = fs.readFileSync('.content-hash', 'utf8').trim();
+              }
+            } catch (error) {
+              console.log('📝 No previous content hash found - treating as new content');
+            }
+            
+            console.log('🔍 Content hash: ' + currentHash.substring(0, 12) + '...');
+            console.log('🔍 Previous hash: ' + previousHash.substring(0, 12) + '...');
+            
+            return currentHash !== previousHash;
+            
+          } catch (error) {
+            console.error('⚠️ Error checking content changes:', error);
+            return true; // Generate on error to be safe
+          }
+        }
+        
+        // Check if latest episode specifically changed (for phone MP3)
+        async function checkIfLatestEpisodeChanged(vimeoData) {
+          if (vimeoData.episodes.length === 0) return false;
+          
+          try {
+            const latestEpisode = vimeoData.episodes
+              .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
+            
+            const currentLatest = latestEpisode.id + ':' + latestEpisode.releaseDate;
+            
+            let previousLatest = '';
+            try {
+              if (fs.existsSync('.latest-episode')) {
+                previousLatest = fs.readFileSync('.latest-episode', 'utf8').trim();
+              }
+            } catch (error) {
+              console.log('📝 No previous latest episode found');
+            }
+            
+            console.log('🎙️ Current latest: ' + latestEpisode.title + ' (' + latestEpisode.id + ')');
+            console.log('🎙️ Previous latest: ' + previousLatest);
+            
+            return currentLatest !== previousLatest;
+            
+          } catch (error) {
+            console.error('⚠️ Error checking latest episode:', error);
+            return true; // Generate on error
+          }
+        }
+        
+        // Update content hash for next run
+        async function updateContentHash(vimeoData) {
+          try {
+            // Update overall content hash
+            const currentContent = {
+              episodeCount: vimeoData.episodes.length,
+              latestEpisode: vimeoData.episodes.length > 0 ? {
+                id: vimeoData.episodes[0].id,
+                title: vimeoData.episodes[0].title,
+                releaseDate: vimeoData.episodes[0].releaseDate
+              } : null,
+              episodeSignature: vimeoData.episodes
+                .map(ep => ep.id + ':' + ep.releaseDate)
+                .sort()
+                .join('|')
+            };
+            
+            const currentHash = require('crypto')
+              .createHash('sha256')
+              .update(JSON.stringify(currentContent))
+              .digest('hex');
+            
+            fs.writeFileSync('.content-hash', currentHash);
+            
+            // Update latest episode tracking
+            if (vimeoData.episodes.length > 0) {
+              const latestEpisode = vimeoData.episodes
+                .sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))[0];
+              const latestInfo = latestEpisode.id + ':' + latestEpisode.releaseDate;
+              fs.writeFileSync('.latest-episode', latestInfo);
+            }
+            
+            console.log('💾 Content tracking updated');
+            
+          } catch (error) {
+            console.error('⚠️ Error updating content hash:', error);
+          }
+        }
+        
+        main();
+        SCRIPT_EOF
+        
+        echo "📝 Running comprehensive feed generator..."
+        node generate-comprehensive.js
+        
+    - name: Create index page
+      run: |
+        echo "📄 Creating feed index page..."
+        
+        cat > index.html << 'EOF'
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Heritage Church of Christ - Media Feeds</title>
+            <style>
+                body { 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                    max-width: 900px; 
+                    margin: 0 auto; 
+                    padding: 20px; 
+                    background: #f8f9fa;
+                }
+                .header { text-align: center; margin-bottom: 40px; }
+                .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+                .feed-card { 
+                    background: white; 
+                    padding: 20px; 
+                    border-radius: 8px; 
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    text-decoration: none;
+                    color: inherit;
+                    transition: transform 0.2s;
+                }
+                .feed-card:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+                .feed-title { font-size: 1.2em; font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+                .feed-description { color: #666; margin-bottom: 15px; }
+                .feed-button { 
+                    background: #3498db; 
+                    color: white; 
+                    padding: 8px 16px; 
+                    border-radius: 4px; 
+                    text-decoration: none; 
+                    display: inline-block;
+                    margin-right: 10px;
+                    margin-bottom: 5px;
+                }
+                .phone-info { background: #e8f5e8; border-left: 4px solid #27ae60; }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>Heritage Church of Christ</h1>
+                <p>Sermons and Media Feeds</p>
+            </div>
+            
+            <div class="feed-grid">
+                <a href="feed-video.xml" class="feed-card">
+                    <div class="feed-title">📺 Video Podcast</div>
+                    <div class="feed-description">Full video sermons for video podcast apps and Apple Podcasts</div>
+                    <span class="feed-button">Subscribe to Video Feed</span>
+                </a>
+                
+                <a href="roku-feed.json" class="feed-card">
+                    <div class="feed-title">📱 Roku Channel</div>
+                    <div class="feed-description">JSON feed for Roku Direct Publisher streaming channel</div>
+                    <span class="feed-button">View Roku Feed</span>
+                </a>
+                
+                <div class="feed-card phone-info">
+                    <div class="feed-title">📞 Phone Tree Audio</div>
+                    <div class="feed-description">Latest sermon in phone-optimized quality with smart trimming</div>
+                    <a href="latest-sermon-phone.mp3" class="feed-button">Download Trimmed</a>
+                    <a href="latest-sermon-phone-full.mp3" class="feed-button">Download Full</a>
+                    <a href="phone-tree-info.json" class="feed-button">Info JSON</a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; text-align: center; color: #666;">
+                <p>Updated automatically every 2 hours • Special checks Sunday evenings</p>
+                <p><a href="https://heritagecoc.org">Visit our website</a></p>
+            </div>
+        </body>
+        </html>
+        EOF
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "Comprehensive Media Generator"
+        
+        # Add generated files and tracking files
+        git add feed-video.xml roku-feed.json latest-sermon-phone.mp3 latest-sermon-phone-full.mp3 phone-tree-info.json index.html .content-hash .latest-episode phone-audio-decisions.log 2>/dev/null || true
+        
+        if git diff --cached --quiet; then
+          echo "ℹ️ No changes to commit"
+        else
+          echo "📝 Changes detected - committing..."
+          git status
+          git commit -m "🎙️ Auto-update comprehensive media feeds - $(date '+%Y-%m-%d %H:%M UTC')"
+          git push
+          echo "✅ Comprehensive media feeds updated successfully!"
+        fi
