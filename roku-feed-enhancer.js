@@ -210,7 +210,7 @@ class RokuFeedEnhancer {
       title: `🔴 LIVE: ${activeService.title}`,
       shortDescription: activeService.description,
       longDescription: `${activeService.description}. Broadcasting live from Heritage Church of Christ.`,
-      thumbnail: "https://heritagecoc.github.io/podcast/podcast-artwork.jpg",
+      thumbnail: "https://heritagecoc.github.io/heritage-media-feeds/podcast-artwork.jpg",
       releaseDate: new Date().toISOString(),
       genres: ["live", "worship", "faith"],
       tags: ["live", "worship", "church", "heritage"],
@@ -404,9 +404,9 @@ class RokuFeedEnhancer {
       rokuDirectPublisherFeed: "roku-direct-publisher-feed.json (submit this to Roku)",
       
       feedUrls: {
-        original: "https://heritagecoc.github.io/podcast/roku-feed.json",
-        enhanced: "https://heritagecoc.github.io/podcast/roku-feed-enhanced.json",
-        directPublisher: "https://heritagecoc.github.io/podcast/roku-direct-publisher-feed.json"
+        original: "https://heritagecoc.github.io/heritage-media-feeds/roku-feed.json",
+        enhanced: "https://heritagecoc.github.io/heritage-media-feeds/roku-feed-enhanced.json",
+        directPublisher: "https://heritagecoc.github.io/heritage-media-feeds/roku-direct-publisher-feed.json"
       },
       
       contentSummary: enhancedFeed.contentSummary,
@@ -445,7 +445,7 @@ async function main() {
     console.log('  ✓ roku-direct-publisher-feed.json - Submit this URL to Roku');
     console.log('  ✓ roku-enhancement-info.json - Deployment guide and info');
     console.log('\n🎯 Roku Direct Publisher URL:');
-    console.log('  https://heritagecoc.github.io/podcast/roku-direct-publisher-feed.json');
+    console.log('  https://heritagecoc.github.io/heritage-media-feeds/roku-direct-publisher-feed.json');
     console.log('\n📖 See roku-enhancement-info.json for detailed setup instructions');
     
   } catch (error) {
