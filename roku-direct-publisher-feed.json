@@ -1,14 +1,14 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-07-20T14:13:41.710Z",
+  "lastUpdated": "2025-07-20T16:27:47.845Z",
   "movies": [
     {
-      "id": "1099141295",
-      "title": "🆕 Latest: \"The Breath of Life\" Chad Hedgpath 7.13.25",
-      "shortDescription": "\"The Breath of Life\" Chad Hedgpath 7.13.25",
-      "thumbnail": "https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us",
-      "releaseDate": "2025-07-06T10:58:00-04:00",
+      "id": "1101004532",
+      "title": "🆕 Latest: \"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
+      "shortDescription": "\"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2036372219-e2226dfbad20cdf446f98d9630110365db4e3cd333af6ce994e5d26d87f8207c-d_800x450?region=us",
+      "releaseDate": "2025-07-13T11:15:13-04:00",
       "genres": [
         "faith"
       ],
@@ -16,11 +16,11 @@
         "faith"
       ],
       "content": {
-        "dateAdded": "2025-07-13T15:56:09-04:00",
-        "duration": 4673,
+        "dateAdded": "2025-07-20T11:07:46-04:00",
+        "duration": 4166,
         "videos": [
           {
-            "url": "https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1",
+            "url": "https://player.vimeo.com/external/1101004532.m3u8?s=9683051a9f6dc05420eea0d963c10f2fa7b7cd7f",
             "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
@@ -30,10 +30,37 @@
       "priority": 900
     },
     {
+      "id": "1101004532",
+      "title": "\"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
+      "shortDescription": "\"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2036372219-e2226dfbad20cdf446f98d9630110365db4e3cd333af6ce994e5d26d87f8207c-d_800x450?region=us",
+      "releaseDate": "2025-07-13T11:15:13-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-07-20T11:07:46-04:00",
+        "duration": 4166,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1101004532.m3u8?s=9683051a9f6dc05420eea0d963c10f2fa7b7cd7f",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      },
+      "priority": 500,
+      "category": "main-sermons"
+    },
+    {
       "id": "1099141295",
       "title": "\"The Breath of Life\" Chad Hedgpath 7.13.25",
       "shortDescription": "\"The Breath of Life\" Chad Hedgpath 7.13.25",
-      "thumbnail": "https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us",
+      "thumbnail": "https://i.vimeocdn.com/video/2036526965-f0c10aab60480c23c46503e2ffd1fba552aeeb1c10ed4bb44566de9cbbade176-d_800x450?region=us",
       "releaseDate": "2025-07-06T10:58:00-04:00",
       "genres": [
         "faith"
@@ -43,11 +70,11 @@
       ],
       "content": {
         "dateAdded": "2025-07-13T15:56:09-04:00",
-        "duration": 4673,
+        "duration": 3630,
         "videos": [
           {
             "url": "https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1",
-            "quality": "HD",
+            "quality": "FHD",
             "videoType": "HLS",
             "bitrate": null
           }
@@ -2219,12 +2246,12 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-07-14T06:15:50.182Z",
-  "enhancedGenerated": "2025-07-20T14:13:41.710Z",
+  "baseGenerated": "2025-07-20T16:17:26.331Z",
+  "enhancedGenerated": "2025-07-20T16:27:47.845Z",
   "contentSummary": {
-    "totalMovies": 82,
+    "totalMovies": 83,
     "liveContent": 0,
-    "mainSermons": 81,
+    "mainSermons": 82,
     "additionalContent": 0,
     "isLiveServiceTime": false
   }

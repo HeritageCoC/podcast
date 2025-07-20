@@ -1,5 +1,5 @@
 {
-  "generated": "2025-07-20T14:13:41.710Z",
+  "generated": "2025-07-20T16:27:47.845Z",
   "baseRokuFeed": "roku-feed.json (from your existing media generator)",
   "enhancedRokuFeed": "roku-feed-enhanced.json (this enhancement)",
   "rokuDirectPublisherFeed": "roku-direct-publisher-feed.json (submit this to Roku)",
@@ -9,9 +9,9 @@
     "directPublisher": "https://heritagecoc.github.io/podcast/roku-direct-publisher-feed.json"
   },
   "contentSummary": {
-    "totalMovies": 82,
+    "totalMovies": 83,
     "liveContent": 0,
-    "mainSermons": 81,
+    "mainSermons": 82,
     "additionalContent": 0,
     "isLiveServiceTime": false
   },

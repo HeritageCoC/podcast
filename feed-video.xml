@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Mon, 14 Jul 2025 06:15:30 GMT</pubDate>
-    <lastBuildDate>Mon, 14 Jul 2025 06:15:30 GMT</lastBuildDate>
+    <pubDate>Sun, 20 Jul 2025 16:17:11 GMT</pubDate>
+    <lastBuildDate>Sun, 20 Jul 2025 16:17:11 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -15,15 +15,26 @@
     </itunes:category>
 
     <item>
+        <title>&quot;It&apos;s time for VBS!&quot; 7.20.25 - Chad Hedgepath</title>
+        <description>&quot;It&apos;s time for VBS!&quot; 7.20.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1101004532</guid>
+        <pubDate>Sun, 13 Jul 2025 15:15:13 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1101004532.m3u8?s=9683051a9f6dc05420eea0d963c10f2fa7b7cd7f" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;It&apos;s time for VBS!&quot; 7.20.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:09:26</itunes:duration>
+        <itunes:episode>82</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2036372219-e2226dfbad20cdf446f98d9630110365db4e3cd333af6ce994e5d26d87f8207c-d_800x450?region=us" />
+    </item>
+    <item>
         <title>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</title>
         <description>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</description>
         <guid isPermaLink="false">vimeo-video-1099141295</guid>
         <pubDate>Sun, 06 Jul 2025 14:58:00 GMT</pubDate>
         <enclosure url="https://player.vimeo.com/external/1099141295.m3u8?s=5ce6ae724ce3f567961026b5a12094bf32d557a1" length="0" type="application/x-mpegURL" />
         <itunes:title>&quot;The Breath of Life&quot; Chad Hedgpath 7.13.25</itunes:title>
-        <itunes:duration>1:17:53</itunes:duration>
+        <itunes:duration>1:00:30</itunes:duration>
         <itunes:episode>81</itunes:episode>
-        <itunes:image href="https://i.vimeocdn.com/video/2033995829-9d172f0bf99cec1433932745b8a8ccfb30cf7f45f953c439763888cbabfb82e1-d_800x450?region=us" />
+        <itunes:image href="https://i.vimeocdn.com/video/2036526965-f0c10aab60480c23c46503e2ffd1fba552aeeb1c10ed4bb44566de9cbbade176-d_800x450?region=us" />
     </item>
     <item>
         <title>&quot;Jonah the Patriot&quot; Travis Roberstson 7.6.2025</title>
