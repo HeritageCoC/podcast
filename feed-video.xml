@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Sun, 20 Jul 2025 16:17:11 GMT</pubDate>
-    <lastBuildDate>Sun, 20 Jul 2025 16:17:11 GMT</lastBuildDate>
+    <pubDate>Mon, 28 Jul 2025 01:16:17 GMT</pubDate>
+    <lastBuildDate>Mon, 28 Jul 2025 01:16:17 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;Why Do We Need Elders and Deacons?&quot; 7.27.25 - Chad Hedgepath</title>
+        <description>&quot;Why Do We Need Elders and Deacons?&quot; 7.27.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1102917936</guid>
+        <pubDate>Sun, 20 Jul 2025 15:06:51 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1102917936.m3u8?s=227163e46b6cc19b34d42a17f1382ba4e76d7cd0" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;Why Do We Need Elders and Deacons?&quot; 7.27.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:05:04</itunes:duration>
+        <itunes:episode>83</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2038802506-63b713f20b7c6c9e370a84d3fd3c9d81bf3138d8c52d8a424517b0866f61d7fd-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;It&apos;s time for VBS!&quot; 7.20.25 - Chad Hedgepath</title>
         <description>&quot;It&apos;s time for VBS!&quot; 7.20.25 - Chad Hedgepath</description>

@@ -1,14 +1,14 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-07-27T20:16:36.008Z",
+  "lastUpdated": "2025-07-28T01:26:27.540Z",
   "movies": [
     {
-      "id": "1101004532",
-      "title": "🆕 Latest: \"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
-      "shortDescription": "\"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2036372219-e2226dfbad20cdf446f98d9630110365db4e3cd333af6ce994e5d26d87f8207c-d_800x450?region=us",
-      "releaseDate": "2025-07-13T11:15:13-04:00",
+      "id": "1102917936",
+      "title": "🆕 Latest: \"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",
+      "shortDescription": "\"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2038802506-63b713f20b7c6c9e370a84d3fd3c9d81bf3138d8c52d8a424517b0866f61d7fd-d_800x450?region=us",
+      "releaseDate": "2025-07-20T11:06:51-04:00",
       "genres": [
         "faith"
       ],
@@ -16,11 +16,11 @@
         "faith"
       ],
       "content": {
-        "dateAdded": "2025-07-20T11:07:46-04:00",
-        "duration": 4166,
+        "dateAdded": "2025-07-27T18:24:34-04:00",
+        "duration": 3904,
         "videos": [
           {
-            "url": "https://player.vimeo.com/external/1101004532.m3u8?s=9683051a9f6dc05420eea0d963c10f2fa7b7cd7f",
+            "url": "https://player.vimeo.com/external/1102917936.m3u8?s=227163e46b6cc19b34d42a17f1382ba4e76d7cd0",
             "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
@@ -28,6 +28,33 @@
         ]
       },
       "priority": 900
+    },
+    {
+      "id": "1102917936",
+      "title": "\"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",
+      "shortDescription": "\"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2038802506-63b713f20b7c6c9e370a84d3fd3c9d81bf3138d8c52d8a424517b0866f61d7fd-d_800x450?region=us",
+      "releaseDate": "2025-07-20T11:06:51-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-07-27T18:24:34-04:00",
+        "duration": 3904,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1102917936.m3u8?s=227163e46b6cc19b34d42a17f1382ba4e76d7cd0",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      },
+      "priority": 500,
+      "category": "main-sermons"
     },
     {
       "id": "1101004532",
@@ -2246,12 +2273,12 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-07-20T16:17:26.331Z",
-  "enhancedGenerated": "2025-07-27T20:16:36.008Z",
+  "baseGenerated": "2025-07-28T01:16:33.097Z",
+  "enhancedGenerated": "2025-07-28T01:26:27.540Z",
   "contentSummary": {
-    "totalMovies": 83,
+    "totalMovies": 84,
     "liveContent": 0,
-    "mainSermons": 82,
+    "mainSermons": 83,
     "additionalContent": 0,
     "isLiveServiceTime": false
   }

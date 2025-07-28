@@ -1,8 +1,33 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-07-20T16:17:26.331Z",
+  "lastUpdated": "2025-07-28T01:16:33.097Z",
   "movies": [
+    {
+      "id": "1102917936",
+      "title": "\"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",
+      "shortDescription": "\"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2038802506-63b713f20b7c6c9e370a84d3fd3c9d81bf3138d8c52d8a424517b0866f61d7fd-d_800x450?region=us",
+      "releaseDate": "2025-07-20T11:06:51-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-07-27T18:24:34-04:00",
+        "duration": 3904,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1102917936.m3u8?s=227163e46b6cc19b34d42a17f1382ba4e76d7cd0",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
     {
       "id": "1101004532",
       "title": "\"It's time for VBS!\" 7.20.25 - Chad Hedgepath",
