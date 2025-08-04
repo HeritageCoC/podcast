@@ -1,8 +1,33 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-07-28T01:16:33.097Z",
+  "lastUpdated": "2025-08-04T12:32:45.127Z",
   "movies": [
+    {
+      "id": "1104904109",
+      "title": "\"What Is My Responsibility to Our Elders and Deacons?\" 8.3.25 - Chad Hedgepath",
+      "shortDescription": "\"What Is My Responsibility to Our Elders and Deacons?\" 8.3.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2041287770-dfc03f5ec38a0b48feb55e2155726cef3cf6feb16c3d63aba42518cb9e825897-d_800x450?region=us",
+      "releaseDate": "2025-07-27T11:00:50-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-08-04T07:33:10-04:00",
+        "duration": 4041,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1104904109.m3u8?s=35ec117e9070979f8ea8e84e77da2e73cd55c17a",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
     {
       "id": "1102917936",
       "title": "\"Why Do We Need Elders and Deacons?\" 7.27.25 - Chad Hedgepath",

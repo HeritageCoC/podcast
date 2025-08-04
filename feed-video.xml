@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Mon, 28 Jul 2025 01:16:17 GMT</pubDate>
-    <lastBuildDate>Mon, 28 Jul 2025 01:16:17 GMT</lastBuildDate>
+    <pubDate>Mon, 04 Aug 2025 12:32:24 GMT</pubDate>
+    <lastBuildDate>Mon, 04 Aug 2025 12:32:24 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;What Is My Responsibility to Our Elders and Deacons?&quot; 8.3.25 - Chad Hedgepath</title>
+        <description>&quot;What Is My Responsibility to Our Elders and Deacons?&quot; 8.3.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1104904109</guid>
+        <pubDate>Sun, 27 Jul 2025 15:00:50 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1104904109.m3u8?s=35ec117e9070979f8ea8e84e77da2e73cd55c17a" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;What Is My Responsibility to Our Elders and Deacons?&quot; 8.3.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:07:21</itunes:duration>
+        <itunes:episode>84</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2041287770-dfc03f5ec38a0b48feb55e2155726cef3cf6feb16c3d63aba42518cb9e825897-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;Why Do We Need Elders and Deacons?&quot; 7.27.25 - Chad Hedgepath</title>
         <description>&quot;Why Do We Need Elders and Deacons?&quot; 7.27.25 - Chad Hedgepath</description>
