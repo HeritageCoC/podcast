@@ -1,8 +1,33 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-08-04T12:32:45.127Z",
+  "lastUpdated": "2025-08-10T16:16:48.076Z",
   "movies": [
+    {
+      "id": "1106881088",
+      "title": "\"Why We Worship\" 8.10.25 - Chad Hedgepath",
+      "shortDescription": "\"Why We Worship\" 8.10.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2043748829-d8296d3d690d3b1b793ff11054ed8ef6f01162cbf70ff10ff91d91c8887da272-d_800x450?region=us",
+      "releaseDate": "2025-08-03T11:06:38-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-08-10T11:05:15-04:00",
+        "duration": 3788,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1106881088.m3u8?s=504d54fd79d56abc7eceb3064993c24f5b51e34f",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
     {
       "id": "1104904109",
       "title": "\"What Is My Responsibility to Our Elders and Deacons?\" 8.3.25 - Chad Hedgepath",
@@ -221,31 +246,6 @@
         "videos": [
           {
             "url": "https://player.vimeo.com/external/1089496187.m3u8?s=27dc98177434b66163a6c91c8b1dcc23a0763a07",
-            "quality": "HD",
-            "videoType": "HLS",
-            "bitrate": null
-          }
-        ]
-      }
-    },
-    {
-      "id": "1087522237",
-      "title": "\"We Appreciate Our Bible Class Teachers\"  6-1-25",
-      "shortDescription": "\"We Appreciate Our Bible Class Teachers\"  6-1-25",
-      "thumbnail": "https://i.vimeocdn.com/video/2019542702-8c28d88dafa906927048b78a71b8148eea971438a602dce0b9781b8ea07ae5a2-d_800x450?region=us",
-      "releaseDate": "2025-05-25T11:02:19-04:00",
-      "genres": [
-        "faith"
-      ],
-      "tags": [
-        "faith"
-      ],
-      "content": {
-        "dateAdded": "2025-06-01T18:31:09-04:00",
-        "duration": 3764,
-        "videos": [
-          {
-            "url": "https://player.vimeo.com/external/1087522237.m3u8?s=00238d3da02109ee3ab0db48ee5873025f535b1f",
             "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
