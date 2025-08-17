@@ -1,14 +1,14 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-08-17T14:13:18.980Z",
+  "lastUpdated": "2025-08-17T16:25:25.437Z",
   "movies": [
     {
-      "id": "1106881088",
-      "title": "🆕 Latest: \"Why We Worship\" 8.10.25 - Chad Hedgepath",
-      "shortDescription": "\"Why We Worship\" 8.10.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2043748829-d8296d3d690d3b1b793ff11054ed8ef6f01162cbf70ff10ff91d91c8887da272-d_800x450?region=us",
-      "releaseDate": "2025-08-03T11:06:38-04:00",
+      "id": "1108838337",
+      "title": "🆕 Latest: \"I will sing to the Lord\" 8.17.25 - Chad Hedgepath",
+      "shortDescription": "\"I will sing to the Lord\" 8.17.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2046206826-b1a61c4bc5221e6ee4456601560362452ef42a644e9d7f14ca83e99cec388abc-d_800x450?region=us",
+      "releaseDate": "2025-08-10T11:01:12-04:00",
       "genres": [
         "faith"
       ],
@@ -16,11 +16,11 @@
         "faith"
       ],
       "content": {
-        "dateAdded": "2025-08-10T11:05:15-04:00",
-        "duration": 3788,
+        "dateAdded": "2025-08-17T11:16:12-04:00",
+        "duration": 4169,
         "videos": [
           {
-            "url": "https://player.vimeo.com/external/1106881088.m3u8?s=504d54fd79d56abc7eceb3064993c24f5b51e34f",
+            "url": "https://player.vimeo.com/external/1108838337.m3u8?s=dcaa7fb23bb7129ecf98e21b08d062046614f7e3",
             "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
@@ -28,6 +28,33 @@
         ]
       },
       "priority": 900
+    },
+    {
+      "id": "1108838337",
+      "title": "\"I will sing to the Lord\" 8.17.25 - Chad Hedgepath",
+      "shortDescription": "\"I will sing to the Lord\" 8.17.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2046206826-b1a61c4bc5221e6ee4456601560362452ef42a644e9d7f14ca83e99cec388abc-d_800x450?region=us",
+      "releaseDate": "2025-08-10T11:01:12-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-08-17T11:16:12-04:00",
+        "duration": 4169,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1108838337.m3u8?s=dcaa7fb23bb7129ecf98e21b08d062046614f7e3",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      },
+      "priority": 500,
+      "category": "main-sermons"
     },
     {
       "id": "1106881088",
@@ -2300,12 +2327,12 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-08-10T16:16:48.076Z",
-  "enhancedGenerated": "2025-08-17T14:13:18.980Z",
+  "baseGenerated": "2025-08-17T16:15:53.132Z",
+  "enhancedGenerated": "2025-08-17T16:25:25.437Z",
   "contentSummary": {
-    "totalMovies": 85,
+    "totalMovies": 86,
     "liveContent": 0,
-    "mainSermons": 84,
+    "mainSermons": 85,
     "additionalContent": 0,
     "isLiveServiceTime": false
   }

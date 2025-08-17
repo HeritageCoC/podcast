@@ -1,8 +1,33 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-08-10T16:16:48.076Z",
+  "lastUpdated": "2025-08-17T16:15:53.132Z",
   "movies": [
+    {
+      "id": "1108838337",
+      "title": "\"I will sing to the Lord\" 8.17.25 - Chad Hedgepath",
+      "shortDescription": "\"I will sing to the Lord\" 8.17.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2046206826-b1a61c4bc5221e6ee4456601560362452ef42a644e9d7f14ca83e99cec388abc-d_800x450?region=us",
+      "releaseDate": "2025-08-10T11:01:12-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-08-17T11:16:12-04:00",
+        "duration": 4169,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1108838337.m3u8?s=dcaa7fb23bb7129ecf98e21b08d062046614f7e3",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
     {
       "id": "1106881088",
       "title": "\"Why We Worship\" 8.10.25 - Chad Hedgepath",

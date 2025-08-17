@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Sun, 10 Aug 2025 16:16:32 GMT</pubDate>
-    <lastBuildDate>Sun, 10 Aug 2025 16:16:32 GMT</lastBuildDate>
+    <pubDate>Sun, 17 Aug 2025 16:15:38 GMT</pubDate>
+    <lastBuildDate>Sun, 17 Aug 2025 16:15:38 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;I will sing to the Lord&quot; 8.17.25 - Chad Hedgepath</title>
+        <description>&quot;I will sing to the Lord&quot; 8.17.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1108838337</guid>
+        <pubDate>Sun, 10 Aug 2025 15:01:12 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1108838337.m3u8?s=dcaa7fb23bb7129ecf98e21b08d062046614f7e3" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;I will sing to the Lord&quot; 8.17.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:09:29</itunes:duration>
+        <itunes:episode>85</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2046206826-b1a61c4bc5221e6ee4456601560362452ef42a644e9d7f14ca83e99cec388abc-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;Why We Worship&quot; 8.10.25 - Chad Hedgepath</title>
         <description>&quot;Why We Worship&quot; 8.10.25 - Chad Hedgepath</description>
