@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Sun, 17 Aug 2025 16:15:38 GMT</pubDate>
-    <lastBuildDate>Sun, 17 Aug 2025 16:15:38 GMT</lastBuildDate>
+    <pubDate>Mon, 25 Aug 2025 03:11:32 GMT</pubDate>
+    <lastBuildDate>Mon, 25 Aug 2025 03:11:32 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;Our Mindset During Communion&quot; 8.24.25 - Chad Hedgepath</title>
+        <description>&quot;Our Mindset During Communion&quot; 8.24.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1110709750</guid>
+        <pubDate>Sun, 17 Aug 2025 15:06:14 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1110709750.m3u8?s=0fab7137df4b63757a17cf48ab2fd4b40f80f4d2" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;Our Mindset During Communion&quot; 8.24.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:01:16</itunes:duration>
+        <itunes:episode>86</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2048538906-70d2340a992b4d1b70dcfc8c3b5b64455fab60e3d10bc85c6b139537b2afe32f-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;I will sing to the Lord&quot; 8.17.25 - Chad Hedgepath</title>
         <description>&quot;I will sing to the Lord&quot; 8.17.25 - Chad Hedgepath</description>
