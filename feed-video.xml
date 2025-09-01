@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Mon, 25 Aug 2025 03:11:32 GMT</pubDate>
-    <lastBuildDate>Mon, 25 Aug 2025 03:11:32 GMT</lastBuildDate>
+    <pubDate>Mon, 01 Sep 2025 04:24:49 GMT</pubDate>
+    <lastBuildDate>Mon, 01 Sep 2025 04:24:49 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;Fear Fails&quot; 8.31.25 - Travis Robertson</title>
+        <description>&quot;Fear Fails&quot; 8.31.25 - Travis Robertson</description>
+        <guid isPermaLink="false">vimeo-video-1112683341</guid>
+        <pubDate>Sun, 24 Aug 2025 15:01:45 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1112683341.m3u8?s=0e0759658ff4dcf6721e0366025e379649b0f9fe" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;Fear Fails&quot; 8.31.25 - Travis Robertson</itunes:title>
+        <itunes:duration>1:07:38</itunes:duration>
+        <itunes:episode>87</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2051003091-f98a5b14156719acb11eaa5aeb7022b76b3ec193b01536dfd44fb479bd6ab1ae-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;Our Mindset During Communion&quot; 8.24.25 - Chad Hedgepath</title>
         <description>&quot;Our Mindset During Communion&quot; 8.24.25 - Chad Hedgepath</description>

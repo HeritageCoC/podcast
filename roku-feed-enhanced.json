@@ -1,14 +1,14 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-08-31T20:14:27.173Z",
+  "lastUpdated": "2025-09-01T04:35:53.704Z",
   "movies": [
     {
-      "id": "1110709750",
-      "title": "🆕 Latest: \"Our Mindset During Communion\" 8.24.25 - Chad Hedgepath",
-      "shortDescription": "\"Our Mindset During Communion\" 8.24.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2048538906-70d2340a992b4d1b70dcfc8c3b5b64455fab60e3d10bc85c6b139537b2afe32f-d_800x450?region=us",
-      "releaseDate": "2025-08-17T11:06:14-04:00",
+      "id": "1112683341",
+      "title": "🆕 Latest: \"Fear Fails\" 8.31.25 - Travis Robertson",
+      "shortDescription": "\"Fear Fails\" 8.31.25 - Travis Robertson",
+      "thumbnail": "https://i.vimeocdn.com/video/2051003091-f98a5b14156719acb11eaa5aeb7022b76b3ec193b01536dfd44fb479bd6ab1ae-d_800x450?region=us",
+      "releaseDate": "2025-08-24T11:01:45-04:00",
       "genres": [
         "faith"
       ],
@@ -16,11 +16,11 @@
         "faith"
       ],
       "content": {
-        "dateAdded": "2025-08-24T21:05:34-04:00",
-        "duration": 3676,
+        "dateAdded": "2025-08-31T23:17:13-04:00",
+        "duration": 4058,
         "videos": [
           {
-            "url": "https://player.vimeo.com/external/1110709750.m3u8?s=0fab7137df4b63757a17cf48ab2fd4b40f80f4d2",
+            "url": "https://player.vimeo.com/external/1112683341.m3u8?s=0e0759658ff4dcf6721e0366025e379649b0f9fe",
             "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
@@ -28,6 +28,33 @@
         ]
       },
       "priority": 900
+    },
+    {
+      "id": "1112683341",
+      "title": "\"Fear Fails\" 8.31.25 - Travis Robertson",
+      "shortDescription": "\"Fear Fails\" 8.31.25 - Travis Robertson",
+      "thumbnail": "https://i.vimeocdn.com/video/2051003091-f98a5b14156719acb11eaa5aeb7022b76b3ec193b01536dfd44fb479bd6ab1ae-d_800x450?region=us",
+      "releaseDate": "2025-08-24T11:01:45-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-08-31T23:17:13-04:00",
+        "duration": 4058,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1112683341.m3u8?s=0e0759658ff4dcf6721e0366025e379649b0f9fe",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      },
+      "priority": 500,
+      "category": "main-sermons"
     },
     {
       "id": "1110709750",
@@ -2354,12 +2381,12 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-08-25T03:11:54.609Z",
-  "enhancedGenerated": "2025-08-31T20:14:27.173Z",
+  "baseGenerated": "2025-09-01T04:25:05.018Z",
+  "enhancedGenerated": "2025-09-01T04:35:53.704Z",
   "contentSummary": {
-    "totalMovies": 87,
+    "totalMovies": 88,
     "liveContent": 0,
-    "mainSermons": 86,
+    "mainSermons": 87,
     "additionalContent": 0,
     "isLiveServiceTime": false
   }
