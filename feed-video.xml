@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Mon, 01 Sep 2025 04:24:49 GMT</pubDate>
-    <lastBuildDate>Mon, 01 Sep 2025 04:24:49 GMT</lastBuildDate>
+    <pubDate>Mon, 08 Sep 2025 14:16:48 GMT</pubDate>
+    <lastBuildDate>Mon, 08 Sep 2025 14:16:48 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;Turn Yourself Around&quot; 9.7.25 - Chad Hedgepath</title>
+        <description>&quot;Turn Yourself Around&quot; 9.7.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1114657102</guid>
+        <pubDate>Sun, 31 Aug 2025 15:08:31 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1114657102.m3u8?s=2492f1c871df9ee37032cf31a498b9b1a1009d15" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;Turn Yourself Around&quot; 9.7.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:07:03</itunes:duration>
+        <itunes:episode>88</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2053488420-6423c903bebd5aed76c7631470bc8ca84aa5b5dbc5ae1152dfc9c1added46263-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;Fear Fails&quot; 8.31.25 - Travis Robertson</title>
         <description>&quot;Fear Fails&quot; 8.31.25 - Travis Robertson</description>

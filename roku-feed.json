@@ -1,8 +1,33 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-09-01T04:25:05.018Z",
+  "lastUpdated": "2025-09-08T14:17:06.767Z",
   "movies": [
+    {
+      "id": "1114657102",
+      "title": "\"Turn Yourself Around\" 9.7.25 - Chad Hedgepath",
+      "shortDescription": "\"Turn Yourself Around\" 9.7.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2053488420-6423c903bebd5aed76c7631470bc8ca84aa5b5dbc5ae1152dfc9c1added46263-d_800x450?region=us",
+      "releaseDate": "2025-08-31T11:08:31-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-09-08T08:37:11-04:00",
+        "duration": 4023,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1114657102.m3u8?s=2492f1c871df9ee37032cf31a498b9b1a1009d15",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
     {
       "id": "1112683341",
       "title": "\"Fear Fails\" 8.31.25 - Travis Robertson",
