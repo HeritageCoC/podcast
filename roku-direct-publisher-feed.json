@@ -1,14 +1,14 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-09-21T20:15:37.698Z",
+  "lastUpdated": "2025-09-22T12:41:12.002Z",
   "movies": [
     {
-      "id": "1114657102",
-      "title": "🆕 Latest: \"Turn Yourself Around\" 9.7.25 - Chad Hedgepath",
-      "shortDescription": "\"Turn Yourself Around\" 9.7.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2053488420-6423c903bebd5aed76c7631470bc8ca84aa5b5dbc5ae1152dfc9c1added46263-d_800x450?region=us",
-      "releaseDate": "2025-08-31T11:08:31-04:00",
+      "id": "1118504042",
+      "title": "🆕 Latest: \"The Incarnation\" 9.21.25 - Chad Hedgepath",
+      "shortDescription": "\"The Incarnation\" 9.21.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2058730295-45c74b3fe37b661eca496ba6a18f11a5b85eb683c7958055a4ba80a1d664dfea-d_800x450?region=us",
+      "releaseDate": "2025-09-14T10:16:29-04:00",
       "genres": [
         "faith"
       ],
@@ -16,11 +16,11 @@
         "faith"
       ],
       "content": {
-        "dateAdded": "2025-09-08T08:37:11-04:00",
-        "duration": 4023,
+        "dateAdded": "2025-09-22T08:08:46-04:00",
+        "duration": 3921,
         "videos": [
           {
-            "url": "https://player.vimeo.com/external/1114657102.m3u8?s=2492f1c871df9ee37032cf31a498b9b1a1009d15",
+            "url": "https://player.vimeo.com/external/1118504042.m3u8?s=cd51d601f7f0904de53151251840c4a11e622344",
             "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
@@ -28,6 +28,60 @@
         ]
       },
       "priority": 900
+    },
+    {
+      "id": "1118504042",
+      "title": "\"The Incarnation\" 9.21.25 - Chad Hedgepath",
+      "shortDescription": "\"The Incarnation\" 9.21.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2058730295-45c74b3fe37b661eca496ba6a18f11a5b85eb683c7958055a4ba80a1d664dfea-d_800x450?region=us",
+      "releaseDate": "2025-09-14T10:16:29-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-09-22T08:08:46-04:00",
+        "duration": 3921,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1118504042.m3u8?s=cd51d601f7f0904de53151251840c4a11e622344",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      },
+      "priority": 500,
+      "category": "main-sermons"
+    },
+    {
+      "id": "1116555727",
+      "title": "\"Connection to the Cross\" 9.14.25 - Chad Hedgepath",
+      "shortDescription": "\"Connection to the Cross\" 9.14.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2056232042-6e129080ee8fd7f5251cabebed82d4ee2dac3414a54ce7cd630d4d87c78d55b2-d_800x450?region=us",
+      "releaseDate": "2025-09-07T11:05:45-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-09-22T08:08:46-04:00",
+        "duration": 869,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1116555727.m3u8?s=43ceff9b611b3b60fea09948b87db4333efed735",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      },
+      "priority": 500,
+      "category": "main-sermons"
     },
     {
       "id": "1114657102",
@@ -2408,12 +2462,12 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-09-08T14:17:06.767Z",
-  "enhancedGenerated": "2025-09-21T20:15:37.698Z",
+  "baseGenerated": "2025-09-22T12:28:38.389Z",
+  "enhancedGenerated": "2025-09-22T12:41:12.002Z",
   "contentSummary": {
-    "totalMovies": 89,
+    "totalMovies": 91,
     "liveContent": 0,
-    "mainSermons": 88,
+    "mainSermons": 90,
     "additionalContent": 0,
     "isLiveServiceTime": false
   }

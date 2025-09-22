@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Mon, 08 Sep 2025 14:16:48 GMT</pubDate>
-    <lastBuildDate>Mon, 08 Sep 2025 14:16:48 GMT</lastBuildDate>
+    <pubDate>Mon, 22 Sep 2025 12:28:20 GMT</pubDate>
+    <lastBuildDate>Mon, 22 Sep 2025 12:28:20 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,28 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;The Incarnation&quot; 9.21.25 - Chad Hedgepath</title>
+        <description>&quot;The Incarnation&quot; 9.21.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1118504042</guid>
+        <pubDate>Sun, 14 Sep 2025 14:16:29 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1118504042.m3u8?s=cd51d601f7f0904de53151251840c4a11e622344" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;The Incarnation&quot; 9.21.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:05:21</itunes:duration>
+        <itunes:episode>90</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2058730295-45c74b3fe37b661eca496ba6a18f11a5b85eb683c7958055a4ba80a1d664dfea-d_800x450?region=us" />
+    </item>
+    <item>
+        <title>&quot;Connection to the Cross&quot; 9.14.25 - Chad Hedgepath</title>
+        <description>&quot;Connection to the Cross&quot; 9.14.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1116555727</guid>
+        <pubDate>Sun, 07 Sep 2025 15:05:45 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1116555727.m3u8?s=43ceff9b611b3b60fea09948b87db4333efed735" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;Connection to the Cross&quot; 9.14.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>14:29</itunes:duration>
+        <itunes:episode>89</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2056232042-6e129080ee8fd7f5251cabebed82d4ee2dac3414a54ce7cd630d4d87c78d55b2-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;Turn Yourself Around&quot; 9.7.25 - Chad Hedgepath</title>
         <description>&quot;Turn Yourself Around&quot; 9.7.25 - Chad Hedgepath</description>
