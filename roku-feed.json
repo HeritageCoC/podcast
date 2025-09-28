@@ -1,8 +1,33 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-09-22T12:28:38.389Z",
+  "lastUpdated": "2025-09-28T16:14:53.895Z",
   "movies": [
+    {
+      "id": "1120590197",
+      "title": "\"Are You Holy?\" 9.28.25 - Chad Hedgepath",
+      "shortDescription": "\"Are You Holy?\" 9.28.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2061404886-c86616d2231432beb55c5cf0e4410123d0d058e825b9537e71c4f50143f30c89-d_800x450?region=us",
+      "releaseDate": "2025-09-21T11:01:22-04:00",
+      "genres": [
+        "faith"
+      ],
+      "tags": [
+        "faith"
+      ],
+      "content": {
+        "dateAdded": "2025-09-28T11:36:31-04:00",
+        "duration": 3746,
+        "videos": [
+          {
+            "url": "https://player.vimeo.com/external/1120590197.m3u8?s=7fba8b4851ff224c44c576950cbc36cf44949203",
+            "quality": "HD",
+            "videoType": "HLS",
+            "bitrate": null
+          }
+        ]
+      }
+    },
     {
       "id": "1118504042",
       "title": "\"The Incarnation\" 9.21.25 - Chad Hedgepath",

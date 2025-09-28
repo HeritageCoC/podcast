@@ -5,8 +5,8 @@
     <link>https://heritagecoc.org</link>
     <description>Weekly sermons and teachings from Heritage Church of Christ. Join us for inspiring messages of faith, hope, and spiritual growth as we explore God&apos;s Word together. - Full video sermons</description>
     <language>en</language>
-    <pubDate>Mon, 22 Sep 2025 12:28:20 GMT</pubDate>
-    <lastBuildDate>Mon, 22 Sep 2025 12:28:20 GMT</lastBuildDate>
+    <pubDate>Sun, 28 Sep 2025 16:14:31 GMT</pubDate>
+    <lastBuildDate>Sun, 28 Sep 2025 16:14:31 GMT</lastBuildDate>
     <itunes:author>Heritage Church of Christ</itunes:author>
     <itunes:image href="https://heritagecoc.github.io/podcast/podcast-artwork.jpg" />
     <itunes:explicit>false</itunes:explicit>
@@ -14,6 +14,17 @@
         <itunes:category text="Christianity" />
     </itunes:category>
 
+    <item>
+        <title>&quot;Are You Holy?&quot; 9.28.25 - Chad Hedgepath</title>
+        <description>&quot;Are You Holy?&quot; 9.28.25 - Chad Hedgepath</description>
+        <guid isPermaLink="false">vimeo-video-1120590197</guid>
+        <pubDate>Sun, 21 Sep 2025 15:01:22 GMT</pubDate>
+        <enclosure url="https://player.vimeo.com/external/1120590197.m3u8?s=7fba8b4851ff224c44c576950cbc36cf44949203" length="0" type="application/x-mpegURL" />
+        <itunes:title>&quot;Are You Holy?&quot; 9.28.25 - Chad Hedgepath</itunes:title>
+        <itunes:duration>1:02:26</itunes:duration>
+        <itunes:episode>91</itunes:episode>
+        <itunes:image href="https://i.vimeocdn.com/video/2061404886-c86616d2231432beb55c5cf0e4410123d0d058e825b9537e71c4f50143f30c89-d_800x450?region=us" />
+    </item>
     <item>
         <title>&quot;The Incarnation&quot; 9.21.25 - Chad Hedgepath</title>
         <description>&quot;The Incarnation&quot; 9.21.25 - Chad Hedgepath</description>
