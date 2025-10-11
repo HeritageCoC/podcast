@@ -1,13 +1,13 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-10-11T18:17:10.118Z",
+  "lastUpdated": "2025-10-11T20:15:05.895Z",
   "movies": [
     {
       "id": "1124462087",
-      "title": "🆕 Latest: \"Are You Holy?\" 10.05.25 - Chad Hedgepath",
-      "shortDescription": "\"Are You Holy?\" 10.05.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2066338517-50e3dd2fa1dbc7f2511eeb63a06cb9525ea2e817100aa211761479db07351cb1-d_800x450?region=us",
+      "title": "🆕 Latest: \"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
+      "shortDescription": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2068940908-5fd6d4302dbca8721b0e8672f7a12cf6f620d6084d56cd14ee40d71951976d72-d_800x450?region=us",
       "releaseDate": "2025-10-04T11:07:45-04:00",
       "genres": [
         "faith"
@@ -31,9 +31,9 @@
     },
     {
       "id": "1124462087",
-      "title": "\"Are You Holy?\" 10.05.25 - Chad Hedgepath",
-      "shortDescription": "\"Are You Holy?\" 10.05.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2066338517-50e3dd2fa1dbc7f2511eeb63a06cb9525ea2e817100aa211761479db07351cb1-d_800x450?region=us",
+      "title": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
+      "shortDescription": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2068940908-5fd6d4302dbca8721b0e8672f7a12cf6f620d6084d56cd14ee40d71951976d72-d_800x450?region=us",
       "releaseDate": "2025-10-04T11:07:45-04:00",
       "genres": [
         "faith"
@@ -2516,8 +2516,8 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-10-10T20:14:24.630Z",
-  "enhancedGenerated": "2025-10-11T18:17:10.118Z",
+  "baseGenerated": "2025-10-11T20:14:57.839Z",
+  "enhancedGenerated": "2025-10-11T20:15:05.895Z",
   "contentSummary": {
     "totalMovies": 93,
     "liveContent": 0,
