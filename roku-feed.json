@@ -1,33 +1,8 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-10-11T20:14:57.839Z",
+  "lastUpdated": "2025-10-26T06:21:00.358Z",
   "movies": [
-    {
-      "id": "1124462087",
-      "title": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
-      "shortDescription": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2068940908-5fd6d4302dbca8721b0e8672f7a12cf6f620d6084d56cd14ee40d71951976d72-d_800x450?region=us",
-      "releaseDate": "2025-10-04T11:07:45-04:00",
-      "genres": [
-        "faith"
-      ],
-      "tags": [
-        "faith"
-      ],
-      "content": {
-        "dateAdded": "2025-10-06T09:52:30-04:00",
-        "duration": 3517,
-        "videos": [
-          {
-            "url": "https://player.vimeo.com/external/1124462087.m3u8?s=caf2b11f8f33283b4b35e330257bcbefcd5327eb",
-            "quality": "FHD",
-            "videoType": "HLS",
-            "bitrate": null
-          }
-        ]
-      }
-    },
     {
       "id": "1120590197",
       "title": "\"Are You Holy?\" 9.28.25 - Chad Hedgepath",
