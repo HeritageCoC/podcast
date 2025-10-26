@@ -1,14 +1,14 @@
 {
   "providerName": "Heritage Church of Christ",
   "language": "en",
-  "lastUpdated": "2025-10-26T18:18:46.897Z",
+  "lastUpdated": "2025-10-26T18:37:00.628Z",
   "movies": [
     {
-      "id": "1124462087",
-      "title": "🆕 Latest: \"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
-      "shortDescription": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2068940908-5fd6d4302dbca8721b0e8672f7a12cf6f620d6084d56cd14ee40d71951976d72-d_800x450?region=us",
-      "releaseDate": "2025-10-04T11:07:45-04:00",
+      "id": "1120590197",
+      "title": "🆕 Latest: \"Are You Holy?\" 9.28.25 - Chad Hedgepath",
+      "shortDescription": "\"Are You Holy?\" 9.28.25 - Chad Hedgepath",
+      "thumbnail": "https://i.vimeocdn.com/video/2061404886-c86616d2231432beb55c5cf0e4410123d0d058e825b9537e71c4f50143f30c89-d_800x450?region=us",
+      "releaseDate": "2025-09-21T11:01:22-04:00",
       "genres": [
         "faith"
       ],
@@ -16,45 +16,18 @@
         "faith"
       ],
       "content": {
-        "dateAdded": "2025-10-06T09:52:30-04:00",
-        "duration": 3517,
+        "dateAdded": "2025-09-28T11:36:31-04:00",
+        "duration": 3746,
         "videos": [
           {
-            "url": "https://player.vimeo.com/external/1124462087.m3u8?s=caf2b11f8f33283b4b35e330257bcbefcd5327eb",
-            "quality": "FHD",
+            "url": "https://player.vimeo.com/external/1120590197.m3u8?s=7fba8b4851ff224c44c576950cbc36cf44949203",
+            "quality": "HD",
             "videoType": "HLS",
             "bitrate": null
           }
         ]
       },
       "priority": 900
-    },
-    {
-      "id": "1124462087",
-      "title": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
-      "shortDescription": "\"The Appeal of the Cross\" 10.05.25 - Chad Hedgepath",
-      "thumbnail": "https://i.vimeocdn.com/video/2068940908-5fd6d4302dbca8721b0e8672f7a12cf6f620d6084d56cd14ee40d71951976d72-d_800x450?region=us",
-      "releaseDate": "2025-10-04T11:07:45-04:00",
-      "genres": [
-        "faith"
-      ],
-      "tags": [
-        "faith"
-      ],
-      "content": {
-        "dateAdded": "2025-10-06T09:52:30-04:00",
-        "duration": 3517,
-        "videos": [
-          {
-            "url": "https://player.vimeo.com/external/1124462087.m3u8?s=caf2b11f8f33283b4b35e330257bcbefcd5327eb",
-            "quality": "FHD",
-            "videoType": "HLS",
-            "bitrate": null
-          }
-        ]
-      },
-      "priority": 500,
-      "category": "main-sermons"
     },
     {
       "id": "1120590197",
@@ -2516,12 +2489,12 @@
   ],
   "version": "2.1-enhanced",
   "enhancedBy": "Heritage Church Enhanced Roku System",
-  "baseGenerated": "2025-10-26T08:18:32.520Z",
-  "enhancedGenerated": "2025-10-26T18:18:46.897Z",
+  "baseGenerated": "2025-10-26T18:33:25.112Z",
+  "enhancedGenerated": "2025-10-26T18:37:00.628Z",
   "contentSummary": {
-    "totalMovies": 93,
+    "totalMovies": 92,
     "liveContent": 0,
-    "mainSermons": 92,
+    "mainSermons": 91,
     "additionalContent": 0,
     "isLiveServiceTime": false
   }
